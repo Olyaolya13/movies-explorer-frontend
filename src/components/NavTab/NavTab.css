@@ -1,0 +1,30 @@
+.navtab{
+    background-color:  #F5F5F5;
+    margin: 0;
+}
+
+.navtab__navigation{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    padding-top: 24px;padding-bottom: 24px;
+}
+
+.navtab__container {
+    display: flex;
+    justify-content: center;
+}
+
+.navtab__text {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.23em;
+    margin-right: 40px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.navtab__text:last-child {
+    margin-right: 0;
+}
