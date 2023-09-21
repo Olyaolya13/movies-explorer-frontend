@@ -28,10 +28,8 @@ const aboutProjectData = {
   function AboutProject() {
     return (
       <section className='project'>
-        <div className='project__main'>
           <h2 className='project__title'>{aboutProjectData.title}</h2>
           <p className='project__line'></p>
-        </div>
         <div className='project__content'>
           {aboutProjectData.stages.map((stage, index) => (
             <div className='project__text' key={index}>
@@ -57,52 +55,3 @@ const aboutProjectData = {
 
 
 export default AboutProject;
-
-
-// function AboutProject(){
-//     const AboutProjectTitle = 'О проекте'
-//     const DiplomAct = 'Дипломный проект включал 5 этапов'
-//     const DiplomPlan= 'Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.'
-//     const DiplomTime = 'Дипломный проект включал 5 этапов'
-//     const DiplomSubtitle = 'Дипломный проект включал 5 этапов'
-//     const OneWeek = '1 неделя'
-//     const Foureek = '4 недели'
-//     const Back = 'Back-end'
-//     const Front = 'Front-end'
-
-//     return(
-// <section className='project'>
-//       <div className='project__main'>
-//         <h2 className='project__title'>{AboutProjectTitle}</h2>
-//         <span className='project__line'></span>
-//         </div>
-//         <div className='project__content'>
-//         <div className='project__text'>
-//         <h3 className='project__title'>{DiplomAct}</h3>
-//         <p className='project__subtotle'>{DiplomPlan}</p>
-//         </div>
-//         <div className='project__text'>
-//         <h3 className='project__title'>{DiplomTime}</h3>
-//         <p className='project__subtotle'>{DiplomSubtitle}</p>
-//         </div>
-//         <div className='project__time'>
-{/* <div className='project__tb'>
-           <p className='project__week'>{OneWeek}</p>
-           <p className='project__name'>{Back}</p>
-</div>
-<div className='project__tb'>
-          <p className='project__weeks'>{Foureek}</p>
-          <p className='project__name'>{Back}</p>
-     </div> */}
-//         <div className='project__develop'>
-//             <p className='project__name'>{Back}</p>
-//             <p className='project__name'>{Front}</p>
-//         </div>
-//         </div>
-        
-
-//     </section>
-//     )
-// }
-
-// export default AboutProject;
