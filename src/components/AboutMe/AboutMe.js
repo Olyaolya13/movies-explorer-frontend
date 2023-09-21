@@ -1,6 +1,5 @@
 import React from 'react';
 import './AboutMe.css'
-import Arrow from '../../images/arrow.svg'
 import Photo from '../../images/Photo.svg'
 
 const aboutMe = {
@@ -14,9 +13,6 @@ const aboutMe = {
         githubLink: 'https://github.com/Olyaolya13',
       },
     ],
-    about: 'Портфолио',
-    skills: ['Статичный сайт', 'Адаптивный сайт', 'Одностраничное приложение'],
-    skillsSite:['https://github.com/Olyaolya13/how-to-learn', 'https://github.com/Olyaolya13/Thalby', 'https://github.com/Olyaolya13/react-mesto-api-full-gha']
   };
   
   function AboutMe() {
@@ -37,19 +33,6 @@ const aboutMe = {
             </div>
           ))}
           <img src={Photo} alt="Фото студента" className='student__photo' />
-        </div>
-        <div className='student__portfolio'>
-        <h3 className='student__portfolio-text'>{aboutMe.about}</h3>
-          <ul className='student__skills'>
-            {aboutMe.skills.map((skill,index) => (
-              <li className='student__skill-name' key={index}>
-                <div className='student__portfolio-arrow'>
-                {skill}<a href={aboutMe.skillsSite[index]} target='_blank' rel='noopener noreferrer'><img src={Arrow} alt="Стрелочка" className='student__arrow' /></a>
-                </div>
-                {index === aboutMe.skills.length - 1 ? null : <p className='student__portfolio-line'></p>}
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
     );

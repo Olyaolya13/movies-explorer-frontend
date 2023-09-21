@@ -6,7 +6,6 @@
 }
 
 .student{
-    margin: 0 ;
     margin: 0 70px 0 70px;
 }
 
@@ -44,7 +43,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 1.5em;
-    margin: 26px 0 99px;
+    margin: 26px 0 90px;
     width: 600px;
 }
 
@@ -56,39 +55,3 @@
     text-decoration: none;
 }
 
-.student__portfolio-text{
-    font-size: 18px;
-    font-weight: 400;
-    line-height: normal;
-    color: #A0A0A0;
-    margin: 101px 0 50px;
-}
-
-.student__skill-name{
-    font-size: 30px;
-    line-height: 1.6em;
-
-}
-
-.student__skill-name:last-child{
-    margin-bottom: 125px;
-}
-
-.student__skills{
-list-style: none;
-margin: 0;
-padding: 0;
-}
-
-.student__portfolio-line{
-    border-bottom: 1px solid #E8E8E8;
-    max-width: 1140px;
-    margin: 0;
-    margin-top: 19px;
-}
-
-.student__portfolio-arrow{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}

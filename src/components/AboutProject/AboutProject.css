@@ -1,6 +1,5 @@
 .project{
-    margin: 0 ;
-    margin-left: 70px;
+    margin: 0 70px 0 70px;
 }
 
 .project__line {
@@ -25,6 +24,7 @@
 .project__content{
     display: flex;
 
+
 }
 
 .project__about{
@@ -37,7 +37,7 @@
 
 .project__text{
     width: 480px;
-    margin-right: 40px;
+    margin-right: 110px;
 }
 
 .project__text:last-child{
@@ -75,7 +75,7 @@
 }
 
 .project__name{
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 500;
     line-height: 1.21em;
     color: #A0A0A0;

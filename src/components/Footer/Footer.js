@@ -17,7 +17,7 @@ import './Footer.css'
           <p className='footer__year'>&copy;{footerYear}</p>
           <ul className='footer__text'>
             <li className='footer__subtitle'>{YandexPractikum}</li>
-            <li><a href={GithubSite} className='footer__link'>{Github}</a></li>
+            <li><a href={GithubSite} className='footer__link' target='_blank' rel='noopener noreferrer'>{Github}</a></li>
           </ul>
         </div>
       </section>
