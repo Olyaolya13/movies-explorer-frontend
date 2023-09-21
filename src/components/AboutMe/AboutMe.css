@@ -1,0 +1,94 @@
+.student__photo{
+    width: 290px;
+    height: 320px;
+    border-radius: 10px;
+    margin-top: 68px;
+}
+
+.student{
+    margin: 0 ;
+    margin: 0 70px 0 70px;
+}
+
+.student__line{
+    border-bottom: 1px solid #000;
+    max-width: 1140px;
+    margin: 0;
+}
+
+.student__content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.student__title,
+.student__subtitle{
+    font-size: 22px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 100px 0 23px;
+}
+
+.student__subtitle{
+    font-size: 50px;
+    margin: 66px 0 0;
+}
+
+.student__text{
+    font-size: 18px;
+    margin: 18px 0 0;
+    font-weight: 500;
+}
+
+.student__about{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5em;
+    margin: 26px 0 99px;
+    width: 600px;
+}
+
+.student__site{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    margin:  99px 0 101px;
+    text-decoration: none;
+}
+
+.student__portfolio-text{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+    color: #A0A0A0;
+    margin: 101px 0 50px;
+}
+
+.student__skill-name{
+    font-size: 30px;
+    line-height: 1.6em;
+
+}
+
+.student__skill-name:last-child{
+    margin-bottom: 125px;
+}
+
+.student__skills{
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+.student__portfolio-line{
+    border-bottom: 1px solid #E8E8E8;
+    max-width: 1140px;
+    margin: 0;
+    margin-top: 19px;
+}
+
+.student__portfolio-arrow{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
