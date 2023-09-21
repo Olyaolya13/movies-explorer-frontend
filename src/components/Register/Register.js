@@ -5,7 +5,7 @@ import './Register.css'
 
 const RegisterData = {
     title: 'Добро пожаловать!',
-    text:'Зарегистрироваться',
+    signup:'Зарегистрироваться',
     question: 'Уже зарегистрированы?',
     name: 'Имя',
     email:'E-mail',
@@ -85,7 +85,7 @@ function Register({ onRegister }) {
           {errors.password}
         </span>
         <button type="submit" className="register__button">
-          {RegisterData.text}
+          {RegisterData.signup}
         </button>
       </form>
       <div>

@@ -7,11 +7,12 @@ import { Routes, Route } from 'react-router-dom';
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { useLocation } from 'react-router-dom';
 import Register from '../Register/Register'
+import Login from '../Login/Login'
 
 function App() {
   const location = useLocation();
 
-  const isRegisterPage = location.pathname === '/signup';
+  const isRegisterPage = location.pathname === '/signup' || 'signin';
 
   return (
 <>
@@ -23,6 +24,7 @@ function App() {
   <Routes>
     <Route path="/" element={<Main/>}/>
     <Route path="/signup" element={<Register/>}/>
+    <Route path="/signin" element={<Login/>}/>
   </Routes>
 {!isRegisterPage && (
   <div>

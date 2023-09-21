@@ -25,7 +25,11 @@
     line-height: normal;
     margin: 0 0 5px;
     color: #A0A0A0;
-    margin-top: 24px;
+    margin: 24px 0 24px;
+}
+
+.register__label:first-child{
+margin-top: 0
 }
 
 .register__input{
