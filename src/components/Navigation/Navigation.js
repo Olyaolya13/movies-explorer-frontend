@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navigation.css';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../../images/logo/header_logo.svg';
-import { Link } from 'react-router-dom';
 import profileLogo from '../../images/logo/profileLogo.svg';
 
 const NavigationData = {
@@ -9,10 +9,17 @@ const NavigationData = {
   savedFilm: 'Сохраненные фильмы',
   profile: 'Аккаунт'
 };
-
 function Navigation({ isLoggedIn }) {
+  const { pathname } = useLocation();
+
+  const isMainPage = pathname === '/';
+
+  const navigationStyle = {
+    backgroundColor: isMainPage ? '' : '#FAFAFA'
+  };
+
   return (
-    <section className="navigation">
+    <section className="navigation" style={navigationStyle}>
       <div className="navigation__content">
         <div className="navigation__title">
           <img src={logo} alt="Logo" className="navigation__logo" />
