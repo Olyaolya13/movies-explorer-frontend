@@ -13,9 +13,19 @@ function Navigation({ isLoggedIn }) {
   const { pathname } = useLocation();
 
   const isMainPage = pathname === '/';
+  const isMoviesPage = pathname === '/movies';
+  const isSavedMoviesPage = pathname === '/saved-movies';
 
   const navigationStyle = {
     backgroundColor: isMainPage ? '' : '#FAFAFA'
+  };
+
+  const activeStyleMoviesPage = {
+    fontWeight: isMoviesPage ? '500' : ''
+  };
+
+  const activeStyleSavedMoviesPage = {
+    fontWeight: isSavedMoviesPage ? '500' : ''
   };
 
   return (
@@ -24,10 +34,14 @@ function Navigation({ isLoggedIn }) {
         <div className="navigation__title">
           <img src={logo} alt="Logo" className="navigation__logo" />
           <Link to="/movies" className="navigation__link">
-            <p className="navigation__text">{NavigationData.film}</p>
+            <p className="navigation__text" style={activeStyleMoviesPage}>
+              {NavigationData.film}
+            </p>
           </Link>
           <Link to="/saved-movies" className="navigation__link">
-            <p className="navigation__text">{NavigationData.savedFilm}</p>
+            <p className="navigation__text" style={activeStyleSavedMoviesPage}>
+              {NavigationData.savedFilm}
+            </p>
           </Link>
         </div>
         <div>

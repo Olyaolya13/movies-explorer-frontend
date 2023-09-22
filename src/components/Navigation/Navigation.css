@@ -39,11 +39,6 @@
   opacity: 0.7;
 }
 
-.navigation__link:focus .navigation__text,
-.navigation__link:active .navigation__text {
-  font-weight: 500;
-}
-
 .navigation__link {
   text-decoration: none;
   align-self: center;
