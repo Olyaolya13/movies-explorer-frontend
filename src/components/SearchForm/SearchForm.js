@@ -38,6 +38,7 @@ function SearchForm({ onSearch }) {
           <p className="search__text">{SearchFormData.shortFilm}</p>
         </div>
       </form>
+      <p className="search__horizontal-line"></p>
     </section>
   );
 }
