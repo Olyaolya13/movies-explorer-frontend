@@ -8,11 +8,13 @@ import { Routes, Route } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Register from '../Register/Register'
 import Login from '../Login/Login'
+import Profile from '../Profile/Profile'
 
 function App() {
   const location = useLocation();
 
-  const isRegisterPage = location.pathname === '/signup' || 'signin';
+  const isRegisterPage = location.pathname === '/signup' || location.pathname === '/signin' || location.pathname === '/profile';
+
 
   return (
 <>
@@ -25,6 +27,7 @@ function App() {
     <Route path="/" element={<Main/>}/>
     <Route path="/signup" element={<Register/>}/>
     <Route path="/signin" element={<Login/>}/>
+    <Route path="/profile" element={<Profile/>}/>
   </Routes>
 {!isRegisterPage && (
   <div>
