@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './SearchForm.css';
 import SearchLogo from '../../images/logo/searchLogo.svg';
 import SearchColorLogo from '../../images/logo/searchColorLogo.svg';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 const SearchFormData = {
   shortFilm: 'Короткометражки'
@@ -35,6 +36,7 @@ function SearchForm({ onSearch }) {
             <img src={SearchColorLogo} alt="Икона поиска" className="search__color-logo" />
           </button>
           <p className="search__line"></p>
+          <FilterCheckbox />
           <p className="search__text">{SearchFormData.shortFilm}</p>
         </div>
       </form>

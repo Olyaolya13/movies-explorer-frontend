@@ -7,6 +7,11 @@
   align-items: center;
 }
 
+.search__form {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
 .search__button {
   display: flex;
   align-items: center;
@@ -60,9 +65,10 @@
 }
 
 .search__text {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   padding-left: 14px;
+  margin: 0;
 }
 
 .search__horizontal-line {
