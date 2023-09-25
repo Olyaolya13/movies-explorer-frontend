@@ -1,0 +1,8 @@
+.movie-card__section {
+  background-color: #fafafa;
+  display: grid;
+  gap: 32px 20px;
+  grid-template-columns: repeat(auto-fill, 280px);
+  justify-content: center;
+  padding: 70px 70px 0;
+}

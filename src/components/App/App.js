@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Navigate, Routes, Route } from 'react-router-dom';
+import { useNavigate, Routes, Route, Navigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import api from '../../utils/api.js';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -13,6 +14,7 @@ import Movies from '../Movies/Movies';
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isRegisterPage =
     location.pathname === '/signup' ||
@@ -21,6 +23,50 @@ function App() {
 
   // check isLoggedIn
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  //context
+  const [currentUser, setCurrentUser] = useState({});
+  //cards
+  const [cards, setCards] = useState([]);
+
+  // // Handle like on a card
+  // function handleMovieSaved(card) {
+  //   const isLiked = card.likes.some(i => i._id === currentUser._id);
+  //   {
+  //     if (!isLiked) {
+  //       api
+  //         .addNewMovieSaved(card._id)
+  //         .then(newCard => {
+  //           setCards(state => state.map(c => (c._id === card._id ? newCard : c)));
+  //         })
+  //         .catch(err => {
+  //           console.log(err);
+  //         });
+  //     } else {
+  //       api
+  //         .removeNewMovieSaved(card._id)
+  //         .then(newCard => {
+  //           setCards(state => state.map(c => (c._id === card._id ? newCard : c)));
+  //         })
+  //         .catch(err => {
+  //           console.log(err);
+  //         });
+  //     }
+  //   }
+  // }
+
+  // function handleConfirmDelete(card) {
+  //   const token = localStorage.getItem('token');
+  //   api
+  //     .removeCard(card._id, token)
+  //     .then(() => {
+  //       setCards(state => state.filter(c => c._id !== card._id));
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
+
   return (
     <>
       {!isRegisterPage && (
@@ -39,6 +85,7 @@ function App() {
             />
           }
         />
+        {/* <Route cards={cards} onCardSaved={handleMovieSaved} onCardDeleteSaved={handleMovieSaved} /> */}
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
