@@ -1,0 +1,26 @@
+.show-button__section {
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+}
+
+.show-button {
+  background-color: #f4f4f4;
+  width: 320px;
+  height: 36px;
+  border-radius: 6px;
+  transition: 0.3s linear;
+  color: #000;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  padding: 0;
+  margin: 50px auto 80px;
+  border: none;
+  cursor: pointer;
+}
+
+.show-button:hover {
+  opacity: 0.8;
+}
