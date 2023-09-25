@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 
 function MoviesCard({ title, hours, minutes, image }) {
+  const location = useLocation();
+  const isSavedPage = location.pathname === '/saved-movies';
+
   const [isSaved, setIsSaved] = useState(false);
+
+  const buttonClassName = isSavedPage
+    ? 'movie-card__delete'
+    : isSaved
+    ? 'movie-card__saved'
+    : 'movie-card__not-saved';
 
   const handleSaveClick = () => {
     setIsSaved(!isSaved);
@@ -20,7 +30,7 @@ function MoviesCard({ title, hours, minutes, image }) {
           </p>
         </div>
         <button
-          className={`movie-card__not-saved ${isSaved ? 'movie-card__saved' : ''}`}
+          className={`movie-card__button ${buttonClassName}`}
           onClick={handleSaveClick}
         ></button>
       </div>

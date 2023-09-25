@@ -15,7 +15,7 @@ import GimmeDanger from '../images/GimmeDanger.svg';
 import RunMan from '../images/RunMan.svg';
 import Parkur from '../images/Parkur.svg';
 
-const MoviesCardList = [
+export const MoviesCardListData = [
   {
     title: '33 слова о дизайне',
     hours: '1ч',
@@ -114,4 +114,23 @@ const MoviesCardList = [
   }
 ];
 
-export default MoviesCardList;
+export const savedMoviesData = [
+  {
+    title: '33 слова о дизайне',
+    hours: '1ч',
+    minutes: '42м',
+    image: HistoryAboutGraffity
+  },
+  {
+    title: '33 слова о дизайне',
+    hours: '1',
+    minutes: '42м',
+    image: Polaroid
+  },
+  {
+    title: '33 слова о дизайне',
+    hours: '1ч',
+    minutes: '42м',
+    image: MickJagger
+  }
+];

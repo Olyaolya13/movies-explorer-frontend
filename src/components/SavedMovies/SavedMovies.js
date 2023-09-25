@@ -1,13 +1,12 @@
 import SearchForm from '../SearchForm/SearchForm';
-// import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import { savedMoviesData } from '../../utils/constants';
 
 function Movies() {
   return (
     <>
       <SearchForm />
-      <MoviesCardList />
-      {/* <Preloader /> */}
+      <MoviesCardList movies={savedMoviesData} />
     </>
   );
 }

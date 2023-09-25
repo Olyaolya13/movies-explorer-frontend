@@ -67,3 +67,11 @@
   border: none;
   cursor: pointer;
 }
+
+.movie-card__delete {
+  background: url(../../images/logo/delBth.svg) no-repeat center;
+  width: 19px;
+  height: 19px;
+  border: none;
+  cursor: pointer;
+}

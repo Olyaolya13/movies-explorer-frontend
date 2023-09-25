@@ -1,16 +1,15 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import MoviesCardListData from '../../utils/constants';
 import ShowMoreBtn from '../ShowMoreBtn/ShowMoreBtn';
 
-function MoviesCardList() {
+function MoviesCardList({ movies }) {
   return (
     <>
       <div className="movie-card__section">
-        {MoviesCardListData.map((movie, index) => (
+        {movies.map(movie => (
           <MoviesCard
-            key={index}
+            key={movie.title}
             title={movie.title}
             hours={movie.hours}
             minutes={movie.minutes}
