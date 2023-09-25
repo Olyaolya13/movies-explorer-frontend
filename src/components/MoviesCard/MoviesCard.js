@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './MoviesCard.css';
 
 function MoviesCard({ title, hours, minutes, image }) {
+  const [isSaved, setIsSaved] = useState(false);
+
+  const handleSaveClick = () => {
+    setIsSaved(!isSaved);
+  };
+
   return (
     <div className="movie-card">
       <img src={image} className="movie-card__image" />
@@ -13,7 +19,10 @@ function MoviesCard({ title, hours, minutes, image }) {
             {minutes}
           </p>
         </div>
-        <button className="movie-card__not-saved"></button>
+        <button
+          className={`movie-card__not-saved ${isSaved ? 'movie-card__saved' : ''}`}
+          onClick={handleSaveClick}
+        ></button>
       </div>
     </div>
   );

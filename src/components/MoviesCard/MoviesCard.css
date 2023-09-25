@@ -54,14 +54,15 @@
   background-size: contain;
   border: none;
   cursor: pointer;
-  width: 22px;
+  width: 19px;
   height: 19px;
   margin: 0;
+  padding: 0;
 }
 
 .movie-card__saved {
   background: url(../../images/logo/SavedBtn.svg) no-repeat center;
-  width: 22px;
+  width: 19px;
   height: 19px;
   border: none;
   cursor: pointer;
