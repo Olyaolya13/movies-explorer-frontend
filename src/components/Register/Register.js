@@ -13,28 +13,7 @@ const RegisterData = {
   signin: 'Войти'
 };
 
-function Register({ onRegister }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [userName, setUserName] = useState('');
-
-  function handleSubmit(evt) {
-    evt.preventDefault();
-    onRegister({ password, email, userName });
-  }
-
-  function handleChangeUserName(evt) {
-    setUserName(evt.target.value);
-  }
-
-  function handleChangeEmail(evt) {
-    setEmail(evt.target.value);
-  }
-
-  function handleChangePassword(evt) {
-    setPassword(evt.target.value);
-  }
-
+function Register({ userName, email, password }) {
   return (
     <section className="register">
       <div className="register__content">
@@ -42,7 +21,7 @@ function Register({ onRegister }) {
           <img src={Logo} alt="Логотип" className="register__logo" />
         </Link>
         <h2 className="register__title">{RegisterData.title}</h2>
-        <form onSubmit={handleSubmit} className="register__form">
+        <form className="register__form">
           <label htmlFor="userName" className="register__label">
             {RegisterData.name}
           </label>
@@ -51,7 +30,6 @@ function Register({ onRegister }) {
             name="userName"
             type="text"
             value={userName}
-            onChange={handleChangeUserName}
             className="register__input"
             required
           />
@@ -64,7 +42,6 @@ function Register({ onRegister }) {
             name="email"
             type="email"
             value={email}
-            onChange={handleChangeEmail}
             className="register__input"
             required
           />
@@ -77,14 +54,15 @@ function Register({ onRegister }) {
             name="password"
             type="password"
             value={password}
-            onChange={handleChangePassword}
             className="register__input"
             required
           />
           <span className="register__error" id="register__password-error"></span>
-          <button type="submit" className="register__button">
-            {RegisterData.signup}
-          </button>
+          <Link to="/signin">
+            <button type="submit" className="register__button">
+              {RegisterData.signup}
+            </button>
+          </Link>
         </form>
         <div>
           <p className="register__subtitle">
