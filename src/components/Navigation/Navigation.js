@@ -32,7 +32,9 @@ function Navigation({ isLoggedIn }) {
     <section className="navigation" style={navigationStyle}>
       <div className="navigation__content">
         <div className="navigation__title">
-          <img src={logo} alt="Logo" className="navigation__logo" />
+          <Link to="/">
+            <img src={logo} alt="Logo" className="navigation__logo" />
+          </Link>
           <Link to="/movies" className="navigation__link">
             <p className="navigation__text" style={activeStyleMoviesPage}>
               {NavigationData.film}
