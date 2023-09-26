@@ -1,9 +1,13 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import ShowMoreBtn from '../ShowMoreBtn/ShowMoreBtn';
 
 function MoviesCardList({ movies }) {
+  const location = useLocation();
+  const isSavedPage = location.pathname === '/saved-movies';
+
   return (
     <>
       <div className="movie-card__section">
@@ -17,7 +21,7 @@ function MoviesCardList({ movies }) {
           />
         ))}
       </div>
-      <ShowMoreBtn />
+      {!isSavedPage && <ShowMoreBtn />}
     </>
   );
 }

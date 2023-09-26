@@ -24,7 +24,7 @@ export const MoviesCardListData = [
   },
   {
     title: '33 слова о дизайне',
-    hours: '1',
+    hours: '1ч',
     minutes: '42м',
     image: Polaroid
   },
@@ -123,7 +123,7 @@ export const savedMoviesData = [
   },
   {
     title: '33 слова о дизайне',
-    hours: '1',
+    hours: '1ч',
     minutes: '42м',
     image: Polaroid
   },
