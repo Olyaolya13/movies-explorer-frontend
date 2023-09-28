@@ -26,6 +26,13 @@ export const PromoData = {
   title: 'Учебный проект студента факультета Веб-разработки.'
 };
 
+//NavTAb
+export const NavTabData = {
+  projects: 'О проекте',
+  techs: 'Технологии',
+  student: 'Студент'
+};
+
 //Movies
 export const MoviesCardListData = [
   {

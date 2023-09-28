@@ -1,26 +1,26 @@
 import React from 'react';
-import './NavTab.css'
 import { Link } from 'react-scroll';
-
+import { NavTabData } from '../../utils/constants';
+import './NavTab.css';
 
 function NavTab() {
   return (
-    <section className='navtab'>
-      <nav className='navtab__container'>
-        <ul className='navtab__navigation'>
-          <li className='navtab__text'>
-            <Link to="project" smooth={true} >
-              О проекте
+    <section className="navtab">
+      <nav className="navtab__container">
+        <ul className="navtab__navigation">
+          <li className="navtab__text">
+            <Link to="project" smooth={true}>
+              {NavTabData.projects}
             </Link>
           </li>
-          <li className='navtab__text'>
-            <Link to="techs" smooth={true} >
-              Технологии
+          <li className="navtab__text">
+            <Link to="techs" smooth={true}>
+              {NavTabData.techs}
             </Link>
           </li>
-          <li className='navtab__text'>
+          <li className="navtab__text">
             <Link to="student" smooth={true}>
-              Студент
+              {NavTabData.student}
             </Link>
           </li>
         </ul>
@@ -29,7 +29,4 @@ function NavTab() {
   );
 }
 
-
 export default NavTab;
-
-
