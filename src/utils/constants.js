@@ -15,6 +15,18 @@ import GimmeDanger from '../images/GimmeDanger.svg';
 import RunMan from '../images/RunMan.svg';
 import Parkur from '../images/Parkur.svg';
 
+//header
+export const HeaderData = {
+  signup: 'Регистрация',
+  signin: 'Войти'
+};
+
+//promo
+export const PromoData = {
+  title: 'Учебный проект студента факультета Веб-разработки.'
+};
+
+//Movies
 export const MoviesCardListData = [
   {
     title: '33 слова о дизайне',
