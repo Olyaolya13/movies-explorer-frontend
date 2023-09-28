@@ -45,8 +45,27 @@
   transition: 0.3s linear;
   color: #fff;
   padding: 0;
+  margin-right: 0;
 }
 
 .header__button:hover {
   opacity: 0.8;
+}
+
+@media (max-width: 950px) {
+  .header {
+    padding: 21px 30px;
+  }
+}
+
+@media (max-width: 430px) {
+  .header {
+    padding: 18px 14px;
+  }
+  .header__text {
+    margin-right: 14px;
+  }
+  .header__button {
+    margin-right: 0;
+  }
 }
