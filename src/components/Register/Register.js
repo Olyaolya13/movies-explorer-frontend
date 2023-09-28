@@ -13,7 +13,23 @@ const RegisterData = {
   signin: 'Войти'
 };
 
-function Register({ userName, email, password }) {
+function Register() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('');
+
+  function handleChangePassword(evt) {
+    setPassword(evt.target.value);
+  }
+
+  function handleChangeEmail(evt) {
+    setEmail(evt.target.value);
+  }
+
+  function handleChangeUserName(evt) {
+    setUserName(evt.target.value);
+  }
+
   return (
     <section className="register">
       <div className="register__content">
@@ -30,6 +46,7 @@ function Register({ userName, email, password }) {
             name="userName"
             type="text"
             value={userName}
+            onChange={handleChangeUserName}
             className="register__input"
             required
           />
@@ -42,6 +59,7 @@ function Register({ userName, email, password }) {
             name="email"
             type="email"
             value={email}
+            onChange={handleChangeEmail}
             className="register__input"
             required
           />
@@ -54,6 +72,7 @@ function Register({ userName, email, password }) {
             name="password"
             type="password"
             value={password}
+            onChange={handleChangePassword}
             className="register__input"
             required
           />

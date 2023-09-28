@@ -9,7 +9,7 @@ const NavigationData = {
   savedFilm: 'Сохраненные фильмы',
   profile: 'Аккаунт'
 };
-function Navigation({ isLoggedIn }) {
+function Navigation() {
   const { pathname } = useLocation();
 
   const isMainPage = pathname === '/';
@@ -35,6 +35,7 @@ function Navigation({ isLoggedIn }) {
           <Link to="/">
             <img src={logo} alt="Logo" className="navigation__logo" />
           </Link>
+
           <Link to="/movies" className="navigation__link">
             <p className="navigation__text" style={activeStyleMoviesPage}>
               {NavigationData.film}

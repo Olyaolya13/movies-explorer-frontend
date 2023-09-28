@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import './Profile.css';
 import Navigation from '../Navigation/Navigation';
 
@@ -7,7 +6,7 @@ const ProfileData = {
   signout: 'Выйти из аккаунта'
 };
 
-function Profile() {
+function Profile({ onLoggedOut }) {
   return (
     <section className="profile">
       <Navigation />
@@ -24,9 +23,9 @@ function Profile() {
         </div>
         <p className="profile__edit">{ProfileData.edit}</p>
         <div>
-          <Link to="/" className="profile__link">
-            <p className="profile__signout">{ProfileData.signout}</p>
-          </Link>
+          <button className="profile__signout" onClick={onLoggedOut}>
+            {ProfileData.signout}
+          </button>
         </div>
       </div>
     </section>

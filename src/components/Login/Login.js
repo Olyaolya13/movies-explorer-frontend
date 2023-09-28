@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import Logo from '../../images/logo/header_logo.svg';
 import './Login.css';
 
@@ -12,7 +13,17 @@ const LoginData = {
   signin: 'Войти'
 };
 
-function Login({ email, password }) {
+function Login({ onlogin }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleChangePassword(event) {
+    setPassword(event.target.value);
+  }
+
+  function handleChangeEmail(event) {
+    setEmail(event.target.value);
+  }
   return (
     <section className="login">
       <div className="login__content">
@@ -29,10 +40,11 @@ function Login({ email, password }) {
             name="email"
             type="email"
             value={email}
+            onChange={handleChangeEmail}
             className="login__input"
             required
           />
-          <span className="login__error" id="register__email-error"></span>
+          <span className="login__error" id="login__email-error"></span>
           <label htmlFor="password" className="login__label">
             {LoginData.password}
           </label>
@@ -41,18 +53,19 @@ function Login({ email, password }) {
             name="password"
             type="password"
             value={password}
+            onChange={handleChangePassword}
             className="login__input"
             required
           />
-          <span className="login__error" id="register__password-error"></span>
-          <Link to="/movies">
-            <button type="submit" className="login__button">
-              {LoginData.signin}
-            </button>
-          </Link>
+          <span className="login__error" id="login__password-error"></span>
+          {/* <Link to="/movies"> */}
+          <button type="submit" className="login__button" onClick={onlogin}>
+            {LoginData.signin}
+          </button>
+          {/* </Link> */}
         </form>
         <div>
-          <p className="register__subtitle">
+          <p className="login__subtitle">
             {LoginData.question}{' '}
             <Link to="/signup" className="login__link">
               {LoginData.signup}
