@@ -80,6 +80,17 @@ export const AboutMeData = {
   ]
 };
 
+//portfolio
+export const PortfolioData = {
+  about: 'Портфолио',
+  skills: ['Статичный сайт', 'Адаптивный сайт', 'Одностраничное приложение'],
+  skillsSite: [
+    'https://github.com/Olyaolya13/how-to-learn',
+    'https://github.com/Olyaolya13/Thalby',
+    'https://github.com/Olyaolya13/react-mesto-api-full-gha'
+  ]
+};
+
 //Movies
 export const MoviesCardListData = [
   {
