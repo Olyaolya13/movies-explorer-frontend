@@ -1,50 +1,50 @@
-.portfolio{
-    margin: 0 70px 0 70px;
+.portfolio {
+  background-color: #fafafa;
+  padding: 0 70px;
 }
 
-.portfolio-title{
-    font-size: 18px;
-    font-weight: 400;
-    line-height: normal;
-    color: #A0A0A0;
-    margin: 101px 0 50px;
+.portfolio-title {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  color: #a0a0a0;
+  padding: 101px 0 50px;
+  margin: 0;
 }
 
-.portfolio-line{
-    border-bottom: 1px solid #E8E8E8;
-    max-width: 1140px;
-    margin: 0  0 20px;
-    margin: 20px 0 20px 0 ;
+.portfolio-line {
+  border-bottom: 1px solid #e8e8e8;
+  max-width: 1140px;
+  margin: 0 0 20px;
 }
 
-.portfolio-text{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.portfolio-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.portfolio__skills{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    }
-
-.portfolio__skill-name{
-    font-size: 30px;
-    line-height: 1.6em;
-
+.portfolio__skills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.portfolio__skill-name:last-child{
-    margin-bottom: 125px;
+.portfolio__skill-name {
+  font-size: 30px;
+  line-height: 1.6em;
 }
 
-.portfolio__arrow{
-    font-size: 30px;
-    font-weight: 400;
-    transition: .3s linear;
+.portfolio__skill-name:last-child {
+  padding-bottom: 125px;
 }
 
-.portfolio__arrow:hover{
-    opacity: 0.7;
+.portfolio__arrow {
+  font-size: 30px;
+  font-weight: 400;
+  transition: 0.3s linear;
+}
+
+.portfolio__arrow:hover {
+  opacity: 0.7;
 }
