@@ -3,10 +3,7 @@ import './SearchForm.css';
 import SearchLogo from '../../images/logo/searchLogo.svg';
 import SearchColorLogo from '../../images/logo/searchColorLogo.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-
-const SearchFormData = {
-  shortFilm: 'Короткометражки'
-};
+import { SearchFormData } from '../../utils/constants';
 
 function SearchForm({ onSearch }) {
   const [searchFilm, setSearchFilm] = useState('');
@@ -23,7 +20,7 @@ function SearchForm({ onSearch }) {
   return (
     <section className="search">
       <form className="search__form" onSubmit={handleSubmit}>
-        <div className="search__button">
+        <div className="search__content">
           <img src={SearchLogo} alt="Икона поиска" className="search__logo" />
           <input
             type="text"
@@ -35,9 +32,11 @@ function SearchForm({ onSearch }) {
           <button type="submit" className="search__submit">
             <img src={SearchColorLogo} alt="Икона поиска" className="search__color-logo" />
           </button>
-          <p className="search__line"></p>
-          <FilterCheckbox />
-          <p className="search__text">{SearchFormData.shortFilm}</p>
+          <p className="search__line"></p>{' '}
+          <div className="search__checkbox">
+            <FilterCheckbox />
+            <p className="search__text">{SearchFormData.shortFilm}</p>
+          </div>
         </div>
       </form>
       <p className="search__horizontal-line"></p>

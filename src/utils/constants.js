@@ -100,6 +100,11 @@ export const FooterData = {
   link: 'https://github.com/yandex-praktikum?tab=repositories'
 };
 
+//search form
+export const SearchFormData = {
+  shortFilm: 'Короткометражки'
+};
+
 //Movies
 export const MoviesCardListData = [
   {
