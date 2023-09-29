@@ -63,9 +63,12 @@
     padding: 18px 14px;
   }
   .header__text {
+    font-size: 11px;
     margin-right: 14px;
   }
   .header__button {
     margin-right: 0;
+    width: 54px;
+    height: 26px;
   }
 }

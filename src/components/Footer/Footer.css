@@ -12,6 +12,7 @@
   line-height: normal;
   text-align: center;
   padding-top: 79px;
+  padding-bottom: 20px;
   margin: 0;
 }
 
@@ -23,6 +24,7 @@
 .footer__content {
   display: flex;
   justify-content: space-between;
+  padding-top: 20px;
   padding-bottom: 20px;
 }
 
@@ -59,6 +61,7 @@
 
 @media (max-width: 770px) {
   .footer {
+    background-color: #fafafa;
     padding-left: 50px;
     padding-right: 50px;
   }
@@ -69,7 +72,11 @@
     padding-left: 10px;
     padding-right: 10px;
   }
+  .footer__title {
+    padding-top: 58px;
+  }
   .footer__content {
+    padding-top: 27px;
     flex-direction: column-reverse;
     align-items: center;
   }
@@ -78,12 +85,9 @@
   }
   .footer__year {
     color: #a0a0a0;
-    padding-top: 30px;
+    padding-top: 25px;
   }
-  .footer__line {
-    margin-bottom: 30px;
-    margin-top: 21px;
-  }
+
   .footer__subtitle {
     padding-bottom: 12px;
   }

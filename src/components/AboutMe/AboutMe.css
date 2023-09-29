@@ -85,9 +85,11 @@
   }
   .student__subtitle {
     font-size: 40px;
+    padding-top: 60px;
   }
   .student__text {
     font-size: 12px;
+    margin-top: 12px;
   }
   .student__about {
     margin-top: 20px;
@@ -120,6 +122,7 @@
 @media (max-width: 520px) {
   .student__content {
     flex-direction: column-reverse;
+    align-items: start;
   }
   .student__photo {
     width: 292px;
@@ -127,7 +130,7 @@
     margin-top: 60px;
   }
   .student {
-    padding-left: 15px;
+    padding-left: 14px;
     padding-right: 14px;
   }
   .student__title {
@@ -136,8 +139,9 @@
     padding-bottom: 28px;
   }
   .student__subtitle {
-    padding-top: 40px;
+    padding-top: 30px;
     font-size: 30px;
+    padding-right: 10px;
   }
   .student__text {
     margin-top: 20px;
@@ -146,7 +150,7 @@
   .student__about {
     margin-bottom: 40px;
     font-size: 11px;
-    width: 263px;
+    width: 268px;
     margin-right: 0;
   }
   .student__content-about {

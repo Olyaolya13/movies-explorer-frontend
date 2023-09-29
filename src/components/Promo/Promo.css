@@ -32,6 +32,13 @@
   align-items: center;
 }
 
+@media (max-width: 770px) {
+  .promo {
+    padding-top: 214px;
+    padding-bottom: 240px;
+  }
+}
+
 @media (max-width: 700px) {
   .promo__title {
     margin-top: 80px;
@@ -41,6 +48,10 @@
 }
 
 @media (max-width: 500px) {
+  .promo {
+    padding-top: 142px;
+    padding-bottom: 175px;
+  }
   .promo_logo {
     width: 250px;
     height: 250px;

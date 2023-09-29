@@ -128,11 +128,11 @@
     flex-direction: column;
   }
   .project__title {
-    padding-top: 70px;
+    padding-top: 65px;
     padding-bottom: 28px;
   }
   .project__subtitle {
-    padding-top: 60px;
+    padding-top: 56px;
     padding-bottom: 16px;
     font-size: 18px;
   }
