@@ -65,6 +65,21 @@ export const AboutTechsData = {
   skills: ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB']
 };
 
+//about Me
+export const AboutMeData = {
+  title: 'Студент',
+  stages: [
+    {
+      title: 'Виталий',
+      subtitle: 'Фронтенд-разработчик, 30 лет',
+      description:
+        'Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить.C 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.',
+      site: 'Github',
+      githubLink: 'https://github.com/Olyaolya13'
+    }
+  ]
+};
+
 //Movies
 export const MoviesCardListData = [
   {
