@@ -52,6 +52,19 @@ export const AboutProjectData = {
   skills: ['Back-end', 'Front-end']
 };
 
+//techs
+export const AboutTechsData = {
+  title: 'Технологии',
+  stages: [
+    {
+      title: '7 технологий',
+      description:
+        'На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.'
+    }
+  ],
+  skills: ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB']
+};
+
 //Movies
 export const MoviesCardListData = [
   {
