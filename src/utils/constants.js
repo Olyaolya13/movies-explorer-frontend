@@ -91,6 +91,15 @@ export const PortfolioData = {
   ]
 };
 
+//footer
+export const FooterData = {
+  title: 'Учебный проект Яндекс.Практикум х BeatFilm.',
+  year: '2023',
+  text: 'Яндекс.Практикум',
+  subtitle: 'Github',
+  link: 'https://github.com/yandex-praktikum?tab=repositories'
+};
+
 //Movies
 export const MoviesCardListData = [
   {
