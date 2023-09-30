@@ -21,21 +21,25 @@ function SearchForm({ onSearch }) {
     <section className="search">
       <form className="search__form" onSubmit={handleSubmit}>
         <div className="search__content">
-          <img src={SearchLogo} alt="Икона поиска" className="search__logo" />
-          <input
-            type="text"
-            placeholder="Фильм"
-            className="search__input"
-            value={searchFilm}
-            onChange={handleInputChange}
-          />
-          <button type="submit" className="search__submit">
-            <img src={SearchColorLogo} alt="Икона поиска" className="search__color-logo" />
-          </button>
-          <p className="search__line"></p>{' '}
-          <div className="search__checkbox">
-            <FilterCheckbox />
-            <p className="search__text">{SearchFormData.shortFilm}</p>
+          <div className="search__films">
+            <img src={SearchLogo} alt="Икона поиска" className="search__logo" />
+            <input
+              type="text"
+              placeholder="Фильм"
+              className="search__input"
+              value={searchFilm}
+              onChange={handleInputChange}
+            />
+            <button type="submit" className="search__submit">
+              <img src={SearchColorLogo} alt="Икона поиска" className="search__color-logo" />
+            </button>
+          </div>
+          <div className="search__short-films">
+            <p className="search__line"></p>{' '}
+            <div className="search__checkbox">
+              <FilterCheckbox />
+              <p className="search__text">{SearchFormData.shortFilm}</p>
+            </div>
           </div>
         </div>
       </form>

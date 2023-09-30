@@ -12,3 +12,12 @@
   height: 36px;
   background-color: #f4f4f4;
 }
+
+@media (max-width: 800px) {
+  .movie-card__section {
+    padding-left: 30px;
+    padding-right: 30px;
+    gap: 36px 30px;
+    grid-template-columns: repeat(auto-fill, 339px);
+  }
+}
