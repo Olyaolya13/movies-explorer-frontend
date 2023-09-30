@@ -1,17 +1,22 @@
+.login {
+  display: flex;
+  justify-content: center;
+}
+
 .login__logo {
   width: 38px;
   height: 38px;
 }
 
 .login__content {
-  margin: 70px 442px;
+  margin: 70px 0 0;
 }
 
 .login__title {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 500;
   line-height: normal;
-  margin: 40px 0 40px;
+  margin: 32px 0 38px;
 }
 
 .login__form {
@@ -25,7 +30,7 @@
   line-height: normal;
   margin: 0 0 5px;
   color: #a0a0a0;
-  margin: 24px 0 24px;
+  margin: 24px 0 5px;
 }
 
 .login__label:first-child {
@@ -33,7 +38,12 @@
 }
 
 .login__input {
-  border: 0;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0;
+  padding-bottom: 10px;
+  line-height: normal;
+  border: none;
   border-bottom: 1px solid #e8e8e8;
   outline: none;
 }
@@ -47,7 +57,7 @@
   font-size: 14px;
   font-weight: 500;
   text-align: center;
-  margin-top: 152px;
+  margin-top: 221px;
   cursor: pointer;
   transition: 0.3s linear;
 }
@@ -56,16 +66,21 @@
   opacity: 0.8;
 }
 
-.loginr__subtitle,
+.login__subtitle,
 .login__link {
-  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
   font-weight: 400;
   text-align: center;
   color: #a0a0a0;
-  margin: 16px 0 0;
+  margin: 0;
+  padding-top: 16px;
 }
 
 .login__link {
+  padding: 0;
+  padding-left: 6px;
   color: #3456f3;
   text-decoration: none;
   transition: 0.3s linear;

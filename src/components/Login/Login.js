@@ -1,17 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { LoginData } from '../../utils/constants';
 import Logo from '../../images/logo/header_logo.svg';
 import './Login.css';
-
-const LoginData = {
-  title: 'Рады видеть!',
-  signup: 'Регистрация',
-  question: 'Ещё не зарегистрированы?',
-  name: 'Имя',
-  email: 'E-mail',
-  password: 'Пароль',
-  signin: 'Войти'
-};
 
 function Login({ onlogin }) {
   const [email, setEmail] = useState('');
@@ -58,15 +49,13 @@ function Login({ onlogin }) {
             required
           />
           <span className="login__error" id="login__password-error"></span>
-          {/* <Link to="/movies"> */}
           <button type="submit" className="login__button" onClick={onlogin}>
             {LoginData.signin}
           </button>
-          {/* </Link> */}
         </form>
         <div>
           <p className="login__subtitle">
-            {LoginData.question}{' '}
+            {LoginData.question}
             <Link to="/signup" className="login__link">
               {LoginData.signup}
             </Link>

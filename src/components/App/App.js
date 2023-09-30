@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { useState } from 'react';
+import { NotFound } from '../../utils/pattern';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -9,11 +10,12 @@ import Profile from '../Profile/Profile';
 import Navigation from '../Navigation/Navigation';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import { useState } from 'react';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const isRegisterPage =
@@ -21,21 +23,21 @@ function App() {
     location.pathname === '/signin' ||
     location.pathname === '/profile';
 
+  const isNotFoundPage = NotFound(location.pathname);
+
   const handleIsLoggedIn = () => {
     setIsLoggedIn(true);
     navigate('/', { replace: true });
-    console.log(isLoggedIn);
   };
 
   const handleIsLoggedOut = () => {
     setIsLoggedIn(false);
     navigate('/', { replace: true });
-    console.log(isLoggedIn);
   };
 
   return (
     <>
-      {!isRegisterPage && (
+      {!isRegisterPage && !isNotFoundPage && (
         <div>{!isLoggedIn ? <Header isLoggedIn={isLoggedIn} /> : <Navigation />}</div>
       )}
       <Routes>
@@ -45,8 +47,9 @@ function App() {
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login onlogin={handleIsLoggedIn} />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      {!isRegisterPage && (
+      {!isRegisterPage && !isNotFoundPage && (
         <div>
           <Footer />
         </div>

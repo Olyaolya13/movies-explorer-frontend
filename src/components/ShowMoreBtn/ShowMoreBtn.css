@@ -24,3 +24,9 @@
 .show-button:hover {
   opacity: 0.8;
 }
+
+@media (max-width: 500px) {
+  .show-button {
+    width: 240px;
+  }
+}

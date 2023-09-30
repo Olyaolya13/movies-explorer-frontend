@@ -1,17 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../images/logo/header_logo.svg';
+import { RegisterData } from '../../utils/constants';
 import './Register.css';
-
-const RegisterData = {
-  title: 'Добро пожаловать!',
-  signup: 'Зарегистрироваться',
-  question: 'Уже зарегистрированы?',
-  name: 'Имя',
-  email: 'E-mail',
-  password: 'Пароль',
-  signin: 'Войти'
-};
 
 function Register() {
   const [email, setEmail] = useState('');

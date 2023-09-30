@@ -91,6 +91,13 @@ export const PortfolioData = {
   ]
 };
 
+//not found page
+export const NotFoundPageData = {
+  number: '404',
+  text: 'Страница не найдена',
+  buttonText: 'Назад'
+};
+
 //footer
 export const FooterData = {
   title: 'Учебный проект Яндекс.Практикум х BeatFilm.',
@@ -98,6 +105,37 @@ export const FooterData = {
   text: 'Яндекс.Практикум',
   subtitle: 'Github',
   link: 'https://github.com/yandex-praktikum?tab=repositories'
+};
+
+//login
+export const LoginData = {
+  title: 'Рады видеть!',
+  signup: 'Регистрация',
+  question: 'Ещё не зарегистрированы?',
+  name: 'Имя',
+  email: 'E-mail',
+  password: 'Пароль',
+  signin: 'Войти'
+};
+
+//register
+export const RegisterData = {
+  title: 'Добро пожаловать!',
+  signup: 'Зарегистрироваться',
+  question: 'Уже зарегистрированы?',
+  name: 'Имя',
+  email: 'E-mail',
+  password: 'Пароль',
+  signin: 'Войти'
+};
+
+//profile
+
+export const ProfileData = {
+  title: 'Имя',
+  email: 'E-mai',
+  edit: 'Редактировать',
+  signout: 'Выйти из аккаунта'
 };
 
 //search form

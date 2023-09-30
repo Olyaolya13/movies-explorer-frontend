@@ -24,6 +24,7 @@
 
 .search__films {
   display: flex;
+  width: 80%;
 }
 
 .search__input {
@@ -34,7 +35,7 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 1.4em;
-  width: 70%;
+  width: 100%;
   padding: 0;
 }
 
@@ -72,6 +73,7 @@
   font-size: 14px;
   font-weight: 400;
   padding-left: 14px;
+  padding-right: 20px;
   margin: 0;
 }
 
@@ -136,7 +138,10 @@
     margin-top: 50px;
     padding-bottom: 56px;
   }
-  .search__horizontal-line {
-    margin-top: 56px;
+  .search__text {
+    padding-right: 0;
+  }
+  .search__submit {
+    padding-right: 0;
   }
 }
