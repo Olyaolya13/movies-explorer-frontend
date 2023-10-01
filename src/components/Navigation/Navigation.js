@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Navigation.css';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../images/logo/header_logo.svg';
 import profileLogo from '../../images/logo/profileLogo.svg';
+import { NavigationData } from '../../utils/constants';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
-const NavigationData = {
-  film: 'Фильмы',
-  savedFilm: 'Сохраненные фильмы',
-  profile: 'Аккаунт'
-};
 function Navigation() {
   const { pathname } = useLocation();
 
@@ -56,6 +53,7 @@ function Navigation() {
           </Link>
         </div>
       </div>
+      <BurgerMenu />
     </section>
   );
 }

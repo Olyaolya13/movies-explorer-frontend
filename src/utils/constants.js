@@ -21,6 +21,13 @@ export const HeaderData = {
   signin: 'Войти'
 };
 
+//navigation
+export const NavigationData = {
+  film: 'Фильмы',
+  savedFilm: 'Сохраненные фильмы',
+  profile: 'Аккаунт'
+};
+
 //promo
 export const PromoData = {
   title: 'Учебный проект студента факультета Веб-разработки.'
