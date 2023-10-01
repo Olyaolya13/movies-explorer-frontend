@@ -74,3 +74,17 @@
   flex-direction: column;
   margin: 220px 0 0;
 }
+
+@media (max-width: 770px) {
+  .profile__content {
+    margin-top: 232px;
+  }
+
+  .profile__title {
+    font-size: 24px;
+    margin-bottom: 97px;
+  }
+  .profile__button {
+    margin-top: 210px;
+  }
+}

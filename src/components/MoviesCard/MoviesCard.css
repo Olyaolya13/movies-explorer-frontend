@@ -84,4 +84,7 @@
   .movie-card__image {
     height: 190px;
   }
+  .movie-card__about {
+    align-items: baseline;
+  }
 }

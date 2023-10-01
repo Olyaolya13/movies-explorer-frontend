@@ -16,7 +16,7 @@ function BurgerMenu() {
     <section className="burger">
       {isBurgerOpen && <div className="burger-menu__overlay" onClick={toggleBurgerMenu}></div>}
       <div className={`burger-menu ${isBurgerOpen ? 'burger-menu__open' : ''}`}>
-        <div className="burger-menu__icon" onClick={toggleBurgerMenu}>
+        <div onClick={toggleBurgerMenu}>
           {isBurgerOpen ? (
             <img src={closeIcon} alt="Cross" className="burger-menu__close-icon" />
           ) : (

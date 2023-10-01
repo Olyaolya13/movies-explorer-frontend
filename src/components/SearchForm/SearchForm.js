@@ -5,21 +5,16 @@ import SearchColorLogo from '../../images/logo/searchColorLogo.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { SearchFormData } from '../../utils/constants';
 
-function SearchForm({ onSearch }) {
+function SearchForm() {
   const [searchFilm, setSearchFilm] = useState('');
 
   const handleInputChange = e => {
     setSearchFilm(e.target.value);
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    onSearch(searchFilm);
-  };
-
   return (
     <section className="search">
-      <form className="search__form" onSubmit={handleSubmit}>
+      <form className="search__form">
         <div className="search__content">
           <div className="search__films">
             <img src={SearchLogo} alt="Икона поиска" className="search__logo" />

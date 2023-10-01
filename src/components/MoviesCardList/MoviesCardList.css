@@ -18,7 +18,7 @@
     padding-left: 30px;
     padding-right: 30px;
     gap: 36px 30px;
-    grid-template-columns: repeat(auto-fill, 300px);
-    padding-top: 50px;
+    grid-template-columns: repeat(auto-fill, 339px);
+    padding-bottom: 165px;
   }
 }
