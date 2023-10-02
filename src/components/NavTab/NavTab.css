@@ -36,6 +36,9 @@
 }
 
 @media (max-width: 400px) {
+  .navtab__navigation {
+    padding-top: 26px;
+  }
   .navtab__text {
     margin-right: 24px;
     font-size: 11px;

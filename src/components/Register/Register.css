@@ -97,3 +97,24 @@
     margin-top: 145px;
   }
 }
+
+@media (max-width: 465px) {
+  .register__button {
+    margin-top: 233px;
+    width: 260px;
+  }
+  .register__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 56px;
+  }
+  .register__subtitle {
+    font-size: 12px;
+    padding-bottom: 30px;
+  }
+  .register__title {
+    margin-top: 47px;
+    margin-bottom: 80px;
+  }
+}

@@ -5,7 +5,6 @@
 
 .student__line {
   border: 1px solid #000;
-  max-width: 1140px;
   margin: 0;
 }
 
@@ -19,7 +18,7 @@
   font-size: 22px;
   font-weight: 400;
   line-height: normal;
-  padding: 100px 0 23px;
+  padding: 110px 0 23px;
   margin: 0;
 }
 
@@ -38,8 +37,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5em;
-  margin: 26px 0 90px;
-  margin-right: 270px;
+  margin: 25px 270px 100px 0;
 }
 
 .student__site {
@@ -85,17 +83,17 @@
   }
   .student__subtitle {
     font-size: 40px;
-    padding-top: 60px;
+    padding-top: 62px;
   }
   .student__text {
     font-size: 12px;
     margin-top: 12px;
   }
   .student__about {
-    margin-top: 20px;
+    margin-top: 23px;
     margin-bottom: 87px;
     font-size: 12px;
-    margin-right: 59px;
+    margin-right: 50px;
   }
   .student__photo {
     width: 255px;
@@ -155,5 +153,14 @@
   }
   .student__content-about {
     display: block;
+  }
+}
+
+@media (max-width: 340px) {
+  .student__subtitle {
+    padding-top: 35px;
+  }
+  .student__about {
+    width: 290px;
   }
 }

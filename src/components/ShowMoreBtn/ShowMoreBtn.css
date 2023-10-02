@@ -25,8 +25,21 @@
   opacity: 0.8;
 }
 
+@media (max-width: 770px) {
+  .show-button {
+    margin-top: -86px;
+    margin-bottom: 76px;
+  }
+}
+
 @media (max-width: 500px) {
   .show-button {
     width: 240px;
+  }
+}
+
+@media (max-width: 400px) {
+  .show-button {
+    margin-bottom: 100px;
   }
 }

@@ -6,7 +6,6 @@
 
 .techs__line {
   border: 1px solid #000;
-  max-width: 1140px;
   margin: 0;
 }
 
@@ -15,18 +14,18 @@
   font-size: 22px;
   font-weight: 400;
   line-height: normal;
-  padding: 100px 0 23px;
+  padding: 105px 0 23px;
   margin: 0;
 }
 
 .techs__subtitle {
-  font-size: 50px;
-  padding: 80px 0 26px;
+  font-size: 47px;
+  padding: 87px 0 26px;
   text-align: center;
 }
 
 .techs__about {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 1.4em;
   padding: 0 0 100px;
@@ -76,7 +75,8 @@
     padding-top: 90px;
   }
   .techs__subtitle {
-    padding-bottom: 22px;
+    padding-top: 80px;
+    padding-bottom: 25px;
   }
   .techs__about {
     font-size: 12px;
@@ -88,7 +88,7 @@
   }
   .techs__skills {
     padding-bottom: 90px;
-    grid-template-columns: repeat(auto-fill, 80px);
+    grid-template-columns: repeat(auto-fill, 85px);
   }
 }
 
@@ -127,5 +127,8 @@
   .techs__skills {
     padding-right: 50px;
     padding-left: 50px;
+  }
+  .techs__subtitle {
+    padding-top: 60px;
   }
 }

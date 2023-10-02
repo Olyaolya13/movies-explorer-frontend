@@ -88,3 +88,15 @@
     align-items: baseline;
   }
 }
+
+@media (max-width: 400px) {
+  .movie-card {
+    height: 235px;
+  }
+  .movie-card__image {
+    height: 168px;
+  }
+  .movie-card__about {
+    align-items: baseline;
+  }
+}

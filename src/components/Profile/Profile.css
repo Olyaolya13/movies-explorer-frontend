@@ -4,7 +4,7 @@
 }
 
 .profile__content {
-  margin: 67px 0 0;
+  margin: 70px 0 0;
 }
 
 .profile__line {
@@ -86,5 +86,26 @@
   }
   .profile__button {
     margin-top: 210px;
+  }
+  .profile__signout:last-child {
+    margin-bottom: 270px;
+  }
+}
+
+@media (max-width: 465px) {
+  .profile__line {
+    width: 260px;
+  }
+  .profile__content {
+    margin-top: 68px;
+  }
+  .profile__title {
+    margin-bottom: 80px;
+  }
+  .profile__button {
+    margin-top: 378px;
+  }
+  .profile__signout:last-child {
+    margin-bottom: 40px;
   }
 }

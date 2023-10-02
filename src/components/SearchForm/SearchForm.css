@@ -123,13 +123,28 @@
     display: none;
   }
   .search__checkbox {
-    margin-top: 50px;
+    align-items: center;
+    margin-top: 60px;
     padding-bottom: 56px;
   }
   .search__text {
     padding-right: 0;
+    font-size: 11px;
   }
   .search__submit {
     padding-right: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .search {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .search__input {
+    font-size: 14px;
+  }
+  .search__content {
+    height: 70px;
   }
 }

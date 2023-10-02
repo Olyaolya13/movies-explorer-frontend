@@ -4,7 +4,7 @@
   gap: 32px 20px;
   grid-template-columns: repeat(auto-fill, 270px);
   justify-content: center;
-  padding: 70px 60px 30px;
+  padding: 70px 60px 170px;
 }
 
 .movies-card__button {
@@ -20,5 +20,13 @@
     gap: 36px 30px;
     grid-template-columns: repeat(auto-fill, 339px);
     padding-bottom: 165px;
+  }
+}
+
+@media (max-width: 400px) {
+  .movie-card__section {
+    grid-template-columns: repeat(auto-fill, 300px);
+    padding-top: 40px;
+    gap: 20px;
   }
 }
