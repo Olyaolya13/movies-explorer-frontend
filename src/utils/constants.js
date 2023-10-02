@@ -142,6 +142,7 @@ export const ProfileData = {
   title: 'Имя',
   email: 'E-mai',
   edit: 'Редактировать',
+  save: 'Сохранить',
   signout: 'Выйти из аккаунта'
 };
 

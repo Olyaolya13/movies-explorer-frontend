@@ -9,22 +9,22 @@ function Register() {
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('');
 
-  function handleChangePassword(evt) {
+  function handlePassword(evt) {
     setPassword(evt.target.value);
   }
 
-  function handleChangeEmail(evt) {
+  function handleEmail(evt) {
     setEmail(evt.target.value);
   }
 
-  function handleChangeUserName(evt) {
+  function handleUserName(evt) {
     setUserName(evt.target.value);
   }
 
   return (
     <section className="register">
       <div className="register__content">
-        <Link to={'/'}>
+        <Link to="/">
           <img src={Logo} alt="Логотип" className="register__logo" />
         </Link>
         <h2 className="register__title">{RegisterData.title}</h2>
@@ -37,7 +37,7 @@ function Register() {
             name="userName"
             type="text"
             value={userName}
-            onChange={handleChangeUserName}
+            onChange={handleUserName}
             className="register__input"
             required
           />
@@ -50,7 +50,7 @@ function Register() {
             name="email"
             type="email"
             value={email}
-            onChange={handleChangeEmail}
+            onChange={handleEmail}
             className="register__input"
             required
           />
@@ -63,17 +63,18 @@ function Register() {
             name="password"
             type="password"
             value={password}
-            onChange={handleChangePassword}
+            onChange={handlePassword}
             className="register__input"
             required
           />
           <span className="register__error" id="register__password-error"></span>
-          <Link to="/signin">
-            <button type="submit" className="register__button">
-              {RegisterData.signup}
-            </button>
-          </Link>
         </form>
+        <Link to="/signin">
+          <button type="submit" className="register__button">
+            {RegisterData.signup}
+          </button>
+        </Link>
+
         <div>
           <p className="register__subtitle">
             {RegisterData.question}{' '}

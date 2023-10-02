@@ -48,7 +48,7 @@
 }
 
 .project__tb,
-.project__tb1 {
+.project__tb-two {
   margin-bottom: 110px;
 }
 
@@ -56,7 +56,7 @@
   width: 20%;
 }
 
-.project__tb1 {
+.project__tb-two {
   width: 80%;
 }
 
@@ -66,7 +66,7 @@
   text-align: center;
 }
 
-.project__tb1 .project__weeks {
+.project__tb-two .project__weeks {
   color: #000;
   background-color: #f2f2f2;
   text-align: center;
@@ -114,7 +114,7 @@
     padding-right: 50px;
   }
   .project__tb,
-  .project__tb1 {
+  .project__tb-two {
     margin-bottom: 90px;
   }
 }
@@ -145,7 +145,7 @@
     margin-top: 60px;
   }
   .project__tb,
-  .project__tb1 {
+  .project__tb-two {
     margin-bottom: 69px;
   }
   .project__text {
@@ -184,7 +184,7 @@
   .project__tb {
     width: 35%;
   }
-  .project__tb1 {
+  .project__tb-two {
     width: 65%;
   }
   .project__subtitle {
