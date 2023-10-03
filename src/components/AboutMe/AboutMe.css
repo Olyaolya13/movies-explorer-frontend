@@ -22,9 +22,14 @@
   margin: 0;
 }
 
+.student__title {
+  letter-spacing: -0.88px;
+}
+
 .student__subtitle {
   font-size: 50px;
   padding: 66px 0 0;
+  letter-spacing: -2px;
 }
 
 .student__text {
@@ -34,6 +39,7 @@
 }
 
 .student__about {
+  width: 590px;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5em;
@@ -61,15 +67,17 @@
   margin-top: 68px;
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1221px) {
   .student__about {
     margin-right: 100px;
+    width: 364px;
   }
 }
 
 @media (max-width: 900px) {
   .student__about {
     margin-right: 60px;
+    width: 300px;
   }
 }
 
@@ -94,6 +102,7 @@
     margin-bottom: 87px;
     font-size: 12px;
     margin-right: 50px;
+    width: 360px;
   }
   .student__photo {
     width: 255px;
@@ -101,7 +110,7 @@
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 732px) {
   .student__content {
     flex-direction: column-reverse;
     align-items: center;
@@ -114,6 +123,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .student__site {
+    margin: 0;
   }
 }
 
@@ -146,7 +158,7 @@
     font-size: 11px;
   }
   .student__about {
-    margin-bottom: 40px;
+    margin-bottom: 35px;
     font-size: 11px;
     width: 268px;
     margin-right: 0;

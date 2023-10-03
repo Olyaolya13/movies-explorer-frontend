@@ -1,10 +1,10 @@
 .portfolio {
   background-color: #fafafa;
-  padding: 0 70px;
+  padding: 0 75px 0 70px;
 }
 
 .portfolio__title {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   line-height: normal;
   color: #a0a0a0;
@@ -23,6 +23,7 @@
   justify-content: space-between;
   align-items: center;
   padding-bottom: 20px;
+  letter-spacing: -1.2px;
 }
 .portfolio-text:last-child {
   padding-bottom: 0px;
@@ -55,16 +56,19 @@
 @media (max-width: 770px) {
   .portfolio {
     padding-left: 50px;
-    padding-right: 50px;
+    padding-right: 53px;
   }
   .portfolio__title {
-    padding-top: 91px;
+    padding-top: 85px;
   }
   .portfolio__skill-name {
     font-size: 28px;
   }
   .portfolio__skill-name:last-child {
     padding-bottom: 90px;
+  }
+  .portfolio-text {
+    padding-bottom: 25px;
   }
 }
 

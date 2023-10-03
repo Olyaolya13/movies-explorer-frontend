@@ -40,7 +40,7 @@ function BurgerMenu() {
           <Link to="/profile" onClick={toggleBurgerMenu} className="burger-menu__link">
             <button className="burger-menu__link-button">
               <img src={profileLogo} alt="" className="burger-menu__link-logo" />
-              <p className="burger-menu__title">Аккаунт</p>
+              <p className="burger-menu__title burger-menu__button-title">Аккаунт</p>
             </button>
           </Link>
         </ul>
