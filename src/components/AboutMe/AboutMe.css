@@ -81,11 +81,17 @@
   }
 }
 
-@media (max-width: 770px) {
+@media (max-width: 792px) {
   .student {
     padding-left: 50px;
     padding-right: 50px;
   }
+  .student__about {
+    margin-right: 50px;
+  }
+}
+
+@media (max-width: 770px) {
   .student__title {
     padding-top: 90px;
   }
@@ -101,7 +107,6 @@
     margin-top: 23px;
     margin-bottom: 87px;
     font-size: 12px;
-    margin-right: 50px;
     width: 360px;
   }
   .student__photo {
@@ -110,7 +115,13 @@
   }
 }
 
-@media (max-width: 732px) {
+@media (max-width: 760px) {
+  .student__about {
+    margin-right: 30px;
+  }
+}
+
+@media (max-width: 741px) {
   .student__content {
     flex-direction: column-reverse;
     align-items: center;
@@ -130,10 +141,6 @@
 }
 
 @media (max-width: 520px) {
-  .student__content {
-    flex-direction: column-reverse;
-    align-items: start;
-  }
   .student__photo {
     width: 292px;
     height: 357px;
@@ -169,6 +176,9 @@
 }
 
 @media (max-width: 340px) {
+  .student__content {
+    align-items: start;
+  }
   .student__subtitle {
     padding-top: 35px;
   }
