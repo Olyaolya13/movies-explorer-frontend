@@ -11,8 +11,20 @@ function Portfolio() {
         {PortfolioData.skills.map((skill, index) => (
           <li className="portfolio__skill-name" key={index}>
             <div className="portfolio-text">
-              {skill}
-              <a href={PortfolioData.skillsSite[index]} target="_blank" rel="noopener noreferrer">
+              <a
+                href={PortfolioData.skillsSite[index]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="portfolio-name"
+              >
+                {skill}
+              </a>
+              <a
+                href={PortfolioData.skillsSite[index]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="portfolio-name"
+              >
                 <img src={Arrow} alt="Стрелочка" className="portfolio__arrow" />
               </a>
             </div>

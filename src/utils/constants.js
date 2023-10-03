@@ -111,7 +111,8 @@ export const FooterData = {
   year: '2023',
   text: 'Яндекс.Практикум',
   subtitle: 'Github',
-  link: 'https://github.com/yandex-praktikum?tab=repositories'
+  linkGithub: 'https://github.com/yandex-praktikum?tab=repositories',
+  linkYandex: 'https://practicum.yandex.ru/'
 };
 
 //login

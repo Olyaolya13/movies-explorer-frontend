@@ -10,10 +10,19 @@ function Footer() {
       <div className="footer__content">
         <p className="footer__year">&copy;{FooterData.year}</p>
         <ul className="footer__text">
-          <li className="footer__subtitle">{FooterData.text}</li>
+          <li className="footer__subtitle">
+            <a
+              href={FooterData.linkYandex}
+              className="footer__link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {FooterData.text}
+            </a>
+          </li>
           <li>
             <a
-              href={FooterData.link}
+              href={FooterData.linkGithub}
               className="footer__link"
               target="_blank"
               rel="noopener noreferrer"
