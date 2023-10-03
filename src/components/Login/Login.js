@@ -56,7 +56,7 @@ function Login({ onlogin }) {
         <div>
           <p className="login__subtitle">
             {LoginData.question}
-            <Link to="/signup" className="login__subtitle login__link">
+            <Link to="/signup" className="login__link">
               {LoginData.signup}
             </Link>
           </p>

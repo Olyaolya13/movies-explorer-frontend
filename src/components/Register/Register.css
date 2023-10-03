@@ -110,7 +110,8 @@
     align-items: center;
     margin-top: 56px;
   }
-  .register__subtitle {
+  .register__subtitle,
+  .register__link {
     font-size: 12px;
     padding-bottom: 30px;
   }

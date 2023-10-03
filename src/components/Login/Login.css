@@ -115,7 +115,8 @@
     align-items: center;
     margin-top: 56px;
   }
-  .login__subtitle {
+  .login__subtitle,
+  .login__link {
     font-size: 12px;
     padding-bottom: 30px;
   }

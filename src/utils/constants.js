@@ -272,3 +272,8 @@ export const savedMoviesData = [
     image: MickJagger
   }
 ];
+
+//move card list
+export const MoviesCardLisShowMoreBtnData = {
+  title: 'Ещё'
+};

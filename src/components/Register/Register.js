@@ -78,7 +78,7 @@ function Register() {
         <div>
           <p className="register__subtitle">
             {RegisterData.question}{' '}
-            <Link to="/signin" className="register__subtitle register__link">
+            <Link to="/signin" className="register__link">
               {RegisterData.signin}
             </Link>
           </p>

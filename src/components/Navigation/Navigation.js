@@ -48,7 +48,7 @@ function Navigation() {
           <Link to="/profile" className="navigation__link">
             <button className="navigation__button">
               <img src={profileLogo} alt="" className="navigation__profile-logo" />
-              <p className="navigation_text-button">{NavigationData.profile}</p>
+              <p className="navigation__text-button">{NavigationData.profile}</p>
             </button>
           </Link>
         </div>
