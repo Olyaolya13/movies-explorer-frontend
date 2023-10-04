@@ -62,19 +62,27 @@
   opacity: 0.8;
 }
 
+.register__text {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  margin-top: 16px;
+}
+
 .register__subtitle,
 .register__link {
   font-size: 14px;
   font-weight: 400;
   text-align: center;
   color: #a0a0a0;
-  margin: 16px 0 0;
+  margin: 0;
 }
 
 .register__link {
   color: #3456f3;
   text-decoration: none;
   transition: 0.3s linear;
+  padding-left: 6px;
 }
 
 .register__link:hover {
@@ -85,9 +93,8 @@
   .register__content {
     margin-top: 232px;
   }
-  .register__subtitle,
-  .register__link {
-    padding-bottom: 232px;
+  .register__text {
+    margin-bottom: 232px;
   }
 
   .register__title {
@@ -110,10 +117,14 @@
     align-items: center;
     margin-top: 56px;
   }
+
   .register__subtitle,
   .register__link {
     font-size: 12px;
-    padding-bottom: 30px;
+  }
+
+  .register__text {
+    margin-bottom: 30px;
   }
   .register__title {
     margin-top: 47px;

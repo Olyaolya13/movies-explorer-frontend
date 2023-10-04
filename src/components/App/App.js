@@ -17,6 +17,7 @@ function App() {
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [IsRegister, setIsRegister] = useState(false);
 
   const isRegisterPage =
     location.pathname === '/signup' ||
@@ -35,20 +36,27 @@ function App() {
     navigate('/', { replace: true });
   };
 
+  const handleIsRegister = () => {
+    setIsRegister(true);
+    navigate('/signin', { replace: true });
+  };
+
   return (
     <>
       {!isRegisterPage && !isNotFoundPage && (
         <div>{!isLoggedIn ? <Header isLoggedIn={isLoggedIn} /> : <Navigation />}</div>
       )}
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/profile" element={<Profile onLoggedOut={handleIsLoggedOut} />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/saved-movies" element={<SavedMovies />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/signin" element={<Login onlogin={handleIsLoggedIn} />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <div className="main">
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/profile" element={<Profile onLoggedOut={handleIsLoggedOut} />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/saved-movies" element={<SavedMovies />} />
+          <Route path="/signup" element={<Register onRegister={handleIsRegister} />} />
+          <Route path="/signin" element={<Login onLogin={handleIsLoggedIn} />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
       {!isRegisterPage && !isNotFoundPage && (
         <div>
           <Footer />

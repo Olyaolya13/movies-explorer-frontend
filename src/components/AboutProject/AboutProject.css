@@ -3,11 +3,6 @@
   padding: 0 70px;
 }
 
-.project__line {
-  border: 1px solid #000;
-  margin: 0;
-}
-
 .project__title,
 .project__subtitle {
   font-size: 22px;
@@ -19,6 +14,8 @@
 
 .project__title {
   letter-spacing: -0.88px;
+  border-bottom: 1px solid #000;
+  margin: 0;
 }
 
 .project__subtitle {

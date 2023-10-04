@@ -13,11 +13,11 @@ function Header({ isLoggedIn }) {
       </Link>
       {!isLoggedIn ? (
         <nav className="header__nav">
-          <Link to="/signup" className="header__link">
-            <p className="header__text">{HeaderData.signup}</p>
+          <Link to="/signup" className="header__link header__text">
+            {HeaderData.signup}
           </Link>
-          <Link to="/signin" className="header__link">
-            <button className="header__button header__text">{HeaderData.signin}</button>
+          <Link to="/signin" className="header__link header__button">
+            {HeaderData.signin}
           </Link>
         </nav>
       ) : (

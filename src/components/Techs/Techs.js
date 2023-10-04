@@ -6,7 +6,6 @@ function Techs() {
   return (
     <section className="techs">
       <h2 className="techs__title">{AboutTechsData.title}</h2>
-      <p className="techs__line"></p>
       <div className="techs__content">
         {AboutTechsData.stages.map((stage, index) => (
           <div key={index}>

@@ -13,14 +13,11 @@
 
 .header__nav {
   display: flex;
+  align-items: center;
 }
 
-.header__link {
-  text-decoration: none;
-  align-self: center;
-}
-
-.header__text {
+.header__text,
+.header__button {
   font-size: 12px;
   font-weight: 500;
   line-height: 1.3em;
@@ -29,13 +26,22 @@
   margin: 0;
   margin-right: 30px;
   transition: 0.3s linear;
+  cursor: pointer;
 }
 
 .header__text:hover {
   opacity: 0.7;
 }
 
+.header__link {
+  text-decoration: none;
+  align-self: center;
+}
+
 .header__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #3456f3;
   border-radius: 3px;
   border: none;
@@ -43,9 +49,9 @@
   height: 32px;
   cursor: pointer;
   transition: 0.3s linear;
-  color: #fff;
   padding: 0;
   margin-right: 0;
+  color: #fff;
 }
 
 .header__button:hover {
@@ -62,7 +68,8 @@
   .header {
     padding: 18px 14px;
   }
-  .header__text {
+  .header__text,
+  .header__button {
     font-size: 11px;
     margin-right: 14px;
   }

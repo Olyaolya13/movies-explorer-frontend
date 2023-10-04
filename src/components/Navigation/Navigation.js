@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Navigation.css';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../images/logo/header_logo.svg';
@@ -32,24 +32,27 @@ function Navigation() {
           <Link to="/">
             <img src={logo} alt="Logo" className="navigation__logo" />
           </Link>
-
-          <Link to="/movies" className="navigation__link">
-            <p className="navigation__text" style={activeStyleMoviesPage}>
-              {NavigationData.film}
-            </p>
+          <Link
+            to="/movies"
+            className="navigation__link navigation__text"
+            style={activeStyleMoviesPage}
+          >
+            {NavigationData.film}
           </Link>
-          <Link to="/saved-movies" className="navigation__link">
-            <p className="navigation__text" style={activeStyleSavedMoviesPage}>
-              {NavigationData.savedFilm}
-            </p>
+          <Link
+            to="/saved-movies"
+            className="navigation__link navigation__text"
+            style={activeStyleSavedMoviesPage}
+          >
+            {NavigationData.savedFilm}
           </Link>
         </div>
         <div>
-          <Link to="/profile" className="navigation__link">
-            <button className="navigation__button">
+          <Link to="/profile" className="navigation__link navigation__text-button">
+            <div className="navigation__button">
               <img src={profileLogo} alt="" className="navigation__profile-logo" />
-              <p className="navigation__text-button">{NavigationData.profile}</p>
-            </button>
+              {NavigationData.profile}
+            </div>
           </Link>
         </div>
       </div>

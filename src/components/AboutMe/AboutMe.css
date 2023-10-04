@@ -3,11 +3,6 @@
   padding: 0 70px;
 }
 
-.student__line {
-  border: 1px solid #000;
-  margin: 0;
-}
-
 .student__content {
   display: flex;
   justify-content: space-between;
@@ -24,6 +19,8 @@
 
 .student__title {
   letter-spacing: -0.88px;
+  border-bottom: 1px solid #000;
+  margin: 0;
 }
 
 .student__subtitle {

@@ -30,7 +30,7 @@ function Profile({ onLoggedOut }) {
         <div className="profile__content">
           <h2 className="profile__title">Привет, Виталий!</h2>
           <form className="profile__form">
-            <label className="profile__text profile__subtitle">
+            <label className="profile__label profile__subtitle">
               {ProfileData.title}
               <input
                 id="userName"
@@ -43,8 +43,7 @@ function Profile({ onLoggedOut }) {
                 disabled={!editBtn}
               />
             </label>
-            <p className="profile__line"></p>
-            <label className="profile__text profile__subtitle">
+            <label className="profile__label profile__subtitle">
               {ProfileData.email}
               <input
                 id="Email"
@@ -60,15 +59,15 @@ function Profile({ onLoggedOut }) {
           </form>
           <div className="profile__button">
             {editBtn ? (
-              <button className="profile__save" onClick={handleDelEditBtnChange}>
+              <button type="submit" className="profile__save" onClick={handleDelEditBtnChange}>
                 {ProfileData.save}
               </button>
             ) : (
               <>
-                <button className="profile__edit" onClick={handleEditBtnChange}>
+                <button type="button" className="profile__edit" onClick={handleEditBtnChange}>
                   {ProfileData.edit}
                 </button>
-                <button className="profile__signout" onClick={onLoggedOut}>
+                <button type="submit" className="profile__signout" onClick={onLoggedOut}>
                   {ProfileData.signout}
                 </button>
               </>

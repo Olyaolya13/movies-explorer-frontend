@@ -158,97 +158,113 @@ export const MoviesCardListData = [
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: HistoryAboutGraffity
+    image: HistoryAboutGraffity,
+    alt: 'Черно-белая картина, улыбающиеся девушка - фотограф стоит на фоне домов с мальчиками около машины'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: Polaroid
+    image: Polaroid,
+    alt: 'Мужчина на фоне постановочного света, картинка в стиле поларойд'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: MickJagger
+    image: MickJagger,
+    alt: 'Мик Джаггер с гитарой за столом, черно белая картинка'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: Skateboard
+    image: Skateboard,
+    alt: 'Мужчина, катающийся на скейтборде, внутри здания с колоннами'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: SkateboardOnTheRoad
+    image: SkateboardOnTheRoad,
+    alt: 'Молодые люди, катающиеся на скейтбордах по дороге на улице в солнечное время в городе '
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: TheBooksellers
+    image: TheBooksellers,
+    alt: 'Продавец книг, переберающий их в квартире в светлое время суток,'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: MerceCunningham
+    image: MerceCunningham,
+    alt: 'Мерс Каннингем с товарищами около забора здания'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: Graffity
+    image: Graffity,
+    alt: 'Граффити на поезде на станции'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: RunMarathon
+    image: RunMarathon,
+    alt: 'Множество людей,бегущих марафон'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: KeithHaringStreetArt
+    image: KeithHaringStreetArt,
+    alt: 'Молодые люди на вечеринке, черно белая картинка'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: SmokingMan
+    image: SmokingMan,
+    alt: 'Молодой, курящий парень'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: IfIThinkOfGermanyAtNight
+    image: IfIThinkOfGermanyAtNight,
+    alt: 'Молодой мужчина в очках, сидящий в студии звукозаписи'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: WarOfArt
+    image: WarOfArt,
+    alt: 'Люди, сидящие в большом зале, над ними два портрета лидеров КНДР '
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: GimmeDanger
+    image: GimmeDanger,
+    alt: 'Молодые люди около кирпичной стены здания, вид сверху'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: RunMan
+    image: RunMan,
+    alt: 'Молодой мужчина, подбегающий к финишной леньте'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: Parkur
+    image: Parkur,
+    alt: 'Множетсво молодых людей, загимающихся на железных конструкцяиях'
   }
 ];
 
@@ -257,19 +273,22 @@ export const savedMoviesData = [
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: HistoryAboutGraffity
+    image: HistoryAboutGraffity,
+    alt: 'Picture: History About Graffity'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: Polaroid
+    image: Polaroid,
+    alt: 'Picture: Polaroid Photo'
   },
   {
     title: '33 слова о дизайне',
     hours: '1ч',
     minutes: '42м',
-    image: MickJagger
+    image: MickJagger,
+    alt: 'Picture: MickJagger'
   }
 ];
 

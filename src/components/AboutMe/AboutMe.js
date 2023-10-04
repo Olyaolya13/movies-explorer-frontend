@@ -7,7 +7,6 @@ function AboutMe() {
   return (
     <section className="student">
       <h2 className="student__title">{AboutMeData.title}</h2>
-      <p className="student__line"></p>
       <div className="student__content">
         {AboutMeData.stages.map((stage, index) => (
           <div className="student__content-about" key={index}>

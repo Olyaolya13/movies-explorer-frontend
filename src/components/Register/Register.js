@@ -4,7 +4,7 @@ import Logo from '../../images/logo/header_logo.svg';
 import { RegisterData } from '../../utils/constants';
 import './Register.css';
 
-function Register() {
+function Register({ onRegister }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('');
@@ -68,20 +68,17 @@ function Register() {
             required
           />
           <span className="register__error" id="register__password-error"></span>
-        </form>
-        <Link to="/signin">
-          <button type="submit" className="register__button">
+          <button type="submit" className="register__button" onClick={onRegister}>
             {RegisterData.signup}
           </button>
-        </Link>
-
+        </form>
         <div>
-          <p className="register__subtitle">
-            {RegisterData.question}{' '}
+          <div className="register__text">
+            <p className="register__subtitle">{RegisterData.question}</p>
             <Link to="/signin" className="register__link">
               {RegisterData.signin}
             </Link>
-          </p>
+          </div>
         </div>
       </div>
     </section>

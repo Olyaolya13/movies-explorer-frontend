@@ -14,11 +14,7 @@
   padding-top: 79px;
   padding-bottom: 20px;
   margin: 0;
-}
-
-.footer__line {
-  border: 1px solid #e8e8e8;
-  margin: 0;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .footer__content {

@@ -23,36 +23,23 @@
   line-height: 1.23em;
   margin-right: 40px;
   cursor: pointer;
-  transition: 0.3s linear;
 }
 
 .navtab__text:last-child {
   margin-right: 0;
 }
 
-.navtab__text:hover {
-  opacity: 0.7;
-}
-
 .navtab__link {
   position: relative;
   display: inline-block;
   text-decoration: none;
-}
-
-.navtab__link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #000;
+  border-bottom: 1px solid #000;
+  margin: 0;
   transition: 0.3s linear;
 }
 
-.navtab__link:hover::after {
-  opacity: 0.8s;
+.navtab__link:hover {
+  opacity: 0.7;
 }
 
 @media (max-width: 400px) {

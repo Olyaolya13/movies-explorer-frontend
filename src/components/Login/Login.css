@@ -66,20 +66,23 @@
   opacity: 0.8;
 }
 
-.login__subtitle,
-.login__link {
+.login__text {
   display: flex;
   justify-content: center;
+  margin: 0;
+  margin-top: 16px;
+}
+
+.login__subtitle,
+.login__link {
   font-size: 14px;
   font-weight: 400;
   text-align: center;
   color: #a0a0a0;
   margin: 0;
-  padding-top: 16px;
 }
 
 .login__link {
-  padding: 0;
   padding-left: 6px;
   color: #3456f3;
   text-decoration: none;
@@ -94,9 +97,8 @@
   .login__content {
     margin-top: 235px;
   }
-  .login__subtitle,
-  .login__link {
-    padding-bottom: 232px;
+  .login__text {
+    margin-bottom: 232px;
   }
   .login__title {
     font-size: 24px;
@@ -115,10 +117,13 @@
     align-items: center;
     margin-top: 56px;
   }
+
   .login__subtitle,
   .login__link {
     font-size: 12px;
-    padding-bottom: 30px;
+  }
+  .login__text {
+    margin-bottom: 30px;
   }
   .login__title {
     margin-top: 47px;

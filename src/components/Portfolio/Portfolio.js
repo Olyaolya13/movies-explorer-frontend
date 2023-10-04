@@ -28,7 +28,6 @@ function Portfolio() {
                 <img src={Arrow} alt="Стрелочка" className="portfolio__arrow" />
               </a>
             </div>
-            {index === PortfolioData.skills.length - 1 ? null : <p className="portfolio-line"></p>}
           </li>
         ))}
       </ul>

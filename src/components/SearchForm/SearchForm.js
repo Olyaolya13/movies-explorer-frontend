@@ -30,7 +30,6 @@ function SearchForm() {
             </button>
           </div>
           <div className="search__short-films">
-            <p className="search__line"></p>{' '}
             <div className="search__checkbox">
               <FilterCheckbox />
               <p className="search__text">{SearchFormData.shortFilm}</p>
@@ -38,7 +37,6 @@ function SearchForm() {
           </div>
         </div>
       </form>
-      <p className="search__horizontal-line"></p>
     </section>
   );
 }

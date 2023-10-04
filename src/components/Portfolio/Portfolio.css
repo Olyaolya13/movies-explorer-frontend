@@ -1,6 +1,6 @@
 .portfolio {
   background-color: #fafafa;
-  padding: 0 75px 0 70px;
+  padding: 0 75px 125px 70px;
 }
 
 .portfolio__title {
@@ -10,11 +10,6 @@
   color: #a0a0a0;
   padding: 100px 0 50px;
   margin: 0;
-}
-
-.portfolio-line {
-  border: 1px solid #e8e8e8;
-  margin: 0 0 20px;
 }
 
 .portfolio-text {
@@ -34,8 +29,18 @@
   padding: 0;
 }
 
+.portfolio__skill-name {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 20px 0 20px;
+}
+
+.portfolio__skill-name:first-child {
+  padding-top: 0;
+}
+
 .portfolio__skill-name:last-child {
-  padding-bottom: 125px;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .portfolio-name {

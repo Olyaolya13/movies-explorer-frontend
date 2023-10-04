@@ -27,23 +27,23 @@ function BurgerMenu() {
             </div>
           )}
         </div>
-        <ul className="burger-menu__items">
+        <div className="burger-menu__items">
           <Link to="/" onClick={toggleBurgerMenu} className="burger-menu__link">
-            <li className="burger-menu__title">Главная</li>
+            <p className="burger-menu__title">Главная</p>
           </Link>
           <Link to="/movies" onClick={toggleBurgerMenu} className="burger-menu__link">
-            <li className="burger-menu__title">Фильмы</li>
+            <p className="burger-menu__title">Фильмы</p>
           </Link>
           <Link to="/saved-movies" onClick={toggleBurgerMenu} className="burger-menu__link">
-            <li className="burger-menu__title">Сохраненные фильмы</li>
+            <p className="burger-menu__title">Сохраненные фильмы</p>
           </Link>
           <Link to="/profile" onClick={toggleBurgerMenu} className="burger-menu__link">
-            <button className="burger-menu__link-button">
+            <div className="burger-menu__link-button">
               <img src={profileLogo} alt="" className="burger-menu__link-logo" />
               <p className="burger-menu__title burger-menu__button-title">Аккаунт</p>
-            </button>
+            </div>
           </Link>
-        </ul>
+        </div>
       </div>
     </section>
   );

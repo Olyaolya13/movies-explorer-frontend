@@ -6,7 +6,6 @@ function AboutProject() {
   return (
     <section className="project">
       <h2 className="project__title">{AboutProjectData.title}</h2>
-      <p className="project__line"></p>
       <div className="project__content">
         {AboutProjectData.stages.map((stage, index) => (
           <div className="project__text" key={index}>

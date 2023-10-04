@@ -4,7 +4,7 @@ import { LoginData } from '../../utils/constants';
 import Logo from '../../images/logo/header_logo.svg';
 import './Login.css';
 
-function Login({ onlogin }) {
+function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -49,17 +49,15 @@ function Login({ onlogin }) {
             required
           />
           <span className="login__error" id="login__password-error"></span>
-          <button type="submit" className="login__button" onClick={onlogin}>
+          <button type="submit" className="login__button" onClick={onLogin}>
             {LoginData.signin}
           </button>
         </form>
-        <div>
-          <p className="login__subtitle">
-            {LoginData.question}
-            <Link to="/signup" className="login__link">
-              {LoginData.signup}
-            </Link>
-          </p>
+        <div className="login__text">
+          <p className="login__subtitle">{LoginData.question}</p>
+          <Link to="/signup" className="login__link">
+            {LoginData.signup}
+          </Link>
         </div>
       </div>
     </section>

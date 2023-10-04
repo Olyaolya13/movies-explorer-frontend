@@ -6,7 +6,6 @@ function Footer() {
   return (
     <section className="footer">
       <h2 className="footer__title">{FooterData.title}</h2>
-      <p className="footer__line"></p>
       <div className="footer__content">
         <p className="footer__year">&copy;{FooterData.year}</p>
         <ul className="footer__text">
