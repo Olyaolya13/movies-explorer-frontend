@@ -18,6 +18,10 @@
   margin-right: 45px;
 }
 
+.navigation__logo:hover {
+  opacity: 0.8;
+}
+
 .header__nav {
   display: flex;
 }

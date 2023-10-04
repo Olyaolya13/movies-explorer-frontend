@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import closeIcon from '../../images/CloseIcon.svg';
+import closeIcon from '../../images/logo/CloseIcon.svg';
 import profileLogo from '../../images/logo/profileLogo.svg';
 
 import './BurgerMenu.css';

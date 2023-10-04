@@ -50,6 +50,12 @@
   background-color: transparent;
 }
 
+.profile__input:focus {
+  border-bottom: 1px solid #3456f3;
+  outline: none;
+  width: 30%;
+}
+
 .profile__edit {
   font-size: 13px;
   text-align: center;

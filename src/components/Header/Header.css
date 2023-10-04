@@ -11,6 +11,10 @@
   height: 38px;
 }
 
+.header__logo:hover {
+  opacity: 0.8;
+}
+
 .header__nav {
   display: flex;
   align-items: center;

@@ -8,6 +8,10 @@
   height: 38px;
 }
 
+.register__logo:hover {
+  opacity: 0.8;
+}
+
 .register__content {
   margin: 70px 0 174px;
 }
@@ -42,6 +46,11 @@
   border-bottom: 1px solid #e8e8e8;
   outline: none;
   padding-bottom: 10px;
+}
+
+.register__input:focus {
+  border-bottom: 1px solid #3456f3;
+  outline: none;
 }
 
 .register__button {

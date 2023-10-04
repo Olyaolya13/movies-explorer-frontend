@@ -1,6 +1,6 @@
 import React from 'react';
 import './Portfolio.css';
-import Arrow from '../../images/arrow.svg';
+import Arrow from '../../images/logo/arrow.svg';
 import { PortfolioData } from '../../utils/constants';
 
 function Portfolio() {

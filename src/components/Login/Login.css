@@ -8,6 +8,10 @@
   height: 38px;
 }
 
+.login__logo:hover {
+  opacity: 0.8;
+}
+
 .login__content {
   margin: 70px 0 175px;
 }
@@ -45,6 +49,11 @@
   line-height: normal;
   border: none;
   border-bottom: 1px solid #e8e8e8;
+  outline: none;
+}
+
+.login__input:focus {
+  border-bottom: 1px solid #3456f3;
   outline: none;
 }
 
