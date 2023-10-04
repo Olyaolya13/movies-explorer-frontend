@@ -37,6 +37,9 @@ function Profile({ onLoggedOut }) {
                 name="userName"
                 type="text"
                 value={userName}
+                placeholder="Введите имя"
+                minlength="2"
+                maxlength="20"
                 onChange={handleChangeUserName}
                 className="profile__input"
                 required
@@ -50,6 +53,9 @@ function Profile({ onLoggedOut }) {
                 name="Email"
                 type="email"
                 value={email}
+                placeholder="Введите е-mail"
+                minlength="6"
+                maxlength="20"
                 onChange={handleEmailChange}
                 className="profile__input"
                 required

@@ -37,6 +37,9 @@ function Register({ onRegister }) {
             name="userName"
             type="text"
             value={userName}
+            placeholder="Введите имя"
+            minlength="2"
+            maxlength="20"
             onChange={handleUserName}
             className="register__input"
             required
@@ -50,6 +53,9 @@ function Register({ onRegister }) {
             name="email"
             type="email"
             value={email}
+            placeholder="Введите е-mail"
+            minlength="6"
+            maxlength="20"
             onChange={handleEmail}
             className="register__input"
             required
@@ -63,6 +69,9 @@ function Register({ onRegister }) {
             name="password"
             type="password"
             value={password}
+            placeholder="Введите пароль"
+            minlength="6"
+            maxlength="20"
             onChange={handlePassword}
             className="register__input"
             required

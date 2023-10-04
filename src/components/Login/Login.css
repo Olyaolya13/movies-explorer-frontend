@@ -57,6 +57,24 @@
   outline: none;
 }
 
+.login__input-error,
+.login__input:focus {
+  border-bottom: 1px solid #f33434;
+  outline: none;
+}
+
+.login__input-error {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.2;
+  display: block;
+  padding-top: 6px;
+  height: 12px;
+  color: #ee3465;
+  border-bottom: none;
+}
+
 .login__button {
   background-color: #3456f3;
   width: 396px;

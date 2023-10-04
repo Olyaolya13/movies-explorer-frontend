@@ -24,6 +24,7 @@ function SearchForm() {
               className="search__input"
               value={searchFilm}
               onChange={handleInputChange}
+              required
             />
             <button type="submit" className="search__submit">
               <img src={SearchColorLogo} alt="Икона поиска" className="search__color-logo" />

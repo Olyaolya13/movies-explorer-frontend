@@ -3,18 +3,32 @@ import { useState } from 'react';
 import { LoginData } from '../../utils/constants';
 import Logo from '../../images/logo/header_logo.svg';
 import './Login.css';
+import useFormValidation from '../../hooks/FormValidation';
 
 function Login({ onLogin }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
 
-  function handleChangePassword(event) {
-    setPassword(event.target.value);
+  const { values, errors, isValid, handleChange, resetValidation } = useFormValidation();
+
+  const { email, password } = values;
+  const { email: emailError, password: passwordError } = errors;
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (isValid) {
+      onLogin({ email, password });
+    }
+    resetValidation();
   }
 
-  function handleChangeEmail(event) {
-    setEmail(event.target.value);
-  }
+  // function handleChangePassword(event) {
+  //   setPassword(event.target.value);
+  // }
+
+  // function handleChangeEmail(event) {
+  //   setEmail(event.target.value);
+  // }
   return (
     <section className="login">
       <div className="login__content">
@@ -31,11 +45,16 @@ function Login({ onLogin }) {
             name="email"
             type="email"
             value={email}
-            onChange={handleChangeEmail}
+            placeholder="Введите е-mail"
+            minlength="6"
+            maxlength="20"
+            onChange={handleChange}
             className="login__input"
             required
           />
-          <span className="login__error" id="login__email-error"></span>
+          <span className="login__input-error" id="login__email-error">
+            {emailError}
+          </span>
           <label htmlFor="password" className="login__label">
             {LoginData.password}
           </label>
@@ -44,11 +63,16 @@ function Login({ onLogin }) {
             name="password"
             type="password"
             value={password}
-            onChange={handleChangePassword}
+            placeholder="Введите пароль"
+            minlength="6"
+            maxlength="20"
+            onChange={handleChange}
             className="login__input"
             required
           />
-          <span className="login__error" id="login__password-error"></span>
+          <span className="login__input-error" id="login__password-error">
+            {passwordError}
+          </span>
           <button type="submit" className="login__button" onClick={onLogin}>
             {LoginData.signin}
           </button>
