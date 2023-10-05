@@ -27,8 +27,8 @@ function App() {
   const isNotFoundPage = NotFound(location.pathname);
 
   const handleIsLoggedIn = () => {
-    setIsLoggedIn(true);
     navigate('/', { replace: true });
+    setIsLoggedIn(true);
   };
 
   const handleIsLoggedOut = () => {

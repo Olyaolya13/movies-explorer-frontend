@@ -109,6 +109,10 @@
     padding-right: 30px;
     padding-top: 80px;
   }
+
+  .search::after {
+    margin-top: 105px;
+  }
   .search__short-films::before {
     margin-right: 19px;
   }
@@ -130,13 +134,13 @@
   .search__logo {
     display: none;
   }
-  .search__short-films {
+  .search__short-films::before {
     display: none;
   }
   .search__checkbox {
     align-items: center;
     margin-top: 60px;
-    padding-bottom: 56px;
+    padding-bottom: 0;
   }
   .search__text {
     padding-right: 0;

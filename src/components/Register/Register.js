@@ -1,24 +1,21 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../images/logo/header_logo.svg';
 import { RegisterData } from '../../utils/constants';
 import './Register.css';
+import useFormValidation from '../../hooks/FormValidation';
 
 function Register({ onRegister }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [userName, setUserName] = useState('');
+  const { values, errors, isValid, handleChange, resetValidation } = useFormValidation();
 
-  function handlePassword(evt) {
-    setPassword(evt.target.value);
-  }
+  const { name, email, password } = values;
+  const { name: nameError, email: emailError, password: passwordError } = errors;
 
-  function handleEmail(evt) {
-    setEmail(evt.target.value);
-  }
-
-  function handleUserName(evt) {
-    setUserName(evt.target.value);
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    if (!isValid) {
+      onRegister({ name, email, password });
+    }
+    resetValidation();
   }
 
   return (
@@ -28,23 +25,27 @@ function Register({ onRegister }) {
           <img src={Logo} alt="Логотип" className="register__logo" />
         </Link>
         <h2 className="register__title">{RegisterData.title}</h2>
-        <form className="register__form">
-          <label htmlFor="userName" className="register__label">
+        <form className="register__form" onSubmit={handleSubmit}>
+          <label htmlFor="name" className="register__label">
             {RegisterData.name}
           </label>
           <input
-            id="userName"
-            name="userName"
+            id="name"
+            name="name"
             type="text"
-            value={userName}
+            value={name}
             placeholder="Введите имя"
             minlength="2"
             maxlength="20"
-            onChange={handleUserName}
-            className="register__input"
+            onChange={handleChange}
+            className={`register__input ${nameError ? 'register__input-text-error' : ''}`}
             required
           />
-          <span className="register__error" id="register__userName-error"></span>
+          <span
+            className={`register__input-error ${nameError ? 'register__input-error_visible' : ''}`}
+          >
+            {nameError}
+          </span>
           <label htmlFor="email" className="register__label">
             {RegisterData.email}
           </label>
@@ -56,11 +57,15 @@ function Register({ onRegister }) {
             placeholder="Введите е-mail"
             minlength="6"
             maxlength="20"
-            onChange={handleEmail}
-            className="register__input"
+            onChange={handleChange}
+            className={`register__input ${emailError ? 'register__input-text-error' : ''}`}
             required
           />
-          <span className="register__error" id="register__email-error"></span>
+          <span
+            className={`register__input-error ${emailError ? 'register__input-error_visible' : ''}`}
+          >
+            {emailError}
+          </span>
           <label htmlFor="password" className="register__label">
             {RegisterData.password}
           </label>
@@ -72,12 +77,18 @@ function Register({ onRegister }) {
             placeholder="Введите пароль"
             minlength="6"
             maxlength="20"
-            onChange={handlePassword}
-            className="register__input"
+            onChange={handleChange}
+            className={`register__input ${passwordError ? 'register__input-text-error' : ''}`}
             required
           />
-          <span className="register__error" id="register__password-error"></span>
-          <button type="submit" className="register__button" onClick={onRegister}>
+          <span
+            className={`register__input-error ${
+              passwordError ? 'register__input-error_visible' : ''
+            }`}
+          >
+            {passwordError}
+          </span>
+          <button type="submit" className="register__button">
             {RegisterData.signup}
           </button>
         </form>

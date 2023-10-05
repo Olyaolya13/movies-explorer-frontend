@@ -1,34 +1,22 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { LoginData } from '../../utils/constants';
 import Logo from '../../images/logo/header_logo.svg';
 import './Login.css';
 import useFormValidation from '../../hooks/FormValidation';
 
 function Login({ onLogin }) {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
   const { values, errors, isValid, handleChange, resetValidation } = useFormValidation();
 
   const { email, password } = values;
   const { email: emailError, password: passwordError } = errors;
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    if (isValid) {
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    if (!isValid) {
       onLogin({ email, password });
     }
     resetValidation();
   }
-
-  // function handleChangePassword(event) {
-  //   setPassword(event.target.value);
-  // }
-
-  // function handleChangeEmail(event) {
-  //   setEmail(event.target.value);
-  // }
   return (
     <section className="login">
       <div className="login__content">
@@ -36,7 +24,7 @@ function Login({ onLogin }) {
           <img src={Logo} alt="Логотип" className="login__logo" />
         </Link>
         <h2 className="login__title">{LoginData.title}</h2>
-        <form className="login__form">
+        <form className="login__form" onSubmit={handleSubmit}>
           <label htmlFor="email" className="login__label">
             {LoginData.email}
           </label>
@@ -46,13 +34,13 @@ function Login({ onLogin }) {
             type="email"
             value={email}
             placeholder="Введите е-mail"
-            minlength="6"
-            maxlength="20"
+            minLength="6"
+            maxLength="20"
             onChange={handleChange}
-            className="login__input"
+            className={`login__input ${emailError ? 'login__input-text-error' : ''}`}
             required
           />
-          <span className="login__input-error" id="login__email-error">
+          <span className={`login__input-error ${emailError ? 'login__input-error_visible' : ''}`}>
             {emailError}
           </span>
           <label htmlFor="password" className="login__label">
@@ -64,16 +52,18 @@ function Login({ onLogin }) {
             type="password"
             value={password}
             placeholder="Введите пароль"
-            minlength="6"
-            maxlength="20"
+            minLength="6"
+            maxLength="20"
             onChange={handleChange}
-            className="login__input"
+            className={`login__input ${passwordError ? 'login__input-text-error' : ''}`}
             required
           />
-          <span className="login__input-error" id="login__password-error">
+          <span
+            className={`login__input-error ${passwordError ? 'login__input-error_visible' : ''}`}
+          >
             {passwordError}
           </span>
-          <button type="submit" className="login__button" onClick={onLogin}>
+          <button type="submit" className="login__button">
             {LoginData.signin}
           </button>
         </form>

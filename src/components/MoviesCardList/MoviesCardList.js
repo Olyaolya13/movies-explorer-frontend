@@ -9,7 +9,7 @@ function MoviesCardList({ movies }) {
   const isSavedPage = location.pathname === '/saved-movies';
 
   return (
-    <section className="movie-card-list">
+    <section className={!isSavedPage ? 'movie-card-list' : 'movie-card-list-saved'}>
       <ul className="movie-card-list__section">
         {movies.map((movie, index) => (
           <li className="movie-card-list__movies" key={index}>

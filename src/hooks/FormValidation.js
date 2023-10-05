@@ -17,7 +17,7 @@ const useFormValidation = initialValues => {
         break;
       case 'email':
         if (!emailPattern.test(value)) {
-          errorMessage = 'Введите корректный email: test@ya.ru';
+          errorMessage = 'Введите корректный email: ya@ya.ru';
         }
         break;
       case 'password':
