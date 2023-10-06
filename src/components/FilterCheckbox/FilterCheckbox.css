@@ -1,0 +1,22 @@
+.checkbox {
+  background-color: transparent;
+}
+
+.checkbox__input {
+  display: none;
+}
+
+.checkbox-label {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.checkbox__button {
+  width: 36px;
+  height: 20px;
+}
+
+.checkbox__button:hover {
+  opacity: 0.8;
+}

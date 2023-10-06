@@ -1,0 +1,140 @@
+.techs {
+  margin: 0;
+  padding: 0 70px;
+  background-color: #f5f5f5;
+}
+
+.techs__title,
+.techs__subtitle {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: normal;
+  padding: 100px 0 23px;
+  margin: 0;
+}
+
+.techs__title {
+  letter-spacing: -0.88px;
+  border-bottom: 1px solid #000;
+  margin: 0;
+}
+
+.techs__subtitle {
+  font-size: 50px;
+  padding: 87px 0 26px;
+  text-align: center;
+  letter-spacing: -2px;
+}
+
+.techs__about {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+  padding: 0 0 100px;
+  margin: 0;
+  width: 460px;
+  text-align: center;
+  letter-spacing: -0.56px;
+}
+
+.techs__content {
+  display: flex;
+  justify-content: center;
+}
+
+.techs__skills {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 90px);
+  gap: 10px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 100px;
+}
+
+.techs__text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: -0.56px;
+}
+
+.techs__text:last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 770px) {
+  .techs {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+  .techs__title {
+    padding-top: 90px;
+  }
+  .techs__subtitle {
+    padding-top: 80px;
+    padding-bottom: 20px;
+  }
+  .techs__about {
+    font-size: 12px;
+    padding-bottom: 83px;
+    width: 400px;
+  }
+  .techs__text {
+    font-size: 12px;
+  }
+  .techs__skills {
+    padding-bottom: 90px;
+    grid-template-columns: repeat(auto-fill, 85px);
+  }
+}
+
+@media (max-width: 510px) {
+  .techs {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+  .techs__title {
+    font-size: 19px;
+    padding-top: 70px;
+    padding-bottom: 28px;
+  }
+  .techs__subtitle {
+    font-size: 32px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+  }
+  .techs__about {
+    font-size: 11px;
+    width: 290px;
+    padding-bottom: 47px;
+  }
+
+  .techs__skills {
+    padding-bottom: 70px;
+    grid-template-columns: repeat(auto-fill, 80px);
+  }
+}
+
+@media (max-width: 340px) {
+  .techs {
+    background-color: #fafafa;
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+  .techs__skills {
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-bottom: 64px;
+  }
+  .techs__subtitle {
+    padding-top: 60px;
+  }
+}
