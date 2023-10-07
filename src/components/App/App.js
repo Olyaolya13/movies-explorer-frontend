@@ -2,6 +2,7 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { NotFound } from '../../utils/pattern';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -50,17 +51,34 @@ function App() {
       {!isRegisterPage && !isNotFoundPage && (
         <div>{!isLoggedIn ? <Header isLoggedIn={isLoggedIn} /> : <Navigation />}</div>
       )}
-      <div className="main">
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/profile" element={<Profile onLoggedOut={handleIsLoggedOut} />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/saved-movies" element={<SavedMovies />} />
-          <Route path="/signup" element={<Register onRegister={handleIsRegister} />} />
-          <Route path="/signin" element={<Login onLogin={handleIsLoggedIn} />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </div>
+
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute
+              redirectTo="/"
+              component={<Profile onLoggedOut={handleIsLoggedOut} />}
+              isLoggedIn={isLoggedIn}
+            />
+          }
+        />
+        <Route
+          path="/movies"
+          element={<ProtectedRoute redirectTo="/" component={<Movies />} isLoggedIn={isLoggedIn} />}
+        />
+        <Route
+          path="/saved-movies"
+          element={
+            <ProtectedRoute redirectTo="/" component={<SavedMovies />} isLoggedIn={isLoggedIn} />
+          }
+        />
+        <Route path="/signup" element={<Register onRegister={handleIsRegister} />} />
+        <Route path="/signin" element={<Login onLogin={handleIsLoggedIn} />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+
       {!isRegisterPage && !isNotFoundPage && (
         <div>
           <Footer />
