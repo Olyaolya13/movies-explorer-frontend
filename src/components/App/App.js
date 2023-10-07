@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { NotFound } from '../../utils/pattern';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -15,6 +16,9 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+
+  //context
+  const [currentUser, setCurrentUser] = useState({});
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [IsRegister, setIsRegister] = useState(false);
@@ -42,7 +46,7 @@ function App() {
   };
 
   return (
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       {!isRegisterPage && !isNotFoundPage && (
         <div>{!isLoggedIn ? <Header isLoggedIn={isLoggedIn} /> : <Navigation />}</div>
       )}
@@ -62,7 +66,7 @@ function App() {
           <Footer />
         </div>
       )}
-    </>
+    </CurrentUserContext.Provider>
   );
 }
 
