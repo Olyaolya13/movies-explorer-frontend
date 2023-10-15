@@ -19,8 +19,6 @@ function AuthForm(props) {
     }
   }, [isValid, props]);
 
-  // ...
-
   function handleSubmit(e) {
     e.preventDefault();
     if (isValid) {
@@ -37,23 +35,27 @@ function AuthForm(props) {
         </Link>
         <h2 className="form__title">{props.title}</h2>
         <form className="form" onSubmit={handleSubmit} noValidate>
-          <label className="form__label">
-            {AuthFormData.name}
-            <input
-              name="name"
-              type="text"
-              onChange={handleChange}
-              value={value.name}
-              placeholder="Введите имя"
-              minLength={2}
-              maxLength={30}
-              className={`form__input ${error.name ? 'form__input-text-error' : ''}`}
-              required
-            />
-            <span className={`form__input-error ${error.name ? 'form__input-error_visible' : ''}`}>
-              {error.name}
-            </span>
-          </label>
+          {props.isRegistration && (
+            <label className="form__label">
+              {AuthFormData.name}
+              <input
+                name="name"
+                type="text"
+                onChange={handleChange}
+                value={value.name}
+                placeholder="Введите имя"
+                minLength={2}
+                maxLength={30}
+                className={`form__input ${error.name ? 'form__input-text-error' : ''}`}
+                required
+              />
+              <span
+                className={`form__input-error ${error.name ? 'form__input-error_visible' : ''}`}
+              >
+                {error.name}
+              </span>
+            </label>
+          )}
           <label className="form__label">
             {AuthFormData.email}
             <input
@@ -88,7 +90,6 @@ function AuthForm(props) {
               {error.password}
             </span>
           </label>
-
           <div className="form__container">
             <span className="form__error-message">{props.error}</span>
             <button
@@ -96,7 +97,7 @@ function AuthForm(props) {
               type="submit"
               disabled={!isValid}
             >
-              {props.buttonText}
+              {props.isSend ? 'Отправка...' : props.buttonText}
             </button>
             <div className="form__text">
               <p className="form__subtitle">
