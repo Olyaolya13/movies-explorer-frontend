@@ -7,7 +7,7 @@ function Register(props) {
       error={props.error}
       setError={props.setError}
       title={'Добро пожаловать!'}
-      buttonText={'Зарегистрироваться'}
+      btnText={'Зарегистрироваться'}
       subtitle={'Уже зарегистрированы?'}
       link={'/signin'}
       linkText={'Войти'}

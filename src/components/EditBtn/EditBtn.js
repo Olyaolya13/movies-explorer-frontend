@@ -1,4 +1,3 @@
-import React from 'react';
 import './EditBtn.css';
 
 function EditButton(props) {
@@ -7,19 +6,28 @@ function EditButton(props) {
     save: 'Сохранить',
     signout: 'Выйти из аккаунта'
   };
+
   if (props.isEditing) {
     return (
-      <button type="button" className="btn-profile__save" onClick={props.onSaveClick}>
-        {buttonTexts.save}
-      </button>
+      <>
+        <span className="profile__error-message">{props.error}</span>
+        <button
+          type="submit"
+          className={`profile-btn__save ${props.isValid ? '' : 'profile-btn__save_disabled'}`}
+          onClick={props.error ? null : props.onSubmit}
+          disabled={!props.isValid}
+        >
+          {props.isSend ? 'Отправка...' : buttonTexts.save}
+        </button>
+      </>
     );
   } else {
     return (
       <>
-        <button type="button" className="btn-profile__edit" onClick={props.onEditClick}>
+        <button type="button" className="profile-btn__edit" onClick={props.onEditClick}>
           {buttonTexts.edit}
         </button>
-        <button type="submit" className="btn-profile__signout" onClick={props.onLoggedOut}>
+        <button type="submit" className="profile-btn__signout" onClick={props.onLoggedOut}>
           {buttonTexts.signout}
         </button>
       </>

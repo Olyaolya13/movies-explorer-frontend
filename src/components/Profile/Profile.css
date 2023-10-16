@@ -1,3 +1,9 @@
+.profile__label-error {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
 .profile {
   display: flex;
   justify-content: center;
@@ -33,14 +39,55 @@
 }
 
 .profile__subtitle,
-.profile__input,
-.profile__edit {
+.profile__input {
   margin: 0;
   font-size: 11px;
   text-align: center;
   font-weight: 500;
   line-height: normal;
   color: #000;
+}
+
+.profile__input,
+.profile__input-text-error {
+  background-color: #fff;
+  width: 100%;
+  padding: 0;
+  padding-bottom: 10px;
+  line-height: normal;
+  border: 0;
+  border-bottom: 1px solid #e8e8e8;
+  outline: none;
+}
+
+.profile__input:focus {
+  border-bottom: 1px solid #3456f3;
+  outline: none;
+}
+
+.profile__input-text-error {
+  color: #ee3465;
+}
+
+.profile__input-error,
+.profile__error-message {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.2;
+  display: block;
+  padding-top: 5px;
+  height: 3px;
+  color: #ee3465;
+}
+
+.profile__error-message {
+  padding: 0;
+}
+
+.profile__input-error_visible {
+  border-top: 1px solid #ee3465;
+  outline: none;
 }
 
 .profile__input {
@@ -50,64 +97,11 @@
   background-color: transparent;
 }
 
-.profile__input:focus {
-  border-bottom: 1px solid #3456f3;
-  outline: none;
-  width: 30%;
-}
-
-.profile__edit {
-  font-size: 13px;
-  text-align: center;
-  margin: 0;
-  cursor: pointer;
-  transition: 0.3s linear;
-  border: none;
-  background-color: transparent;
-}
-
-.profile__edit:hover {
-  opacity: 0.7;
-}
-
-.profile__save {
-  background-color: #3456f3;
-  width: 396px;
-  height: 45px;
-  border: none;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.3s linear;
-}
-
-.profile__save:hover {
-  opacity: 0.8;
-}
-
 .profile__link {
   text-decoration: none;
 }
 
-.profile__signout {
-  cursor: pointer;
-  font-size: 13px;
-  text-align: center;
-  font-weight: 500;
-  color: #ee3465;
-  margin: 16px 0 0;
-  transition: 0.3s linear;
-  border: none;
-  background-color: transparent;
-}
-
-.profile__signout:hover {
-  opacity: 0.7;
-}
-
-.profile__button {
+.profile__btn {
   display: flex;
   flex-direction: column;
   margin: 200px 0 0;
@@ -122,11 +116,8 @@
     font-size: 24px;
     margin-bottom: 97px;
   }
-  .profile__button {
+  .profile__btn {
     margin-top: 190px;
-  }
-  .profile__signout:last-child {
-    margin-bottom: 270px;
   }
 }
 
@@ -140,13 +131,7 @@
   .profile__title {
     margin-bottom: 80px;
   }
-  .profile__button {
+  .profile__btn {
     margin-top: 358px;
-  }
-  .profile__signout:last-child {
-    margin-bottom: 40px;
-  }
-  .profile__save {
-    width: 260px;
   }
 }

@@ -7,7 +7,7 @@ function Login(props) {
       error={props.error}
       setError={props.setError}
       title={'Рады видеть!'}
-      buttonText={'Войти'}
+      btnText={'Войти'}
       subtitle={'Ещё не зарегистрированы?'}
       link={'/signup'}
       linkText={'Регистрация'}

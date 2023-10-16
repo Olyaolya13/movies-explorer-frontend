@@ -84,8 +84,8 @@
   padding: 0;
 }
 
-.form__button,
-.form__button_disabled {
+.form__btn,
+.form__btn_disabled {
   background-color: #3456f3;
   width: 396px;
   height: 45px;
@@ -100,11 +100,11 @@
   padding: 0;
 }
 
-.form__button:hover:not(.form__button_disabled) {
+.form__btn:hover:not(.form__btn_disabled) {
   opacity: 0.8;
 }
 
-.form__button_disabled {
+.form__btn_disabled {
   background-color: #a0a0a0;
   cursor: default;
 }
@@ -151,7 +151,7 @@
 }
 
 @media (max-width: 465px) {
-  .form__button {
+  .form__btn {
     width: 260px;
   }
   .form__error-message {

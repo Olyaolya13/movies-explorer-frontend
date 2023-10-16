@@ -1,4 +1,5 @@
-.btn-profile__save {
+.profile-btn__save,
+.profile-btn__save_disabled {
   background-color: #3456f3;
   width: 396px;
   height: 45px;
@@ -11,21 +12,21 @@
   transition: 0.3s linear;
 }
 
-.btn-profile__save:hover {
+.profile-btn__save:hover:not(.profile-btn__save_disabled) {
   opacity: 0.8;
 }
 
-.btn-profile__edit {
-  margin: 0;
-  font-size: 11px;
+.profile-btn__save_disabled {
+  background-color: #a0a0a0;
+  cursor: default;
+}
+
+.profile-btn__edit {
+  font-size: 13px;
   text-align: center;
   font-weight: 500;
   line-height: normal;
   color: #000;
-}
-
-.btn-profile__edit {
-  font-size: 13px;
   text-align: center;
   margin: 0;
   cursor: pointer;
@@ -34,11 +35,11 @@
   background-color: transparent;
 }
 
-.btn-profile__edit:hover {
+.profile-btn__edit:hover {
   opacity: 0.7;
 }
 
-.btn-profile__signout {
+.profile-btn__signout {
   cursor: pointer;
   font-size: 13px;
   text-align: center;
@@ -50,21 +51,34 @@
   background-color: transparent;
 }
 
-.btn-profile__signout:hover {
+.profile-btn__signout:hover {
   opacity: 0.7;
 }
 
+.profile__error-message {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.2;
+  display: block;
+  padding: 0;
+  padding-bottom: 5px;
+  height: 12px;
+  color: #ee3465;
+  text-align: center;
+}
+
 @media (max-width: 770px) {
-  .btn-profile__signout:last-child {
+  .profile-btn__signout:last-child {
     margin-bottom: 270px;
   }
 }
 
 @media (max-width: 465px) {
-  .btn-profile__save {
+  .profile-btn__save {
     width: 260px;
   }
-  .btn-profile__signout:last-child {
+  .profile-btn__signout:last-child {
     margin-bottom: 40px;
   }
 }
