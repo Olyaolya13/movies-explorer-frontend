@@ -14,7 +14,7 @@ function EditButton(props) {
         <button
           type="submit"
           className={`profile-btn__save ${props.isValid ? '' : 'profile-btn__save_disabled'}`}
-          onClick={props.error ? null : props.onSubmit}
+          onClick={props.onSubmit}
           disabled={!props.isValid}
         >
           {props.isSend ? 'Отправка...' : buttonTexts.save}
