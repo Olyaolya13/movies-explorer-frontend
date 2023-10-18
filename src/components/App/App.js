@@ -1,6 +1,9 @@
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NotFound } from '../../utils/pattern';
+import api from '../../utils/MainApi';
+import moviesApi from '../../utils/MoviesApi';
+import * as auth from '../../utils/Auth';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
@@ -18,11 +21,14 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  //context
   const [currentUser, setCurrentUser] = useState({});
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [IsRegister, setIsRegister] = useState(false);
+  const [isError, setIsError] = useState('');
+  const [isSend, setIsSend] = useState(false); //отправкак для загрузки preloader
+  // const [savedMovies, setSavedMovies] = useState([]);
+  // const [checkToken, setCheckToken] = useState(false);
+  // const [isSuccess, setIsSuccess] = useState(false);
+  // const [isEdit, setIsEdit] = useState(false);
 
   const isRegisterPage =
     location.pathname === '/signup' ||
@@ -31,20 +37,142 @@ function App() {
 
   const isNotFoundPage = NotFound(location.pathname);
 
-  const handleIsLoggedIn = () => {
-    navigate('/', { replace: true });
-    setIsLoggedIn(true);
-  };
+  function handleToken(token) {
+    auth
+      .checkToken(token)
+      .then(res => {
+        setIsLoggedIn(true);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
-  const handleIsLoggedOut = () => {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    if (token) {
+      handleToken(token);
+    }
+  }, []);
+
+  //login
+  // function handleOnLogin({ password, email }) {
+  //   setIsSend(true);
+  //   return auth
+  //     .login(password, email)
+  //     .then(res => {
+  //       if (res.token) {
+  //         localStorage.setItem('token', res.token);
+  //         setIsLoggedIn(true);
+  //         navigate('/movies', { replace: true });
+  //       }
+  //     })
+  //     .catch(err => {
+  //       setIsError(true);
+  //       console.log(`Ошибка авторизации:${err}`);
+  //     })
+  //     .finally(() => {
+  //       setIsSend(false);
+  //     });
+  // }
+
+  function handleOnLogin({ email, password }) {
+    setIsSend(true);
+    return auth
+      .login(email, password)
+      .then(res => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          setIsLoggedIn(true);
+          navigate('/movies', { replace: true });
+        }
+      })
+      .catch(error => {
+        if (error.statusCode === 401) {
+          setIsError('Неправильные почта или пароль');
+        } else {
+          console.log(error.statusCode);
+          setIsError('При авторизации пользователя произошла ошибка');
+        }
+      })
+      .finally(() => setIsSend(false));
+  }
+
+  function handleOnRegister({ name, password, email }) {
+    setIsSend(true);
+    return auth
+      .register(name, password, email)
+      .then(res => {
+        if (!res || !res.error) {
+          return handleOnLogin({ password, email });
+        } else {
+          setIsError('При регистрации пользователя произошла ошибка');
+        }
+        return res;
+      })
+      .catch(error => {
+        if (error.statusCode === 409) {
+          setIsError('Пользователь с таким email уже существует');
+        } else {
+          console.log(error.statusCode);
+          setIsError('При регистрации пользователя произошла ошибка');
+        }
+      })
+      .finally(() => setIsSend(false));
+  }
+
+  //logout
+  function handleLogOut() {
     setIsLoggedIn(false);
+    localStorage.removeItem('token');
     navigate('/', { replace: true });
-  };
+  }
 
-  const handleIsRegister = () => {
-    setIsRegister(true);
-    navigate('/signin', { replace: true });
-  };
+  function handleUpdateUser({ email, name }) {
+    const token = localStorage.getItem('token');
+    api
+      .editProfile({ name, email }, token)
+      .then(res => {
+        setCurrentUser(res);
+        setIsError('');
+      })
+      .catch(() => {
+        setIsError('Произошла ошибка при обновлении данных');
+      })
+
+      .finally(() => {
+        setIsSend(false);
+      });
+  }
+
+  useEffect(() => {
+    handleToken();
+    if (isLoggedIn) {
+      api
+        .getUserInfo()
+        .then(res => {
+          localStorage.setItem('user', JSON.stringify(res));
+          setCurrentUser(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }, [isLoggedIn]);
+
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     const token = localStorage.getItem('token');
+  //     Promise.all([api.getUserInfo(token)])
+  //       .then(([userInfo]) => {
+  //         setCurrentUser(userInfo);
+  //       })
+  //       .catch(err => {
+  //         console.log('Ошибка при получении информации:', err);
+  //       });
+  //   }
+  // }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -55,30 +183,65 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route
-          path="/profile"
+          path="/signup"
           element={
-            <ProtectedRoute
-              redirectTo="/"
-              component={<Profile onLoggedOut={handleIsLoggedOut} />}
-              isLoggedIn={isLoggedIn}
+            <Register
+              onRegister={handleOnRegister}
+              error={isError}
+              setError={setIsError}
+              setIsSend={setIsSend}
+              isSend={isSend}
             />
           }
         />
         <Route
-          path="/movies"
-          element={<ProtectedRoute redirectTo="/" component={<Movies />} isLoggedIn={isLoggedIn} />}
-        />
-        <Route
-          path="/saved-movies"
+          path="/signin"
           element={
-            <ProtectedRoute redirectTo="/" component={<SavedMovies />} isLoggedIn={isLoggedIn} />
+            <Login
+              onLogin={handleOnLogin}
+              error={isError}
+              setError={setIsError}
+              setIsSend={setIsSend}
+              isSend={isSend}
+            />
           }
         />
-        <Route path="/signup" element={<Register onRegister={handleIsRegister} />} />
-        <Route path="/signin" element={<Login onLogin={handleIsLoggedIn} />} />
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              onLoggedOut={handleLogOut}
+              isLoggedIn={isLoggedIn}
+              onSave={handleUpdateUser}
+              error={isError}
+              setError={setIsError}
+              setIsSend={setIsSend}
+              isSend={isSend}
+            />
+          }
+        />
+        <Route path="/movies" element={<Movies />} isLoggedIn={isLoggedIn} />
+        <Route path="/saved-movies" element={<SavedMovies />} isLoggedIn={isLoggedIn} />
+        {/* <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                onLoggedOut={handleLogOut}
+                isLoggedIn={isLoggedIn}
+                onSave={handleUpdateUser}
+                error={isError}
+                setError={setIsError}
+                setIsSend={setIsSend}
+                isSend={isSend}
+              />
+            }
+          />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/saved-movies" element={<SavedMovies />} />
+        </Route> */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-
       {!isRegisterPage && !isNotFoundPage && (
         <div>
           <Footer />
