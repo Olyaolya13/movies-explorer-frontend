@@ -10,7 +10,6 @@ function EditButton(props) {
   if (props.isEditing) {
     return (
       <>
-        <span className="profile__error-message">{props.error}</span>
         <button
           type="submit"
           className={`profile-btn__save ${props.isValid ? '' : 'profile-btn__save_disabled'}`}

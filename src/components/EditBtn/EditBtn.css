@@ -1,5 +1,6 @@
 .profile-btn__save,
 .profile-btn__save_disabled {
+  padding: 0;
   background-color: #3456f3;
   width: 396px;
   height: 45px;
@@ -22,6 +23,7 @@
 }
 
 .profile-btn__edit {
+  padding: 0;
   font-size: 13px;
   text-align: center;
   font-weight: 500;
@@ -40,6 +42,7 @@
 }
 
 .profile-btn__signout {
+  padding: 0;
   cursor: pointer;
   font-size: 13px;
   text-align: center;
