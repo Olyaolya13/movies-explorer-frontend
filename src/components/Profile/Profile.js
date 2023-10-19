@@ -7,7 +7,6 @@ import EditButton from '../EditBtn/EditBtn';
 
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
-
   const ProfileData = {
     title: 'Имя',
     email: 'E-mail'
@@ -97,6 +96,7 @@ function Profile(props) {
               </div>
             </label>
             <div className="profile__btn">
+              <span className="profile__error-message">{props.error}</span>
               <EditButton
                 isEditing={isEditing}
                 onEditClick={handleEditBtnClick}
