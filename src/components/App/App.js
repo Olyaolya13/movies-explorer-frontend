@@ -2,7 +2,7 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { NotFound } from '../../utils/pattern';
 import api from '../../utils/MainApi';
-import moviesApi from '../../utils/MoviesApi';
+
 import * as auth from '../../utils/Auth';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -27,9 +27,6 @@ function App() {
   const [isSend, setIsSend] = useState(false);
 
   // const [savedMovies, setSavedMovies] = useState([]);
-  // const [checkToken, setCheckToken] = useState(false);
-  // const [isSuccess, setIsSuccess] = useState(false);
-  // const [isEdit, setIsEdit] = useState(false);
 
   const isRegisterPage =
     location.pathname === '/signup' ||
@@ -51,7 +48,6 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log(token);
     if (token) {
       handleToken(token);
     }
@@ -64,6 +60,7 @@ function App() {
       .login(email, password)
       .then(res => {
         if (res.token) {
+          console.log(res.token);
           localStorage.setItem('token', res.token);
           setIsLoggedIn(true);
           navigate('/movies', { replace: true });
@@ -100,7 +97,6 @@ function App() {
       .finally(() => setIsSend(false));
   }
 
-  //logout
   function handleLogOut() {
     setIsLoggedIn(false);
     localStorage.removeItem('token');
@@ -115,10 +111,14 @@ function App() {
         setCurrentUser(res);
         setIsError('');
       })
-      .catch(() => {
-        setIsError('Произошла ошибка при обновлении данных');
+      .catch(error => {
+        if (error.statusCode === 409) {
+          setIsError('Пользователь с таким email уже существует');
+        } else {
+          console.log(error.statusCode);
+          setIsError('Произошла ошибка при обновлении данных');
+        }
       })
-
       .finally(() => {
         setIsSend(false);
       });
@@ -130,13 +130,36 @@ function App() {
       Promise.all([api.getUserInfo(token)])
         .then(([userInfo]) => {
           setCurrentUser(userInfo);
-          setIsLoggedIn(true);
         })
         .catch(err => {
           console.log('Ошибка при получении информации:', err);
         });
     }
   }, [isLoggedIn]);
+
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     const token = localStorage.getItem('token');
+  //     console.log(token);
+  //     api
+  //       .getUserInfo(token)
+  //       .then(userInfo => {
+  //         setCurrentUser(userInfo);
+  //       })
+  //       .catch(err => {
+  //         console.log('Ошибка при получении информации о пользователе:', err);
+  //       });
+  //     moviesApi
+  //       .getMovies(token)
+  //       .then(initialMovies => {
+  //         setMovies(initialMovies);
+  //         console.log('ok');
+  //       })
+  //       .catch(err => {
+  //         console.log('Ошибка при получении списка фильмов:', err);
+  //       });
+  //   }
+  // }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -188,18 +211,7 @@ function App() {
         <Route path="/movies" element={<ProtectedRoute isLoggedIn={true} element={Movies} />} />
         <Route
           path="/saved-movies"
-          element={
-            <ProtectedRoute
-              isLoggedIn={true}
-              element={SavedMovies}
-              onLoggedOut={handleLogOut}
-              onSave={handleUpdateUser}
-              error={isError}
-              setError={setIsError}
-              setIsSend={setIsSend}
-              isSend={isSend}
-            />
-          }
+          element={<ProtectedRoute isLoggedIn={true} element={SavedMovies} />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

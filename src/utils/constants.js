@@ -115,158 +115,158 @@ export const FooterData = {
   linkYandex: 'https://practicum.yandex.ru/'
 };
 
-//login
-export const LoginData = {
-  title: 'Рады видеть!',
-  signup: 'Регистрация',
-  question: 'Ещё не зарегистрированы?',
-  name: 'Имя',
-  email: 'E-mail',
-  password: 'Пароль',
-  signin: 'Войти'
-};
+// //login
+// export const LoginData = {
+//   title: 'Рады видеть!',
+//   signup: 'Регистрация',
+//   question: 'Ещё не зарегистрированы?',
+//   name: 'Имя',
+//   email: 'E-mail',
+//   password: 'Пароль',
+//   signin: 'Войти'
+// };
 
-//register
-export const RegisterData = {
-  title: 'Добро пожаловать!',
-  signup: 'Зарегистрироваться',
-  question: 'Уже зарегистрированы?',
-  name: 'Имя',
-  email: 'E-mail',
-  password: 'Пароль',
-  signin: 'Войти'
-};
+// //register
+// export const RegisterData = {
+//   title: 'Добро пожаловать!',
+//   signup: 'Зарегистрироваться',
+//   question: 'Уже зарегистрированы?',
+//   name: 'Имя',
+//   email: 'E-mail',
+//   password: 'Пароль',
+//   signin: 'Войти'
+// };
 
-//profile
+// //profile
 
-export const ProfileData = {
-  title: 'Имя',
-  email: 'E-mai',
-  edit: 'Редактировать',
-  save: 'Сохранить',
-  signout: 'Выйти из аккаунта'
-};
+// export const ProfileData = {
+//   title: 'Имя',
+//   email: 'E-mai',
+//   edit: 'Редактировать',
+//   save: 'Сохранить',
+//   signout: 'Выйти из аккаунта'
+// };
 
-//search form
-export const SearchFormData = {
-  shortFilm: 'Короткометражки'
-};
+// //search form
+// export const SearchFormData = {
+//   shortFilm: 'Короткометражки'
+// };
 
 //Movies
-export const MoviesCardListData = [
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: HistoryAboutGraffity,
-    alt: 'Черно-белая картина, улыбающиеся девушка - фотограф стоит на фоне домов с мальчиками около машины'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: Polaroid,
-    alt: 'Мужчина на фоне постановочного света, картинка в стиле поларойд'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: MickJagger,
-    alt: 'Мик Джаггер с гитарой за столом, черно белая картинка'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: Skateboard,
-    alt: 'Мужчина, катающийся на скейтборде, внутри здания с колоннами'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: SkateboardOnTheRoad,
-    alt: 'Молодые люди, катающиеся на скейтбордах по дороге на улице в солнечное время в городе '
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: TheBooksellers,
-    alt: 'Продавец книг, переберающий их в квартире в светлое время суток,'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: MerceCunningham,
-    alt: 'Мерс Каннингем с товарищами около забора здания'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: Graffity,
-    alt: 'Граффити на поезде на станции'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: RunMarathon,
-    alt: 'Множество людей,бегущих марафон'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: KeithHaringStreetArt,
-    alt: 'Молодые люди на вечеринке, черно белая картинка'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: SmokingMan,
-    alt: 'Молодой, курящий парень'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: IfIThinkOfGermanyAtNight,
-    alt: 'Молодой мужчина в очках, сидящий в студии звукозаписи'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: WarOfArt,
-    alt: 'Люди, сидящие в большом зале, над ними два портрета лидеров КНДР '
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: GimmeDanger,
-    alt: 'Молодые люди около кирпичной стены здания, вид сверху'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: RunMan,
-    alt: 'Молодой мужчина, подбегающий к финишной леньте'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: Parkur,
-    alt: 'Множетсво молодых людей, загимающихся на железных конструкцяиях'
-  }
-];
+// export const MoviesCardListData = [
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: HistoryAboutGraffity,
+//     alt: 'Черно-белая картина, улыбающиеся девушка - фотограф стоит на фоне домов с мальчиками около машины'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: Polaroid,
+//     alt: 'Мужчина на фоне постановочного света, картинка в стиле поларойд'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: MickJagger,
+//     alt: 'Мик Джаггер с гитарой за столом, черно белая картинка'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: Skateboard,
+//     alt: 'Мужчина, катающийся на скейтборде, внутри здания с колоннами'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: SkateboardOnTheRoad,
+//     alt: 'Молодые люди, катающиеся на скейтбордах по дороге на улице в солнечное время в городе '
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: TheBooksellers,
+//     alt: 'Продавец книг, переберающий их в квартире в светлое время суток,'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: MerceCunningham,
+//     alt: 'Мерс Каннингем с товарищами около забора здания'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: Graffity,
+//     alt: 'Граффити на поезде на станции'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: RunMarathon,
+//     alt: 'Множество людей,бегущих марафон'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: KeithHaringStreetArt,
+//     alt: 'Молодые люди на вечеринке, черно белая картинка'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: SmokingMan,
+//     alt: 'Молодой, курящий парень'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: IfIThinkOfGermanyAtNight,
+//     alt: 'Молодой мужчина в очках, сидящий в студии звукозаписи'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: WarOfArt,
+//     alt: 'Люди, сидящие в большом зале, над ними два портрета лидеров КНДР '
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: GimmeDanger,
+//     alt: 'Молодые люди около кирпичной стены здания, вид сверху'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: RunMan,
+//     alt: 'Молодой мужчина, подбегающий к финишной леньте'
+//   },
+//   {
+//     title: '33 слова о дизайне',
+//     hours: '1ч',
+//     minutes: '42м',
+//     image: Parkur,
+//     alt: 'Множетсво молодых людей, загимающихся на железных конструкцяиях'
+//   }
+// ];
 
 export const savedMoviesData = [
   {

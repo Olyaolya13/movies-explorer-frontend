@@ -26,11 +26,6 @@ const useFormValidation = () => {
           errorMessage = 'Пароль должен содержать минимум 6 символов';
         }
         break;
-      case 'search':
-        if (value.length < 2) {
-          errorMessage = 'Нужно ввести ключевое слово';
-        }
-        break;
       default:
         break;
     }

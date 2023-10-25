@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 
-function MoviesCard({ title, hours, minutes, image, alt }) {
+function MoviesCard(props) {
   const location = useLocation();
   const isSavedPage = location.pathname === '/saved-movies';
+  const movieUrl = `https://api.nomoreparties.co${props.movie.image.url}`;
 
   const [isSaved, setIsSaved] = useState(false);
 
@@ -20,14 +21,13 @@ function MoviesCard({ title, hours, minutes, image, alt }) {
 
   return (
     <section className="movie-card">
-      <img src={image} className="movie-card__image" alt={alt} />
+      <a href={props.movie.trailerLink} target="blank">
+        <img src={movieUrl} className="movie-card__image" alt={props.movie.description} />
+      </a>
       <div className="movie-card__about">
         <div className="movie-card__text">
-          <h2 className="movie-card__title">{title}</h2>
-          <p className="movie-card__duration">
-            {hours}
-            {minutes}
-          </p>
+          <h2 className="movie-card__title">{props.movie.nameRU}</h2>
+          <p className="movie-card__duration">{props.movie.duration}</p>
         </div>
         <button
           type="submit"

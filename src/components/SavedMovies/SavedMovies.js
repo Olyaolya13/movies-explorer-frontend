@@ -6,7 +6,8 @@ function Movies() {
   return (
     <>
       <SearchForm />
-      <MoviesCardList movies={savedMoviesData} />
+      <MoviesCardList />
+      {/* <MoviesCardList movies={savedMoviesData} /> */}
     </>
   );
 }
