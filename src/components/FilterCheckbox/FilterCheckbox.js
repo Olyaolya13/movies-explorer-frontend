@@ -1,26 +1,21 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import './FilterCheckbox.css';
 import OffButton from '../../images/logo/offTumb.svg';
 import OnButton from '../../images/logo/onTumb.svg';
 
-function FilterCheckbox() {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-
+function FilterCheckbox(props) {
+  console.log(props);
   return (
     <section className="checkbox">
       <label className="checkbox-label">
         <input
           type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
+          checked={props.isShortFilm}
+          onChange={props.onCheck}
           className="checkbox__input"
         />
         <img
-          src={isChecked ? OnButton : OffButton}
+          src={props.isShortFilm ? OnButton : OffButton}
           alt="Кнопка включения"
           className="checkbox__button"
         />
