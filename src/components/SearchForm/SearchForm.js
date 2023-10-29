@@ -5,7 +5,6 @@ import SearchColorLogo from '../../images/logo/searchColorLogo.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
-  const [searchFilm, setSearchFilm] = useState('');
   const [searchError, setSearchError] = useState(false);
 
   const SearchFormData = {
@@ -13,18 +12,18 @@ function SearchForm(props) {
   };
 
   const handleInputChange = e => {
-    setSearchFilm(e.target.value);
+    props.setKeyWord(e.target.value);
     setSearchError(false);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!searchFilm) {
+    if (!props.keyWord) {
       setSearchError(true);
       return;
     } else {
       setSearchError(false);
-      props.onSearch(searchFilm); // Передаем значение searchFilm в родительский компонент
+      props.onSearch(props.keyWord);
     }
   };
 
@@ -38,7 +37,7 @@ function SearchForm(props) {
               type="text"
               placeholder={searchError ? 'Нужно ввести ключевое слово' : 'Фильм'}
               className="search__input"
-              value={searchFilm}
+              value={props.keyWord}
               onChange={handleInputChange}
               required
             />
@@ -49,7 +48,7 @@ function SearchForm(props) {
           </div>
           <div className="search__short-films">
             <div className="search__checkbox">
-              <FilterCheckbox />
+              <FilterCheckbox isShortFilm={props.isShortFilm} onCheck={props.onCheck} />
               <p className="search__text">{SearchFormData.shortFilm}</p>
             </div>
           </div>

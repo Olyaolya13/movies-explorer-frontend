@@ -99,6 +99,7 @@ function App() {
 
   function handleLogOut() {
     setIsLoggedIn(false);
+    localStorage.clear();
     localStorage.removeItem('token');
     navigate('/', { replace: true });
   }

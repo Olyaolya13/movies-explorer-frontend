@@ -2,6 +2,7 @@
 .movie-card-list-saved {
   padding: 70px 60px 80px;
   background-color: #fafafa;
+  min-height: 86px;
 }
 
 .movie-card-list-saved {
