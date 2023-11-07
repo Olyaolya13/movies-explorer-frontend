@@ -1,39 +1,3 @@
-// class MovieApi {
-//   constructor({ baseUrl }) {
-//     this._baseUrl = baseUrl;
-//   }
-
-//   // Проверка ответа сервера
-//   _checkResponseServer(res) {
-//     if (res.ok) {
-//       return res.json();
-//     } else {
-//       return Promise.reject(`Ошибка: ${res.status}`);
-//     }
-//   }
-
-//   // Универсальный метод запроса с проверкой ответа
-//   _request(url, options) {
-//     return fetch(url, options).then(this._checkResponseServer);
-//   }
-
-//   // Загрузка информации о фильмах
-//   getMovies(token) {
-//     return this._request(this._baseUrl, {
-//       method: 'GET',
-//       headers: {
-//         Authorization: `Bearer ${token}`
-//       }
-//     });
-//   }
-// }
-
-// const moviesApi = new MovieApi({
-//   baseUrl: 'https://api.nomoreparties.co/beatfilm-movies/'
-// });
-
-// export default moviesApi;
-
 class MovieApi {
   constructor({ baseUrl }) {
     this._baseUrl = baseUrl;

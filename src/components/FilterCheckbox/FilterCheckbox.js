@@ -4,7 +4,6 @@ import OffButton from '../../images/logo/offTumb.svg';
 import OnButton from '../../images/logo/onTumb.svg';
 
 function FilterCheckbox(props) {
-  console.log(props);
   return (
     <section className="checkbox">
       <label className="checkbox-label">

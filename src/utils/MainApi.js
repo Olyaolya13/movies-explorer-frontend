@@ -16,9 +16,17 @@ class MainApi {
       });
     }
   };
-  //универсальный метод запроса с проверкой ответа
   _request(url, options) {
-    return fetch(url, options).then(this._checkResponseServer);
+    console.log(`Отправка запроса: ${url}`);
+    return fetch(url, options)
+      .then(response => {
+        console.log(`Получен ответ: ${url}`, response);
+        return this._checkResponseServer(response);
+      })
+      .catch(error => {
+        console.error(`Ошибка при выполнении запроса: ${url}`, error);
+        throw error;
+      });
   }
 
   //Загрузка информации о пользователе с сервера
@@ -43,15 +51,6 @@ class MainApi {
     });
   }
 
-  getMovies(token) {
-    return this._request(`${this._baseUrl}movies`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-  }
-
   //Сохраненные фильмы
   getSavedMovies(token) {
     return this._request(`${this._baseUrl}movies`, {
@@ -63,25 +62,22 @@ class MainApi {
   }
 
   //добавление нового фильма
-  addNewMovie(element, token) {
+  addSavedMovie(movie, token) {
     return this._request(`${this._baseUrl}movies`, {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        country: element.country,
-        director: element.director,
-        duration: element.duration,
-        year: element.year,
-        description: element.description,
-        image: element.image, //
-        trailer: element.trailer,
-        nameRU: element.nameRU,
-        nameEN: element.nameEN,
-        thumbnail: element.thumbnail,
-        movieId: element.movieId
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: movie.image,
+        trailerLink: movie.trailerLink,
+        thumbnail: movie.thumbnail,
+        movieId: movie.movieId,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN
       })
     });
   }

@@ -1,22 +1,32 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { useMovies } from '../../contexts/MovieContext';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import moviesApi from '../../utils/MoviesApi';
-import api from '../../utils/MoviesApi';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function Movies() {
-  const [movies, setMovies] = useState([]); //фильмы
-  const [searchMovies, setSearchMovies] = useState(false); //поиск фильма
-  const [isLoading, setIsLoading] = useState(false); //прелладер
-  const [searchErrorNotFinded, setSearchErrorNotFinded] = useState(false); //ничего не найдено
-  const [isShortFilm, setIsShortFilm] = useState(false);
-  const [keyWord, setKeyWord] = useState('');
-  const currentUser = useContext(CurrentUserContext);
+  const [searchMovies, setSearchMovies] = useState(false);
+
+  const {
+    savedMovies,
+    isLoading,
+    searchErrorNotFinded,
+    isShortFilm,
+    handleCheckboxChange,
+    updateSearchKeyword,
+    addMovieToSaved,
+    removeMovieFromSaved,
+    keyWord,
+    setIsLoading,
+    setSearchErrorNotFinded,
+    setIsShortFilm,
+    movies,
+    setMovies
+  } = useMovies();
 
   function searchAllMovies() {
-    setSearchErrorNotFinded(false);
     setSearchMovies(false);
+    setSearchErrorNotFinded(false);
     setIsLoading(true);
 
     moviesApi
@@ -33,8 +43,7 @@ function Movies() {
           const searchData = {
             key: keyWord,
             movies: findMovies,
-            shortFilm: isShortFilm
-            // userId: currentUser._id
+            isShortFilm: isShortFilm
           };
 
           localStorage.setItem('movies', JSON.stringify(searchData));
@@ -44,6 +53,7 @@ function Movies() {
           setMovies([]);
           setSearchErrorNotFinded(true);
         }
+
         return findMovies;
       })
       .catch(() => {
@@ -54,24 +64,11 @@ function Movies() {
       });
   }
 
-  function handleCheckboxChange() {
-    setIsShortFilm(!isShortFilm);
-  }
-
   useEffect(() => {
-    const storedData = localStorage.getItem('movies');
-    if (storedData) {
-      const searchData = JSON.parse(storedData);
-
-      if (searchData) {
-        setKeyWord(searchData.key);
-        setMovies(searchData.movies);
-        setIsShortFilm(searchData.shortFilm);
-        console.log(typeof searchData.shortFilm);
-        setSearchErrorNotFinded(false);
-      }
+    if (searchMovies) {
+      searchAllMovies();
     }
-  }, []);
+  }, [searchMovies]);
 
   return (
     <>
@@ -79,15 +76,19 @@ function Movies() {
         onSearch={searchAllMovies}
         isShortFilm={isShortFilm}
         onCheck={handleCheckboxChange}
-        setKeyWord={setKeyWord}
+        setKeyWord={updateSearchKeyword}
         keyWord={keyWord}
+        setIsShortFilm={setIsShortFilm}
       />
       <MoviesCardList
         movies={movies}
+        savedMovies={savedMovies}
         isLoading={isLoading}
         isMovieNotFound={searchErrorNotFinded}
         isSearchError={searchMovies}
         isShortFilm={isShortFilm}
+        onAdd={addMovieToSaved}
+        onDelete={removeMovieFromSaved}
       />
     </>
   );

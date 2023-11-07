@@ -5,6 +5,7 @@ import api from '../../utils/MainApi';
 
 import * as auth from '../../utils/Auth';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import MoviesProvider from '../../contexts/MovieContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -20,13 +21,10 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isError, setIsError] = useState('');
   const [isSend, setIsSend] = useState(false);
-
-  // const [savedMovies, setSavedMovies] = useState([]);
 
   const isRegisterPage =
     location.pathname === '/signup' ||
@@ -106,6 +104,10 @@ function App() {
 
   function handleUpdateUser({ email, name }) {
     const token = localStorage.getItem('token');
+    if (!token) {
+      setIsLoggedIn(false);
+      return;
+    }
     api
       .editProfile({ name, email }, token)
       .then(res => {
@@ -126,8 +128,8 @@ function App() {
   }
 
   useEffect(() => {
-    if (isLoggedIn) {
-      const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    if (isLoggedIn && token) {
       Promise.all([api.getUserInfo(token)])
         .then(([userInfo]) => {
           setCurrentUser(userInfo);
@@ -138,91 +140,182 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     const token = localStorage.getItem('token');
-  //     console.log(token);
-  //     api
-  //       .getUserInfo(token)
-  //       .then(userInfo => {
-  //         setCurrentUser(userInfo);
-  //       })
-  //       .catch(err => {
-  //         console.log('Ошибка при получении информации о пользователе:', err);
-  //       });
-  //     moviesApi
-  //       .getMovies(token)
-  //       .then(initialMovies => {
-  //         setMovies(initialMovies);
-  //         console.log('ok');
-  //       })
-  //       .catch(err => {
-  //         console.log('Ошибка при получении списка фильмов:', err);
-  //       });
-  //   }
-  // }, [isLoggedIn]);
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {!isRegisterPage && !isNotFoundPage && (
         <div>{!isLoggedIn ? <Header isLoggedIn={isLoggedIn} /> : <Navigation />}</div>
       )}
-
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route
-          path="/signup"
-          element={
-            <Register
-              onRegister={handleOnRegister}
-              error={isError}
-              setError={setIsError}
-              setIsSend={setIsSend}
-              isSend={isSend}
-            />
-          }
-        />
-        <Route
-          path="/signin"
-          element={
-            <Login
-              onLogin={handleOnLogin}
-              error={isError}
-              setError={setIsError}
-              setIsSend={setIsSend}
-              isSend={isSend}
-            />
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute
-              isLoggedIn={true}
-              element={Profile}
-              onLoggedOut={handleLogOut}
-              onSave={handleUpdateUser}
-              error={isError}
-              setError={setIsError}
-              setIsSend={setIsSend}
-              isSend={isSend}
-            />
-          }
-        />
-        <Route path="/movies" element={<ProtectedRoute isLoggedIn={true} element={Movies} />} />
-        <Route
-          path="/saved-movies"
-          element={<ProtectedRoute isLoggedIn={true} element={SavedMovies} />}
-        />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-      {!isRegisterPage && !isNotFoundPage && (
-        <div>
-          <Footer />
-        </div>
-      )}
+      <MoviesProvider>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route
+            path="/signup"
+            element={
+              <Register
+                onRegister={handleOnRegister}
+                error={isError}
+                setError={setIsError}
+                setIsSend={setIsSend}
+                isSend={isSend}
+              />
+            }
+          />
+          <Route
+            path="/signin"
+            element={
+              <Login
+                onLogin={handleOnLogin}
+                error={isError}
+                setError={setIsError}
+                setIsSend={setIsSend}
+                isSend={isSend}
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute
+                isLoggedIn={isLoggedIn}
+                element={Profile}
+                onLoggedOut={handleLogOut}
+                onSave={handleUpdateUser}
+                error={isError}
+                setError={setIsError}
+                setIsSend={setIsSend}
+                isSend={isSend}
+              />
+            }
+          />
+          <Route
+            path="/movies"
+            element={<ProtectedRoute isLoggedIn={isLoggedIn} element={Movies} />}
+          />
+          <Route
+            path="/saved-movies"
+            element={<ProtectedRoute isLoggedIn={isLoggedIn} element={SavedMovies} />}
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+        {!isRegisterPage && !isNotFoundPage && (
+          <div>
+            <Footer />
+          </div>
+        )}
+      </MoviesProvider>
     </CurrentUserContext.Provider>
   );
 }
 
 export default App;
+
+// import React, { useContext } from 'react';
+// import { Routes, Route, useLocation } from 'react-router-dom';
+// import { NotFound } from '../../utils/pattern';
+
+// import { CurrentUserContext, CurrentUserProvider } from '../../contexts/CurrentUserContext';
+
+// import MoviesProvider from '../../contexts/MovieContext';
+// import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+// import Header from '../Header/Header';
+// import Main from '../Main/Main';
+// import Footer from '../Footer/Footer';
+// import Register from '../Register/Register';
+// import Login from '../Login/Login';
+// import Profile from '../Profile/Profile';
+// import Navigation from '../Navigation/Navigation';
+// import Movies from '../Movies/Movies';
+// import SavedMovies from '../SavedMovies/SavedMovies';
+// import NotFoundPage from '../NotFoundPage/NotFoundPage';
+
+// function App() {
+//   const location = useLocation();
+
+//   const isRegisterPage =
+//     location.pathname === '/signup' ||
+//     location.pathname === '/signin' ||
+//     location.pathname === '/profile';
+
+//   const isNotFoundPage = NotFound(location.pathname);
+
+//   const {
+//     currentUser,
+//     isLoggedIn,
+//     handleOnRegister,
+//     isError,
+//     setIsError,
+//     setIsSend,
+//     isSend,
+//     handleOnLogin,
+//     handleLogOut,
+//     handleUpdateUser
+//   } = useContext(CurrentUserContext);
+
+//   return (
+//     <CurrentUserProvider value={currentUser}>
+//       {!isRegisterPage && !isNotFoundPage && (
+//         <div>{!isLoggedIn ? <Header isLoggedIn={isLoggedIn} /> : <Navigation />}</div>
+//       )}
+//       <MoviesProvider>
+//         <Routes>
+//           <Route path="/" element={<Main />} />
+//           <Route
+//             path="/signup"
+//             element={
+//               <Register
+//                 onRegister={handleOnRegister}
+//                 error={isError}
+//                 setError={setIsError}
+//                 setIsSend={setIsSend}
+//                 isSend={isSend}
+//               />
+//             }
+//           />
+//           <Route
+//             path="/signin"
+//             element={
+//               <Login
+//                 onLogin={handleOnLogin}
+//                 error={isError}
+//                 setError={setIsError}
+//                 setIsSend={setIsSend}
+//                 isSend={isSend}
+//               />
+//             }
+//           />
+//           <Route
+//             path="/profile"
+//             element={
+//               <ProtectedRoute
+//                 isLoggedIn={isLoggedIn}
+//                 element={Profile}
+//                 onLoggedOut={handleLogOut}
+//                 onSave={handleUpdateUser}
+//                 error={isError}
+//                 setError={setIsError}
+//                 setIsSend={setIsSend}
+//                 isSend={isSend}
+//               />
+//             }
+//           />
+//           <Route
+//             path="/movies"
+//             element={<ProtectedRoute isLoggedIn={isLoggedIn} element={Movies} />}
+//           />
+//           <Route
+//             path="/saved-movies"
+//             element={<ProtectedRoute isLoggedIn={isLoggedIn} element={SavedMovies} />}
+//           />
+//           <Route path="*" element={<NotFoundPage />} />
+//         </Routes>
+//         {!isRegisterPage && !isNotFoundPage && (
+//           <div>
+//             <Footer />
+//           </div>
+//         )}
+//       </MoviesProvider>
+//     </CurrentUserProvider>
+//   );
+// }
+
+// export default App;

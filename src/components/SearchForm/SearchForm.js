@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SearchForm.css';
 import SearchLogo from '../../images/logo/searchLogo.svg';
 import SearchColorLogo from '../../images/logo/searchColorLogo.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
+  console.log(props);
   const [searchError, setSearchError] = useState(false);
 
   const SearchFormData = {
@@ -14,6 +15,13 @@ function SearchForm(props) {
   const handleInputChange = e => {
     props.setKeyWord(e.target.value);
     setSearchError(false);
+  };
+
+  const handleCheckboxChange = e => {
+    const isChecked = e.target.checked;
+    props.setIsShortFilm(isChecked);
+    localStorage.setItem('isShortFilm', JSON.stringify(isChecked));
+    props.onCheck();
   };
 
   const handleSubmit = e => {
@@ -48,7 +56,7 @@ function SearchForm(props) {
           </div>
           <div className="search__short-films">
             <div className="search__checkbox">
-              <FilterCheckbox isShortFilm={props.isShortFilm} onCheck={props.onCheck} />
+              <FilterCheckbox isShortFilm={props.isShortFilm} onCheck={handleCheckboxChange} />
               <p className="search__text">{SearchFormData.shortFilm}</p>
             </div>
           </div>
