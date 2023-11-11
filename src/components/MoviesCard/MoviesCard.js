@@ -4,21 +4,27 @@ import './MoviesCard.css';
 
 function MoviesCard(props) {
   const location = useLocation();
+
   const isSavedPage = location.pathname === '/saved-movies';
   const isSavedMovie = props.savedMovies.some(savedMovie => savedMovie.id === props.movie.id);
-
-  const [isSaved, setIsSaved] = useState(isSavedMovie);
+  const [isSaved, setIsSaved] = useState(false);
+  console.log(isSaved);
 
   const handleSaveClick = () => {
-    if (!isSaved && !isSavedPage) {
+    if (!isSaved) {
+      console.log('yes');
       props.onAdd(props.movie);
       setIsSaved(true);
-      localStorage.setItem(`isSaved-${props.movie.id}`, 'true');
     } else {
+      console.log('no');
       props.onDelete(props.movie._id);
       setIsSaved(false);
-      localStorage.removeItem(`isSaved-${props.movie.id}`);
     }
+  };
+
+  const handleDeleteClick = () => {
+    console.log('delete');
+    props.onSavedDelete(props.movie._id);
   };
 
   const movieUrl = isSavedMovie
@@ -32,12 +38,6 @@ function MoviesCard(props) {
   }
 
   const durationInMinutesAndHours = changeToHoursAndMinutes(props.movie.duration);
-
-  useEffect(() => {
-    const movieId = props.movie.id;
-    const saved = localStorage.getItem(`isSaved-${movieId}`);
-    setIsSaved(saved === 'true');
-  }, [props.movie.id]);
 
   const buttonClassName = isSavedPage
     ? 'movie-card__delete'
@@ -58,7 +58,7 @@ function MoviesCard(props) {
         <button
           type="button"
           className={`movie-card__button ${buttonClassName}`}
-          onClick={handleSaveClick}
+          onClick={!isSavedPage ? handleSaveClick : handleDeleteClick}
         ></button>
       </div>
     </section>

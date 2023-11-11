@@ -52,20 +52,23 @@ class MainApi {
   }
 
   //Сохраненные фильмы
-  getSavedMovies(token) {
+  getSavedMovies() {
     return this._request(`${this._baseUrl}movies`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     });
   }
 
   //добавление нового фильма
-  addSavedMovie(movie, token) {
+  addSavedMovie(movie) {
     return this._request(`${this._baseUrl}movies`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
       body: JSON.stringify({
         country: movie.country,
         director: movie.director,
@@ -87,7 +90,7 @@ class MainApi {
     return this._request(`${this._baseUrl}movies/${movieId}`, {
       method: 'DELETE',
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     });
   }

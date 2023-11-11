@@ -3,7 +3,6 @@ class MovieApi {
     this._baseUrl = baseUrl;
   }
 
-  // Проверка ответа сервера
   _checkResponseServer(res) {
     if (res.ok) {
       return res.json();
@@ -13,7 +12,6 @@ class MovieApi {
     }
   }
 
-  // Универсальный метод запроса с проверкой ответа
   _request(url, options) {
     console.log(`Отправка запроса: ${url}`);
     return fetch(url, options)
@@ -27,13 +25,10 @@ class MovieApi {
       });
   }
 
-  // Загрузка информации о фильмах
-  getMovies(token) {
+  getMovies() {
     return this._request(this._baseUrl, {
       method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+      headers: { 'Content-Type': 'application/json' }
     });
   }
 }

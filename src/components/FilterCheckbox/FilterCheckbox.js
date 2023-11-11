@@ -10,7 +10,7 @@ function FilterCheckbox(props) {
         <input
           type="checkbox"
           checked={props.isShortFilm}
-          onChange={props.onCheck}
+          onChange={props.onCheckboxChange}
           className="checkbox__input"
         />
         <img

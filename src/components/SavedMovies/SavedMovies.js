@@ -1,49 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { useMovies } from '../../contexts/MovieContext';
+import React, { useEffect, useState, useContext } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import { useMovieContext } from '../../contexts/MovieContext'; //
 
 function SavedMovies() {
-  const [searchMovies, setSearchMovies] = useState(false);
+  const { movies, savedMovies, loadSavedMovies, keyWord, isShortSavedFilm, removeSavedMovie } =
+    useMovieContext();
 
-  const {
-    savedMovies,
-    isLoading,
-    searchErrorNotFinded,
-    isShortFilm,
-    handleCheckboxChange,
-    updateSearchKeyword,
-    removeMovieFromSaved,
-    keyWord,
-    fetchSavedMovies,
-    setIsShortFilm
-  } = useMovies();
-
-  const handleDeleteMovie = id => {
-    removeMovieFromSaved(id);
+  const handleMovieDelete = (movieId, token) => {
+    removeSavedMovie(movieId, token).then(() => {
+      loadSavedMovies();
+    });
   };
 
   useEffect(() => {
-    fetchSavedMovies();
+    localStorage.setItem(
+      'savedMovies',
+      JSON.stringify({ key: keyWord, movies: savedMovies, isShortSavedFilm })
+    );
+  }, [keyWord, savedMovies, isShortSavedFilm]);
+
+  useEffect(() => {
+    loadSavedMovies();
   }, []);
 
   return (
     <>
-      <SearchForm
-        onSearch={fetchSavedMovies}
-        isShortFilm={isShortFilm}
-        onCheck={handleCheckboxChange}
-        setKeyWord={updateSearchKeyword}
-        keyWord={keyWord}
-      />
-      <MoviesCardList
-        savedMovies={savedMovies}
-        isLoading={isLoading}
-        isMovieNotFound={searchErrorNotFinded}
-        isSearchError={searchMovies}
-        isShortFilm={isShortFilm}
-        onDelete={handleDeleteMovie}
-      />
+      <SearchForm onSearchSavedMovies={loadSavedMovies} />
+      <MoviesCardList savedMovies={savedMovies} onSavedMovieDelete={handleMovieDelete} />
     </>
   );
 }

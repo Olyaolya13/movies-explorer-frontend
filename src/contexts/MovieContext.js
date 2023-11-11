@@ -1,40 +1,89 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import api from '../utils/MainApi';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import moviesApi from '../utils/MoviesApi';
+import mainApi from '../utils/MainApi';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+const MovieContext = createContext();
 
-const MoviesContext = createContext();
-
-export const useMovies = () => {
-  return useContext(MoviesContext);
-};
-
-export default function MoviesProvider({ children }) {
+const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isShortFilm, setIsShortFilm] = useState(false);
+  const [isShortSavedFilm, setIsShortSavedFilm] = useState(false);
   const [searchErrorNotFinded, setSearchErrorNotFinded] = useState(false);
-  const initialIsShortFilm = JSON.parse(localStorage.getItem('isShortFilm')) || false;
-  const [isShortFilm, setIsShortFilm] = useState(initialIsShortFilm);
+  const [isLoading, setIsLoading] = useState(false);
   const [keyWord, setKeyWord] = useState('');
+  const [searchMovies, setSearchMovies] = useState(false);
+  const currentUser = useContext(CurrentUserContext);
 
-  const handleCheckboxChange = () => {
-    setIsShortFilm(!isShortFilm);
-  };
+  function searchAllMovies(token) {
+    setSearchMovies(false);
+    setSearchErrorNotFinded(false);
+    setIsLoading(true);
 
-  const updateSearchKeyword = keyword => {
-    setKeyWord(keyword);
-  };
+    moviesApi
+      .getMovies(token)
+      .then(res => {
+        let findMovies = res.filter(
+          movie =>
+            movie.nameRU.toLowerCase().includes(keyWord.toLowerCase()) ||
+            movie.nameEN.toLowerCase().includes(keyWord.toLowerCase())
+        );
 
-  const fetchSavedMovies = () => {
-    const token = localStorage.getItem('token');
-    api
+        if (findMovies.length) {
+          console.log('Найден фильм:', findMovies);
+          setMovies(findMovies);
+        } else {
+          console.log('Фильм не найден');
+          setMovies([]);
+          setSearchErrorNotFinded(true);
+        }
+      })
+      .catch(() => {
+        setSearchMovies(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
+  function loadSavedMovies(token) {
+    mainApi
       .getSavedMovies(token)
-      .then(data => setSavedMovies(data))
-      .catch(err => setSearchErrorNotFinded(err));
-  };
+      .then(res => {
+        let findMovies = res.filter(
+          movie =>
+            movie.nameRU.toLowerCase().includes(keyWord.toLowerCase()) ||
+            movie.nameEN.toLowerCase().includes(keyWord.toLowerCase())
+        );
 
-  const addMovieToSaved = movie => {
-    const token = localStorage.getItem('token');
+        if (findMovies.length > 0) {
+          console.log('Найденные сохраненные фильмы:', findMovies);
+          setSavedMovies(findMovies);
+        } else {
+          console.log('Сохраненные фильмы не найдены');
+          setSavedMovies([]);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
+  useEffect(() => {
+    const storedData = localStorage.getItem('movies');
+    if (storedData) {
+      const searchData = JSON.parse(storedData);
+
+      if (searchData) {
+        setMovies(searchData.movies);
+        setKeyWord(searchData.key);
+        setIsShortFilm(searchData.isShortFilm);
+        setSearchErrorNotFinded(false);
+      }
+    }
+  }, []);
+
+  function addSavedMovie(movie, token) {
     const movieInfo = {
       country: movie.country,
       director: movie.director,
@@ -49,81 +98,64 @@ export default function MoviesProvider({ children }) {
       nameEN: movie.nameEN
     };
 
-    api.addSavedMovie(movieInfo, token).then(res => {
-      const savedMoviesData = JSON.parse(localStorage.getItem('savedMovies')) || [];
-      const updatedSavedMovies = [
-        ...savedMoviesData,
-        {
-          ...res,
-          isSaved: true
-        }
-      ];
+    const updatedMovieInfo = {
+      ...movieInfo,
+      owner: currentUser
+    };
 
-      localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
-      setSavedMovies(updatedSavedMovies);
-      console.log('Фильм успешно добавлен в сохраненные:', res);
-    });
-  };
+    return mainApi
+      .addSavedMovie(updatedMovieInfo, token)
+      .then(res => {
+        setSavedMovies(savedMovies => [...savedMovies, res]);
+        console.log('Фильм успешно добавлен в сохраненные:', res);
+        localStorage.setItem('savedMovies', JSON.stringify([...savedMovies, res]));
+      })
+      .catch(error => {
+        console.error('Ошибка при добавлении фильма в сохраненные:', error);
+      });
+  }
 
-  const removeMovieFromSaved = id => {
-    const token = localStorage.getItem('token');
-    const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || [];
-    const movieToRemove = savedMovies.find(movie => movie.movieId === id);
-    if (movieToRemove) {
-      movieToRemove.isSaved = false;
-      const updatedSavedMovies = savedMovies.filter(movie => movie.movieId !== id);
-      localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
-      setSavedMovies(updatedSavedMovies);
-
-      console.log('Фильм успешно удален:', movieToRemove);
-    }
-    api
+  function removeSavedMovie(id, token) {
+    return mainApi
       .removeSavedMovie(id, token)
       .then(res => {
+        const updatedSavedMovies = savedMovies.filter(movie => movie.id !== id);
+        console.log(updatedSavedMovies);
+        localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
+        // setMovies(updatedSavedMovies);
+        setSavedMovies(updatedSavedMovies);
         console.log('Фильм успешно удален на сервере:', res);
       })
       .catch(error => {
         console.error('Ошибка при удалении фильма из сохраненных:', error);
       });
-  };
-
-  useEffect(() => {
-    const storedData = localStorage.getItem('movies');
-    if (storedData) {
-      const searchData = JSON.parse(storedData);
-
-      if (searchData) {
-        setMovies(searchData.movies);
-        setKeyWord(searchData.key);
-        setIsShortFilm(initialIsShortFilm);
-        setSearchErrorNotFinded(false);
-      }
-    }
-  }, [initialIsShortFilm]);
+  }
 
   return (
-    <MoviesContext.Provider
+    <MovieContext.Provider
       value={{
-        savedMovies,
-        isLoading,
-        searchErrorNotFinded,
-        isShortFilm,
-        addMovieToSaved,
-        removeMovieFromSaved,
-        handleCheckboxChange,
-        fetchSavedMovies,
-        updateSearchKeyword,
-        keyWord,
-        setIsLoading,
-        setKeyWord,
-        setIsShortFilm,
-        setSearchErrorNotFinded,
-        setSavedMovies,
         movies,
-        setMovies
+        savedMovies,
+        isShortFilm,
+        isShortSavedFilm,
+        setIsShortSavedFilm,
+        setIsShortFilm,
+        addSavedMovie,
+        removeSavedMovie,
+        searchAllMovies,
+        loadSavedMovies,
+        keyWord,
+        setKeyWord,
+        searchMovies,
+        searchErrorNotFinded,
+        isLoading
       }}
     >
       {children}
-    </MoviesContext.Provider>
+    </MovieContext.Provider>
   );
-}
+};
+
+export const useMovieContext = () => useContext(MovieContext);
+
+export default MovieProvider;
