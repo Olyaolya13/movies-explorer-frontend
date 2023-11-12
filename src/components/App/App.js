@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { NotFound } from '../../utils/pattern';
-import api from '../../utils/MainApi';
+import api from '../../utils/MainApi'; //
 
 import * as auth from '../../utils/Auth';
 import CurrentUserContext from '../../contexts/CurrentUserContext';

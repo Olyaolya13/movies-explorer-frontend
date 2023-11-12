@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import useFormValidation from '../../hooks/FormValidation';
 import './AuthForm.css';
-import Logo from '../../images/logo/header_logo.svg';
+import Logo from '../../images/logo/header_logo.svg'; //
 
 function AuthForm(props) {
   const AuthFormData = {
