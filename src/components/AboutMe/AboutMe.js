@@ -1,7 +1,7 @@
 import React from 'react';
 import './AboutMe.css';
 import { AboutMeData } from '../../utils/constants';
-import Photo from '../../images/Photo.svg'; //
+import Photo from '../../images/Photo.svg';
 
 function AboutMe() {
   return (
