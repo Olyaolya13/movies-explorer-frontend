@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP 130.193.40.17
+IP 158.160.29.134
 
 Frotend choosemovie.nomoredomainsrocks.ru
 Backend api.choosemovie.nomoredomainsrocks.ru
