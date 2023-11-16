@@ -97,8 +97,8 @@ class MainApi {
 }
 
 const api = new MainApi({
-  // baseUrl: 'https://api.choosemovie.nomoredomainsrocks.ru/',
-  baseUrl: 'http://localhost:3000/',
+  baseUrl: 'https://api.choosemovie.nomoredomainsrocks.ru/',
+  // baseUrl: 'http://localhost:3000/',
   headers: {
     Authorization: `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json'
