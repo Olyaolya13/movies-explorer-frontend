@@ -1,23 +1,26 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { useMovieContext } from '../../contexts/MovieContext'; //
 
 function SavedMovies() {
-  const { movies, savedMovies, loadSavedMovies, keyWord, isShortSavedFilm, removeSavedMovie } =
+  const { savedMovies, loadSavedMovies, keyWord, isShortSavedFilm, removeSavedMovie } =
     useMovieContext();
 
-  const handleMovieDelete = (movieId, token) => {
-    removeSavedMovie(movieId, token).then(() => {
+  // const handleMovieDelete = movieId => {
+  //   removeSavedMovie(movieId).then(() => {
+  //     loadSavedMovies();
+  //   });
+  // };
+
+  const handleMovieDelete = movieId => {
+    removeSavedMovie(movieId).then(() => {
       loadSavedMovies();
     });
   };
 
   useEffect(() => {
-    localStorage.setItem(
-      'savedMovies',
-      JSON.stringify({ key: keyWord, movies: savedMovies, isShortSavedFilm })
-    );
+    localStorage.setItem('savedMovies', JSON.stringify({ movies: savedMovies }));
   }, [keyWord, savedMovies, isShortSavedFilm]);
 
   useEffect(() => {
@@ -27,7 +30,12 @@ function SavedMovies() {
   return (
     <>
       <SearchForm onSearchSavedMovies={loadSavedMovies} />
-      <MoviesCardList savedMovies={savedMovies} onSavedMovieDelete={handleMovieDelete} />
+      <MoviesCardList
+        movies={savedMovies}
+        savedMovies={savedMovies}
+        onMovieDelete={handleMovieDelete}
+        isSearchError={false}
+      />
     </>
   );
 }
