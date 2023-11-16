@@ -21,8 +21,8 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const storedUser = JSON.parse(localStorage.getItem('user'));
-  const [currentUser, setCurrentUser] = useState(storedUser || {});
+
+  const [currentUser, setCurrentUser] = useState({});
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isError, setIsError] = useState('');
@@ -53,12 +53,6 @@ function App() {
       handleToken(token);
     }
   }, []);
-
-  useEffect(() => {
-    if (currentUser) {
-      localStorage.setItem('user', JSON.stringify(currentUser));
-    }
-  }, [currentUser]);
 
   function handleOnLogin({ email, password }) {
     setIsSend(true);
@@ -107,7 +101,6 @@ function App() {
   function handleLogOut() {
     setIsLoggedIn(false);
     localStorage.removeItem('token');
-    setCurrentUser({});
     localStorage.clear();
     navigate('/', { replace: true });
   }

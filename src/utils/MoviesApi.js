@@ -26,7 +26,7 @@ class MovieApi {
   }
 
   getMovies() {
-    return this._request(this._baseUrl, {
+    return this._request(`${this._baseUrl}/beatfilm-movies`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     });
@@ -34,7 +34,7 @@ class MovieApi {
 }
 
 const moviesApi = new MovieApi({
-  baseUrl: 'https://api.nomoreparties.co/beatfilm-movies'
+  baseUrl: 'https://api.nomoreparties.co'
 });
 
 export default moviesApi;

@@ -15,9 +15,16 @@ function Movies() {
     searchMovies
   } = useMovieContext();
 
+  function handleDeleteClick(movieId) {
+    removeSavedMovie(movieId);
+  }
+
   useEffect(() => {
-    localStorage.setItem('movies', JSON.stringify({ key: keyWord, movies, isShortFilm }));
-  }, [keyWord, movies, isShortFilm, searchMovies]);
+    localStorage.setItem(
+      'movies',
+      JSON.stringify({ key: keyWord, movies: movies, isShortFilm, savedMovies: savedMovies })
+    );
+  }, [keyWord, movies, isShortFilm, searchMovies, savedMovies]);
 
   return (
     <>
@@ -26,7 +33,7 @@ function Movies() {
         movies={movies}
         savedMovies={savedMovies}
         onMovieSave={addSavedMovie}
-        onMovieDelete={removeSavedMovie}
+        onMovieDelete={handleDeleteClick}
         isSearchError={searchMovies}
       />
     </>
