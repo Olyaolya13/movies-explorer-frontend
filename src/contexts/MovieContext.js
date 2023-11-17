@@ -86,36 +86,33 @@ const MovieProvider = ({ children }) => {
       nameEN: movie.nameEN
     };
 
-    console.log('movieInfo:', movieInfo);
-
     const updatedMovieInfo = {
       ...movieInfo,
       owner: currentUser._id
     };
 
-    setSavedMovies(savedMovies => [...savedMovies, updatedMovieInfo]);
-
     mainApi
       .addSavedMovie(updatedMovieInfo)
       .then(res => {
+        console.log('Серверный ответ после сохранения:', res);
+        setSavedMovies(savedMovies => [...savedMovies, updatedMovieInfo]);
         console.log('Фильм успешно добавлен в сохраненные:', res);
         localStorage.setItem('savedMovies', JSON.stringify([...savedMovies, res]));
+        return;
       })
       .catch(error => {
         console.error('Ошибка при добавлении фильма в сохраненные:', error);
       });
   }
 
-  function removeSavedMovie(id) {
+  function removeSavedMovie(movieId) {
     return mainApi
-      .removeSavedMovie(id)
-      .then(res => {
-        const updatedSavedMovies = savedMovies.filter(movie => movie.id !== id);
-        console.log(updatedSavedMovies);
+      .removeSavedMovie(movieId)
+      .then(() => {
+        const updatedSavedMovies = savedMovies.filter(movie => movie._id !== movieId);
         localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
-
         setSavedMovies(updatedSavedMovies);
-        console.log('Фильм успешно удален на сервере:', res);
+        console.log('Фильм успешно удален на сервере:', movieId);
       })
       .catch(error => {
         console.error('Ошибка при удалении фильма из сохраненных:', error);
@@ -139,7 +136,8 @@ const MovieProvider = ({ children }) => {
         setKeyWord,
         searchMovies,
         searchErrorNotFinded,
-        isLoading
+        isLoading,
+        setSavedMovies
       }}
     >
       {children}

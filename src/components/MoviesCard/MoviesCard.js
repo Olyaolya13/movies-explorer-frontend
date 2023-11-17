@@ -7,34 +7,32 @@ function MoviesCard(props) {
 
   const isSavedPage = location.pathname === '/saved-movies';
 
-  const isSavedMovie = props.savedMovies.some(savedMovie => savedMovie.id === props.movie.id);
   const [isSaved, setIsSaved] = useState(false);
 
-  // useEffect(() => {
-  //   console.log('useEffect is called', props.savedMovies, props.movie.id);
-  //   setIsSaved(props.savedMovies.some(savedMovie => savedMovie.movieId === props.movie.id));
-  //   console.log('After setIsSaved:', isSaved);
-  // }, [props.savedMovies, props.movie.id, isSaved]);
-
   useEffect(() => {
-    console.log('useEffect is called');
     setIsSaved(props.savedMovies.some(savedMovie => savedMovie.movieId === props.movie.id));
   }, [props.savedMovies, props.movie.id]);
 
-  const handleSaveClick = () => {
-    if (!isSavedMovie) {
-      console.log('yes');
-      props.onAdd(props.movie);
-      setIsSaved(true);
+  const handleDeleteClick = () => {
+    console.log('delete');
+    const savedMovie = props.savedMovies.find(
+      savedMovie => savedMovie.movieId === props.movie.movieId || props.movie.id
+    );
+    if (savedMovie && savedMovie._id) {
+      props.onDelete(savedMovie._id);
     } else {
-      handleDeleteClick();
-      setIsSaved(false);
+      console.log('Не удалось удалить');
     }
   };
 
-  const handleDeleteClick = () => {
-    console.log('delete');
-    props.onSavedDelete(props.movie._id);
+  const handleSaveClick = () => {
+    if (!isSaved) {
+      props.onAdd(props.movie);
+      setIsSaved(true);
+    } else {
+      const movieIdToDelete = props.movie._id || props.movie.movieId;
+      handleDeleteClick(movieIdToDelete);
+    }
   };
 
   const movieUrl = isSavedPage
@@ -44,7 +42,7 @@ function MoviesCard(props) {
   function changeToHoursAndMinutes(min) {
     const hours = Math.floor(min / 60);
     const minutes = min % 60;
-    return `${hours} ч ${minutes} мин`;
+    return hours > 0 ? `${hours} ч${minutes > 0 ? ` ${minutes} мин` : ''}` : `${minutes} мин`;
   }
 
   const durationInMinutesAndHours = changeToHoursAndMinutes(props.movie.duration);
@@ -68,7 +66,7 @@ function MoviesCard(props) {
         <button
           type="button"
           className={`movie-card__button ${buttonClassName}`}
-          onClick={!isSavedPage ? handleSaveClick : handleDeleteClick}
+          onClick={isSavedPage ? handleDeleteClick : handleSaveClick}
         ></button>
       </div>
     </section>
