@@ -6,18 +6,28 @@ function MoviesCard(props) {
   const location = useLocation();
 
   const isSavedPage = location.pathname === '/saved-movies';
+
   const isSavedMovie = props.savedMovies.some(savedMovie => savedMovie.id === props.movie.id);
   const [isSaved, setIsSaved] = useState(false);
-  console.log(isSaved);
+
+  // useEffect(() => {
+  //   console.log('useEffect is called', props.savedMovies, props.movie.id);
+  //   setIsSaved(props.savedMovies.some(savedMovie => savedMovie.movieId === props.movie.id));
+  //   console.log('After setIsSaved:', isSaved);
+  // }, [props.savedMovies, props.movie.id, isSaved]);
+
+  useEffect(() => {
+    console.log('useEffect is called');
+    setIsSaved(props.savedMovies.some(savedMovie => savedMovie.movieId === props.movie.id));
+  }, [props.savedMovies, props.movie.id]);
 
   const handleSaveClick = () => {
-    if (!isSaved) {
+    if (!isSavedMovie) {
       console.log('yes');
       props.onAdd(props.movie);
       setIsSaved(true);
     } else {
-      console.log('no');
-      props.onDelete(props.movie._id);
+      handleDeleteClick();
       setIsSaved(false);
     }
   };
@@ -27,7 +37,7 @@ function MoviesCard(props) {
     props.onSavedDelete(props.movie._id);
   };
 
-  const movieUrl = isSavedMovie
+  const movieUrl = isSavedPage
     ? props.movie.image
     : `https://api.nomoreparties.co${props.movie.image.url}`;
 

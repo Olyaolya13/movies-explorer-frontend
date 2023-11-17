@@ -7,7 +7,6 @@ import EditButton from '../EditBtn/EditBtn';
 
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
-  console.log(currentUser);
 
   const ProfileData = {
     title: 'Имя',

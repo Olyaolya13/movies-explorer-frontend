@@ -5,6 +5,7 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 const MovieContext = createContext();
 
 const MovieProvider = ({ children }) => {
+  const currentUser = useContext(CurrentUserContext);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isShortFilm, setIsShortFilm] = useState(false);
@@ -13,7 +14,6 @@ const MovieProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [keyWord, setKeyWord] = useState('');
   const [searchMovies, setSearchMovies] = useState(false);
-  const currentUser = useContext(CurrentUserContext);
 
   function searchAllMovies(token) {
     setSearchMovies(false);
@@ -46,29 +46,6 @@ const MovieProvider = ({ children }) => {
       });
   }
 
-  function loadSavedMovies(token) {
-    mainApi
-      .getSavedMovies(token)
-      .then(res => {
-        let findMovies = res.filter(
-          movie =>
-            movie.nameRU.toLowerCase().includes(keyWord.toLowerCase()) ||
-            movie.nameEN.toLowerCase().includes(keyWord.toLowerCase())
-        );
-
-        if (findMovies.length > 0) {
-          console.log('Найденные сохраненные фильмы:', findMovies);
-          setSavedMovies(findMovies);
-        } else {
-          console.log('Сохраненные фильмы не найдены');
-          setSavedMovies([]);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
   useEffect(() => {
     const storedData = localStorage.getItem('movies');
     if (storedData) {
@@ -76,14 +53,25 @@ const MovieProvider = ({ children }) => {
 
       if (searchData) {
         setMovies(searchData.movies);
-        setKeyWord(searchData.key);
-        setIsShortFilm(searchData.isShortFilm);
-        setSearchErrorNotFinded(false);
+        loadSavedMovies(searchData.keyWord);
       }
     }
   }, []);
 
-  function addSavedMovie(movie, token) {
+  function loadSavedMovies(token) {
+    setSearchErrorNotFinded(false);
+    mainApi
+      .getSavedMovies(token)
+      .then(savedMovies => {
+        setSearchMovies(false);
+        setSavedMovies(savedMovies);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  function addSavedMovie(movie) {
     const movieInfo = {
       country: movie.country,
       director: movie.director,
@@ -98,15 +86,18 @@ const MovieProvider = ({ children }) => {
       nameEN: movie.nameEN
     };
 
+    console.log('movieInfo:', movieInfo);
+
     const updatedMovieInfo = {
       ...movieInfo,
-      owner: currentUser
+      owner: currentUser._id
     };
 
-    return mainApi
-      .addSavedMovie(updatedMovieInfo, token)
+    setSavedMovies(savedMovies => [...savedMovies, updatedMovieInfo]);
+
+    mainApi
+      .addSavedMovie(updatedMovieInfo)
       .then(res => {
-        setSavedMovies(savedMovies => [...savedMovies, res]);
         console.log('Фильм успешно добавлен в сохраненные:', res);
         localStorage.setItem('savedMovies', JSON.stringify([...savedMovies, res]));
       })
@@ -115,14 +106,14 @@ const MovieProvider = ({ children }) => {
       });
   }
 
-  function removeSavedMovie(id, token) {
+  function removeSavedMovie(id) {
     return mainApi
-      .removeSavedMovie(id, token)
+      .removeSavedMovie(id)
       .then(res => {
         const updatedSavedMovies = savedMovies.filter(movie => movie.id !== id);
         console.log(updatedSavedMovies);
         localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
-        // setMovies(updatedSavedMovies);
+
         setSavedMovies(updatedSavedMovies);
         console.log('Фильм успешно удален на сервере:', res);
       })

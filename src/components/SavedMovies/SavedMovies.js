@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { useMovieContext } from '../../contexts/MovieContext'; //
 
 function SavedMovies() {
-  const { movies, savedMovies, loadSavedMovies, keyWord, isShortSavedFilm, removeSavedMovie } =
-    useMovieContext();
+  const { savedMovies, loadSavedMovies, removeSavedMovie } = useMovieContext();
 
   const handleMovieDelete = (movieId, token) => {
     removeSavedMovie(movieId, token).then(() => {
@@ -14,15 +13,12 @@ function SavedMovies() {
   };
 
   useEffect(() => {
-    localStorage.setItem(
-      'savedMovies',
-      JSON.stringify({ key: keyWord, movies: savedMovies, isShortSavedFilm })
-    );
-  }, [keyWord, savedMovies, isShortSavedFilm]);
-
-  useEffect(() => {
     loadSavedMovies();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+  }, [savedMovies]);
 
   return (
     <>

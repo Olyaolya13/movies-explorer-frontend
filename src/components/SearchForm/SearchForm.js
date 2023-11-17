@@ -57,28 +57,24 @@ function SearchForm(props) {
   };
 
   useEffect(() => {
-    const value = localStorage.getItem(keyWordMovie);
-    if (value) {
-      setKeyWord(value);
-    } else {
+    if (isSavedPage) {
       setKeyWord('');
+      setIsShortSavedFilm(false);
+    } else {
+      const value = localStorage.getItem(keyWordMovie);
+      if (value) {
+        setKeyWord(value);
+      } else {
+        setKeyWord('');
+      }
     }
-
     const storedValue = localStorage.getItem(filterMovie);
     if (storedValue) {
-      if (isSavedPage) {
-        setIsShortSavedFilm(storedValue === 'true');
-      } else {
-        setIsShortFilm(storedValue === 'true');
-      }
+      setIsShortFilm(storedValue === 'true');
     } else {
-      if (isSavedPage) {
-        setIsShortSavedFilm(false);
-      } else {
-        setIsShortFilm(false);
-      }
+      setIsShortFilm(false);
     }
-  }, [keyWordMovie, isSavedPage, filterMovie]);
+  }, [keyWordMovie, filterMovie, isSavedPage]);
 
   return (
     <section className="search">

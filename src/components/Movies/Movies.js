@@ -16,8 +16,11 @@ function Movies() {
   } = useMovieContext();
 
   useEffect(() => {
-    localStorage.setItem('movies', JSON.stringify({ key: keyWord, movies, isShortFilm }));
-  }, [keyWord, movies, isShortFilm, searchMovies]);
+    localStorage.setItem(
+      'movies',
+      JSON.stringify({ key: keyWord, movies, isShortFilm, savedMovies })
+    );
+  }, [keyWord, movies, isShortFilm, searchMovies, savedMovies]);
 
   return (
     <>
