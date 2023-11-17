@@ -21,7 +21,7 @@ function MoviesCard(props) {
     if (savedMovie && savedMovie._id) {
       props.onDelete(savedMovie._id);
     } else {
-      console.log('Не удалось удалить');
+      console.log('Не удалось удалить'); //
     }
   };
 
