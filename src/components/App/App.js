@@ -24,8 +24,6 @@ function App() {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const [currentUser, setCurrentUser] = useState(storedUser || {});
 
-  const [currentPage, setCurrentPage] = useState(location.pathname);
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isError, setIsError] = useState('');
   const [isSend, setIsSend] = useState(false);

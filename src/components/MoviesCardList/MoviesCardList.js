@@ -38,13 +38,16 @@ function MoviesCardList(props) {
   return (
     <section className={isSavedPage ? 'movie-card-list-saved' : 'movie-card-list'}>
       {isLoading && <Preloader />}
-      {searchErrorNotFinded && !isLoading && !isSavedPage && (
-        <p className="movie-card-list__error">{MoviesCardListData.notFound}</p>
-      )}
-      {props.isSearchError && !isLoading && (
+      {(searchErrorNotFinded || props.isSearchError) && !isLoading && (
         <p className="movie-card-list__error">{MoviesCardListData.Error}</p>
       )}
-      {!isSavedPage && (
+      {!isSavedPage && allMovies.length === 0 && !isLoading && (
+        <p className="movie-card-list__error">{MoviesCardListData.notFound}</p>
+      )}
+      {isSavedPage && allSavedMovies.length === 0 && !props.isLoading && (
+        <p className="movie-card-list__error">{MoviesCardListData.notFound}</p>
+      )}
+      {!isSavedPage && allMovies.length > 0 && (
         <ul className="movie-card-list__section">
           {!isLoading &&
             allMovies.slice(0, visibleCards).map(movie => (
@@ -59,7 +62,7 @@ function MoviesCardList(props) {
             ))}
         </ul>
       )}
-      {isSavedPage && (
+      {isSavedPage && allSavedMovies.length > 0 && (
         <ul className="movie-card-list__section">
           {!props.isLoading &&
             allSavedMovies.map(movie => (
@@ -73,6 +76,7 @@ function MoviesCardList(props) {
             ))}
         </ul>
       )}
+
       {!isSavedPage &&
         showMoreButton &&
         visibleCardsRows * visibleCardsMovies < props.movies.length && (
