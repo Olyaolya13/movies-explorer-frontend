@@ -7,6 +7,8 @@ import EditButton from '../EditBtn/EditBtn';
 
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
+  console.log(currentUser);
+
   const ProfileData = {
     title: 'Имя',
     email: 'E-mail'
@@ -43,7 +45,10 @@ function Profile(props) {
 
   useEffect(() => {
     if (!isValid && !isEditing) {
-      resetValidation({ name: currentUser.name, email: currentUser.email });
+      resetValidation({
+        name: currentUser?.name || '',
+        email: currentUser?.email || ''
+      });
     }
   }, [isValid, currentUser, resetValidation, isEditing]);
 
@@ -52,7 +57,7 @@ function Profile(props) {
       <Navigation />
       <section className="profile">
         <div className="profile__content">
-          <h2 className="profile__title">Привет, {currentUser.name}!</h2>
+          <h2 className="profile__title">Привет, {currentUser?.name || ''}!</h2>
           <form className="profile__form" onSubmit={handleSubmit} noValidate>
             <label className="profile__label profile__subtitle">
               {ProfileData.title}

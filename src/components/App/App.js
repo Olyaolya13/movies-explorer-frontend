@@ -24,6 +24,8 @@ function App() {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const [currentUser, setCurrentUser] = useState(storedUser || {});
 
+  const [currentPage, setCurrentPage] = useState(location.pathname);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isError, setIsError] = useState('');
   const [isSend, setIsSend] = useState(false);
@@ -41,6 +43,7 @@ function App() {
       .then(res => {
         setIsLoggedIn(true);
         setCurrentUser(res.user);
+        localStorage.setItem('isLoggedIn', true);
       })
       .catch(error => {
         console.log(error);
@@ -54,11 +57,31 @@ function App() {
     }
   }, []);
 
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     localStorage.setItem('user', JSON.stringify(currentUser));
+  //   }
+  // }, [currentUser]);
+
   useEffect(() => {
-    if (currentUser) {
-      localStorage.setItem('user', JSON.stringify(currentUser));
+    const storedLastRoute = window.sessionStorage.getItem('lastRoute');
+
+    if (storedLastRoute) {
+      try {
+        const parsedLastRoute = JSON.parse(storedLastRoute);
+        if (parsedLastRoute.name) {
+          navigate(parsedLastRoute.name);
+        }
+      } catch (error) {
+        console.error('Ошибка разбора сохраненного маршрута:', error);
+      }
     }
-  }, [currentUser]);
+
+    window.onbeforeunload = () => {
+      const currentPath = window.location.pathname;
+      window.sessionStorage.setItem('lastRoute', JSON.stringify({ name: currentPath }));
+    };
+  }, []);
 
   function handleOnLogin({ email, password }) {
     setIsSend(true);
@@ -107,8 +130,10 @@ function App() {
   function handleLogOut() {
     setIsLoggedIn(false);
     localStorage.removeItem('token');
+    localStorage.removeItem('isLoggedIn');
     setCurrentUser({});
     localStorage.clear();
+    window.scrollTo(0, 0);
     navigate('/', { replace: true });
   }
 
@@ -182,6 +207,7 @@ function App() {
               />
             }
           />
+
           <Route
             path="/profile"
             element={
