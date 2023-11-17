@@ -81,6 +81,15 @@ export const PortfolioData = {
   ]
 };
 
+//edit Btn
+
+export const EditButtonData = {
+  edit: 'Редактировать',
+  save: 'Сохранить',
+  signout: 'Выйти из аккаунта',
+  cancel: 'Отмена'
+};
+
 //movie
 export const MoviesCardListData = {
   notFound: 'Ничего не найдено',

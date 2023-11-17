@@ -1,12 +1,7 @@
 import './EditBtn.css';
+import { EditButtonData } from '../../utils/constants';
 
 function EditButton(props) {
-  const buttonTexts = {
-    edit: 'Редактировать',
-    save: 'Сохранить',
-    signout: 'Выйти из аккаунта'
-  };
-
   if (props.isEditing) {
     return (
       <>
@@ -16,7 +11,10 @@ function EditButton(props) {
           onClick={props.onSubmit}
           disabled={!props.isValid}
         >
-          {props.isSend ? 'Отправка...' : buttonTexts.save}
+          {props.isSend ? 'Отправка...' : EditButtonData.save}
+        </button>
+        <button type="button" className="profile-btn__cancel" onClick={props.onCancelClick}>
+          {EditButtonData.cancel}
         </button>
       </>
     );
@@ -24,10 +22,10 @@ function EditButton(props) {
     return (
       <>
         <button type="button" className="profile-btn__edit" onClick={props.onEditClick}>
-          {buttonTexts.edit}
+          {EditButtonData.edit}
         </button>
         <button type="submit" className="profile-btn__signout" onClick={props.onLoggedOut}>
-          {buttonTexts.signout}
+          {EditButtonData.signout}
         </button>
       </>
     );

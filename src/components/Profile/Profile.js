@@ -15,9 +15,11 @@ function Profile(props) {
   const { value, error, isValid, handleChange, resetValidation } = useFormValidation();
 
   const [isEditing, setIsEditing] = useState(false);
+  const [preValue, setPreValue] = useState({});
 
   const handleEditBtnClick = () => {
     setIsEditing(true);
+    setPreValue({ ...value });
   };
 
   const handleSaveBtnClick = () => {
@@ -25,9 +27,14 @@ function Profile(props) {
     setIsEditing(false);
   };
 
+  const handleCancel = () => {
+    resetValidation(preValue);
+    setIsEditing(false);
+  };
+
   function handleSubmit(e) {
     e.preventDefault();
-    if (isValid && isEditing) {
+    if (isValid || isEditing) {
       props.onSave(value);
     }
     resetValidation();
@@ -105,6 +112,7 @@ function Profile(props) {
                 setIsSend={props.setIsSend}
                 isSend={props.isSend}
                 onSubmit={handleSaveBtnClick}
+                onCancelClick={handleCancel}
                 error={props.error}
               />
             </div>
