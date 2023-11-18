@@ -4,10 +4,10 @@ import './MoviesCard.css';
 
 function MoviesCard(props) {
   const location = useLocation();
+
   const isSavedPage = location.pathname === '/saved-movies';
 
   const [isSaved, setIsSaved] = useState(false);
-<<<<<<< HEAD
 
   useEffect(() => {
     setIsSaved(props.savedMovies.some(savedMovie => savedMovie.movieId === props.movie.id));
@@ -21,7 +21,7 @@ function MoviesCard(props) {
     if (savedMovie && savedMovie._id) {
       props.onDelete(savedMovie._id);
     } else {
-      console.log('Не удалось удалить'); //
+      console.log('Не удалось удалить');
     }
   };
 
@@ -36,11 +36,6 @@ function MoviesCard(props) {
   };
 
   const movieUrl = isSavedPage
-=======
-
-  const isSavedMovie = props.savedMovies.some(savedMovie => savedMovie.id === props.movie.id);
-  const movieUrl = isSavedMovie
->>>>>>> df4c11d4f936d217e838a12531af7185baeff8ad
     ? props.movie.image
     : `https://api.nomoreparties.co${props.movie.image.url}`;
 
@@ -58,63 +53,21 @@ function MoviesCard(props) {
     ? 'movie-card__saved'
     : 'movie-card__not-saved';
 
-  function handleDeleteClick() {
-    props.onDelete(props.movie._id);
-    setIsSaved(false);
-  }
-
-  function handleSaveClick() {
-    if (!isSaved) {
-      props.onAdd(props.movie);
-      setIsSaved(true);
-    } else {
-      props.onDelete(props.movie.id);
-    }
-  }
-
-  useEffect(() => {
-    setIsSaved(props.savedMovies.some(savedMovie => savedMovie.movieId === props.movie.id));
-  }, []);
-
   return (
     <section className="movie-card">
       <a href={props.movie.trailerLink} target="_blank" rel="noopener noreferrer">
-        <img
-          src={movieUrl}
-          className="movie-card__image"
-          alt={props.movie.description || 'Movie poster'}
-        />
+        <img src={movieUrl} className="movie-card__image" alt={props.movie.description} />
       </a>
-
       <div className="movie-card__about">
         <div className="movie-card__text">
           <h2 className="movie-card__title">{props.movie.nameRU}</h2>
           <p className="movie-card__duration">{durationInMinutesAndHours}</p>
         </div>
-<<<<<<< HEAD
         <button
           type="button"
           className={`movie-card__button ${buttonClassName}`}
           onClick={isSavedPage ? handleDeleteClick : handleSaveClick}
         ></button>
-=======
-
-        {location.pathname === '/movies' && (
-          <button
-            type="button"
-            className={`movie-card__button ${buttonClassName}`}
-            onClick={handleSaveClick}
-          ></button>
-        )}
-
-        {location.pathname === '/saved-movies' && (
-          <button
-            type="button"
-            className={`movie-card__button ${buttonClassName}`}
-            onClick={handleDeleteClick}
-          ></button>
-        )}
->>>>>>> df4c11d4f936d217e838a12531af7185baeff8ad
       </div>
     </section>
   );

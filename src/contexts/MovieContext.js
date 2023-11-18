@@ -46,29 +46,6 @@ const MovieProvider = ({ children }) => {
       });
   }
 
-  function loadSavedMovies(token) {
-    mainApi
-      .getSavedMovies(token)
-      .then(res => {
-        let findMovies = res.filter(
-          movie =>
-            movie.nameRU.toLowerCase().includes(keyWord.toLowerCase()) ||
-            movie.nameEN.toLowerCase().includes(keyWord.toLowerCase())
-        );
-
-        if (findMovies.length > 0) {
-          console.log('Найденные сохраненные фильмы:', findMovies);
-          setSavedMovies(findMovies);
-        } else {
-          console.log('Сохраненные фильмы не найдены');
-          setSavedMovies([]);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
   useEffect(() => {
     const storedData = localStorage.getItem('movies');
     if (storedData) {
@@ -76,14 +53,25 @@ const MovieProvider = ({ children }) => {
 
       if (searchData) {
         setMovies(searchData.movies);
-        setKeyWord(searchData.key);
-        setIsShortFilm(searchData.isShortFilm);
-        setSearchErrorNotFinded(false);
+        loadSavedMovies(searchData.keyWord);
       }
     }
   }, []);
 
-  function addSavedMovie(movie, token) {
+  function loadSavedMovies(token) {
+    setSearchErrorNotFinded(false);
+    mainApi
+      .getSavedMovies(token)
+      .then(savedMovies => {
+        setSearchMovies(false);
+        setSavedMovies(savedMovies);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  function addSavedMovie(movie) {
     const movieInfo = {
       country: movie.country,
       director: movie.director,
@@ -100,34 +88,34 @@ const MovieProvider = ({ children }) => {
 
     const updatedMovieInfo = {
       ...movieInfo,
-      owner: currentUser
+      owner: currentUser._id
     };
 
-    return mainApi
-      .addSavedMovie(updatedMovieInfo, token)
+    mainApi
+      .addSavedMovie(updatedMovieInfo)
       .then(res => {
-        setSavedMovies(savedMovies => [...savedMovies, res]);
+        console.log('Серверный ответ после сохранения:', res);
+        setSavedMovies(savedMovies => [...savedMovies, updatedMovieInfo]);
         console.log('Фильм успешно добавлен в сохраненные:', res);
         localStorage.setItem('savedMovies', JSON.stringify([...savedMovies, res]));
+        return;
       })
       .catch(error => {
         console.error('Ошибка при добавлении фильма в сохраненные:', error);
       });
   }
 
-  function removeSavedMovie(id, token) {
+  function removeSavedMovie(movieId) {
     return mainApi
-      .removeSavedMovie(id, token)
-      .then(res => {
-        const updatedSavedMovies = savedMovies.filter(movie => movie.id !== id);
-        console.log(updatedSavedMovies);
+      .removeSavedMovie(movieId)
+      .then(() => {
+        const updatedSavedMovies = savedMovies.filter(movie => movie._id !== movieId);
         localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
-        // setMovies(updatedSavedMovies);
         setSavedMovies(updatedSavedMovies);
-        console.log('Фильм успешно удален на сервере:', res);
+        console.log('Фильм успешно удален на сервере:', movieId);
       })
       .catch(error => {
-        console.log('Ошибка при удалении фильма из сохраненных:', error);
+        console.error('Ошибка при удалении фильма из сохраненных:', error);
       });
   }
 
