@@ -55,12 +55,6 @@ function App() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     localStorage.setItem('user', JSON.stringify(currentUser));
-  //   }
-  // }, [currentUser]);
-
   useEffect(() => {
     const storedLastRoute = window.sessionStorage.getItem('lastRoute');
 
