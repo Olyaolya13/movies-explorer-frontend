@@ -21,8 +21,8 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const storedUser = JSON.parse(localStorage.getItem('user'));
-  const [currentUser, setCurrentUser] = useState(storedUser || {});
+
+  const [currentUser, setCurrentUser] = useState({});
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isError, setIsError] = useState('');
@@ -55,6 +55,12 @@ function App() {
     }
   }, []);
 
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     localStorage.setItem('user', JSON.stringify(currentUser));
+  //   }
+  // }, [currentUser]);
+
   useEffect(() => {
     const storedLastRoute = window.sessionStorage.getItem('lastRoute');
 
@@ -75,6 +81,8 @@ function App() {
     };
   }, []);
 
+=======
+>>>>>>> df4c11d4f936d217e838a12531af7185baeff8ad
   function handleOnLogin({ email, password }) {
     setIsSend(true);
     setIsError('');
@@ -122,8 +130,11 @@ function App() {
   function handleLogOut() {
     setIsLoggedIn(false);
     localStorage.removeItem('token');
+<<<<<<< HEAD
     localStorage.removeItem('isLoggedIn');
     setCurrentUser({});
+=======
+>>>>>>> df4c11d4f936d217e838a12531af7185baeff8ad
     localStorage.clear();
     window.scrollTo(0, 0);
     navigate('/', { replace: true });
