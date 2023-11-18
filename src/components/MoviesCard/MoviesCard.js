@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; //
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 
@@ -16,9 +16,11 @@ function MoviesCard(props) {
   const handleDeleteClick = () => {
     console.log('delete');
     const savedMovie = props.savedMovies.find(
-      savedMovie => savedMovie.movieId === props.movie.movieId || props.movie.id
+      savedMovie =>
+        savedMovie.movieId === props.movie.movieId || savedMovie.movieId === props.movie.id
     );
     if (savedMovie && savedMovie._id) {
+      console.log('Trying to delete movie with _id:', savedMovie._id);
       props.onDelete(savedMovie._id);
     } else {
       console.log('Не удалось удалить');
@@ -26,13 +28,20 @@ function MoviesCard(props) {
   };
 
   const handleSaveClick = () => {
-    if (!isSaved) {
-      props.onAdd(props.movie);
-      setIsSaved(true);
+    const existingMovie = props.savedMovies.find(
+      savedMovie =>
+        savedMovie.movieId === props.movie.movieId || savedMovie.movieId === props.movie.id
+    );
+
+    if (existingMovie && existingMovie._id) {
+      console.log('Trying to delete movie with _id:', existingMovie._id);
+      props.onDelete(existingMovie._id);
     } else {
-      const movieIdToDelete = props.movie._id || props.movie.movieId;
-      handleDeleteClick(movieIdToDelete);
+      props.onAdd(props.movie);
+      console.log('Фильм успешно добавлен в сохраненные');
     }
+
+    setIsSaved(prevIsSaved => !prevIsSaved);
   };
 
   const movieUrl = isSavedPage

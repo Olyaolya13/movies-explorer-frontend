@@ -53,7 +53,6 @@ const MovieProvider = ({ children }) => {
 
       if (searchData) {
         setMovies(searchData.movies);
-        loadSavedMovies(searchData.keyWord);
       }
     }
   }, []);
@@ -68,6 +67,20 @@ const MovieProvider = ({ children }) => {
       })
       .catch(err => {
         console.log(err);
+      });
+  }
+
+  function removeSavedMovie(movieId) {
+    return mainApi
+      .removeSavedMovie(movieId)
+      .then(() => {
+        const updatedSavedMovies = savedMovies.filter(movie => movie._id !== movieId);
+        localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
+        setSavedMovies(updatedSavedMovies);
+        console.log('Фильм успешно удален на сервере:', movieId);
+      })
+      .catch(error => {
+        console.error('Ошибка при удалении фильма из сохраненных:', error);
       });
   }
 
@@ -93,29 +106,15 @@ const MovieProvider = ({ children }) => {
 
     mainApi
       .addSavedMovie(updatedMovieInfo)
-      .then(res => {
-        console.log('Серверный ответ после сохранения:', res);
-        setSavedMovies(savedMovies => [...savedMovies, updatedMovieInfo]);
-        console.log('Фильм успешно добавлен в сохраненные:', res);
-        localStorage.setItem('savedMovies', JSON.stringify([...savedMovies, res]));
+      .then(response => {
+        console.log('Серверный ответ после сохранения:', response);
+        setSavedMovies(savedMovies => [...savedMovies, response.data]);
+        localStorage.setItem('savedMovies', JSON.stringify([...savedMovies, response.data]));
+        console.log('Фильм успешно добавлен в сохраненные:', response.data);
         return;
       })
       .catch(error => {
         console.error('Ошибка при добавлении фильма в сохраненные:', error);
-      });
-  }
-
-  function removeSavedMovie(movieId) {
-    return mainApi
-      .removeSavedMovie(movieId)
-      .then(() => {
-        const updatedSavedMovies = savedMovies.filter(movie => movie._id !== movieId);
-        localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
-        setSavedMovies(updatedSavedMovies);
-        console.log('Фильм успешно удален на сервере:', movieId);
-      })
-      .catch(error => {
-        console.error('Ошибка при удалении фильма из сохраненных:', error);
       });
   }
 
