@@ -48,7 +48,7 @@ const MovieProvider = ({ children }) => {
 
   useEffect(() => {
     const storedData = localStorage.getItem('movies');
-    if (storedData) {
+    if (storedData && searchMovies) {
       const searchData = JSON.parse(storedData);
 
       if (searchData) {

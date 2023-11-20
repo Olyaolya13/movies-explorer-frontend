@@ -49,7 +49,15 @@ function Profile(props) {
         email: currentUser?.email || ''
       });
     }
-  }, [isValid, currentUser, resetValidation, isEditing]);
+
+    if (!isEditing) {
+      setPreValue({ ...value });
+      resetValidation({
+        name: currentUser?.name || '',
+        email: currentUser?.email || ''
+      });
+    }
+  }, [isValid, currentUser, resetValidation, isEditing, value]);
 
   return (
     <>

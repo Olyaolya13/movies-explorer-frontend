@@ -44,7 +44,9 @@ function MoviesCardList(props) {
       {searchErrorNotFinded && allMovies && !isLoading && (
         <p className="movie-card-list__error">{MoviesCardListData.notFound}</p>
       )}
-
+      {!isSavedPage && !props.isSearchError && allMovies.length === 0 && !props.isLoading && (
+        <p className="movie-card-list__error">{MoviesCardListData.notFound}</p>
+      )}
       {isSavedPage && !props.isSearchError && allSavedMovies.length === 0 && !props.isLoading && (
         <p className="movie-card-list__error">{MoviesCardListData.notFound}</p>
       )}
