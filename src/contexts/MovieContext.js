@@ -16,8 +16,8 @@ const MovieProvider = ({ children }) => {
   const [searchMovies, setSearchMovies] = useState(false);
 
   function searchAllMovies(token) {
-    setSearchMovies(false);
     setSearchErrorNotFinded(false);
+    setSearchMovies(false);
     setIsLoading(true);
 
     moviesApi
@@ -48,14 +48,15 @@ const MovieProvider = ({ children }) => {
 
   useEffect(() => {
     const storedData = localStorage.getItem('movies');
-    if (storedData && searchMovies) {
+    if (storedData) {
       const searchData = JSON.parse(storedData);
 
-      if (searchData) {
+      if (searchData && searchData.movies) {
         setMovies(searchData.movies);
+        setSearchErrorNotFinded(true);
       }
     }
-  }, []);
+  }, [searchMovies]);
 
   function loadSavedMovies(token) {
     setSearchErrorNotFinded(false);

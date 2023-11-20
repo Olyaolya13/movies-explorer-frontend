@@ -11,7 +11,8 @@ function MoviesCardList(props) {
   const location = useLocation();
   const isSavedPage = location.pathname === '/saved-movies';
 
-  const { isLoading, searchErrorNotFinded, isShortSavedFilm, isShortFilm } = useMovieContext();
+  const { isLoading, searchErrorNotFinded, isShortSavedFilm, isShortFilm, searchMovies } =
+    useMovieContext();
 
   const { visibleCardsRows, visibleCardsMovies, stepAddCardMovies, setVisibleCardsRows } =
     useVisibleCardsMovies();
@@ -41,12 +42,13 @@ function MoviesCardList(props) {
       {props.isSearchError && !searchErrorNotFinded && !isLoading && (
         <p className="movie-card-list__error">{MoviesCardListData.Error}</p>
       )}
-      {searchErrorNotFinded && allMovies && !isLoading && (
-        <p className="movie-card-list__error">{MoviesCardListData.notFound}</p>
-      )}
-      {!isSavedPage && !props.isSearchError && allMovies.length === 0 && !props.isLoading && (
-        <p className="movie-card-list__error">{MoviesCardListData.notFound}</p>
-      )}
+
+      {!props.isSearchError &&
+        !isSavedPage &&
+        !searchErrorNotFinded &&
+        allMovies.length === 0 &&
+        !props.isLoading && <p className="movie-card-list__error">{MoviesCardListData.notFound}</p>}
+
       {isSavedPage && !props.isSearchError && allSavedMovies.length === 0 && !props.isLoading && (
         <p className="movie-card-list__error">{MoviesCardListData.notFound}</p>
       )}
