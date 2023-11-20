@@ -57,7 +57,9 @@ function Profile(props) {
         email: currentUser?.email || ''
       });
     }
-  }, [isValid, currentUser, resetValidation, isEditing, value]);
+
+    setPreValue({ ...value });
+  }, [isValid, currentUser, resetValidation, isEditing]);
 
   return (
     <>
