@@ -58,13 +58,26 @@ const MovieProvider = ({ children }) => {
     }
   }, [searchMovies]);
 
-  function loadSavedMovies(token) {
+  function loadSavedMovies(savedMovie) {
     setSearchErrorNotFinded(false);
+
     mainApi
-      .getSavedMovies(token)
+      .getSavedMovies(savedMovie)
       .then(savedMovies => {
+        let findMovies = savedMovies.filter(
+          movie =>
+            movie.nameRU.toLowerCase().includes(keyWord.toLowerCase()) ||
+            movie.nameEN.toLowerCase().includes(keyWord.toLowerCase())
+        );
+        if (savedMovies.length) {
+          console.log('Найден фильм:', findMovies);
+          setSavedMovies(findMovies);
+        } else {
+          console.log('Фильм не найден');
+          setSavedMovies([]);
+          setSearchErrorNotFinded(true);
+        }
         setSearchMovies(false);
-        setSavedMovies(savedMovies);
       })
       .catch(err => {
         console.log(err);
