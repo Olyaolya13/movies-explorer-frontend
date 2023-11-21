@@ -15,22 +15,40 @@ function Profile(props) {
 
   const { value, error, isValid, handleChange, resetValidation } = useFormValidation();
 
+  console.log(value);
+
   const [isEditing, setIsEditing] = useState(false);
   const [preValue, setPreValue] = useState({});
 
   const handleEditBtnClick = () => {
     setIsEditing(true);
-    setPreValue({ ...value });
+    setPreValue(prevValue => {
+      const updatedValue = { ...prevValue, ...value };
+      resetValidation({
+        name: updatedValue.name,
+        email: updatedValue.email
+      });
+      return updatedValue;
+    });
+    console.log('Editing - value:', value, 'preValue:', preValue);
   };
 
   const handleSaveBtnClick = () => {
-    props.onSave(value);
+    props.onSave({
+      name: value.name,
+      email: value.email
+    });
     setIsEditing(false);
+    console.log('Saved - value:', value);
   };
 
   const handleCancel = () => {
-    resetValidation(preValue);
+    resetValidation({
+      name: preValue.name,
+      email: preValue.email
+    });
     setIsEditing(false);
+    console.log('Cancelled - preValue:', preValue);
   };
 
   function handleSubmit(e) {
@@ -38,27 +56,24 @@ function Profile(props) {
     if (isValid || isEditing) {
       props.onSave(value);
     }
-    resetValidation();
+    resetValidation({
+      name: value.name,
+      email: value.email
+    });
     props.setError('');
   }
 
   useEffect(() => {
     if (!isValid && !isEditing) {
       resetValidation({
-        name: currentUser?.name || '',
-        email: currentUser?.email || ''
+        name: currentUser?.name,
+        email: currentUser?.email
       });
     }
 
     if (!isEditing) {
       setPreValue({ ...value });
-      resetValidation({
-        name: currentUser?.name || '',
-        email: currentUser?.email || ''
-      });
     }
-
-    setPreValue({ ...value });
   }, [isValid, currentUser, resetValidation, isEditing]);
 
   return (
@@ -66,7 +81,7 @@ function Profile(props) {
       <Navigation />
       <section className="profile">
         <div className="profile__content">
-          <h2 className="profile__title">Привет, {currentUser?.name || ''}!</h2>
+          <h2 className="profile__title">Привет, {currentUser?.name}!</h2>
           <form className="profile__form" onSubmit={handleSubmit} noValidate>
             <label className="profile__label profile__subtitle">
               {ProfileData.title}
