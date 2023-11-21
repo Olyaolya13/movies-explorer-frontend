@@ -15,38 +15,26 @@ function Profile(props) {
 
   const { value, error, isValid, handleChange, resetValidation } = useFormValidation();
 
-  console.log(value);
-
   const [isEditing, setIsEditing] = useState(false);
   const [preValue, setPreValue] = useState({});
 
   const handleEditBtnClick = () => {
     setIsEditing(true);
     setPreValue(prevValue => {
-      const updatedValue = { ...prevValue, ...value };
-      resetValidation({
-        name: updatedValue.name,
-        email: updatedValue.email
-      });
-      return updatedValue;
+      resetValidation({ ...prevValue, ...value });
+      return { ...prevValue, ...value };
     });
     console.log('Editing - value:', value, 'preValue:', preValue);
   };
 
   const handleSaveBtnClick = () => {
-    props.onSave({
-      name: value.name,
-      email: value.email
-    });
+    props.onSave(value);
     setIsEditing(false);
     console.log('Saved - value:', value);
   };
 
   const handleCancel = () => {
-    resetValidation({
-      name: preValue.name,
-      email: preValue.email
-    });
+    resetValidation(preValue);
     setIsEditing(false);
     console.log('Cancelled - preValue:', preValue);
   };
@@ -56,25 +44,75 @@ function Profile(props) {
     if (isValid || isEditing) {
       props.onSave(value);
     }
-    resetValidation({
-      name: value.name,
-      email: value.email
-    });
+    resetValidation(value);
     props.setError('');
   }
 
   useEffect(() => {
     if (!isValid && !isEditing) {
-      resetValidation({
-        name: currentUser?.name,
-        email: currentUser?.email
-      });
+      resetValidation({ ...currentUser });
     }
 
     if (!isEditing) {
       setPreValue({ ...value });
     }
   }, [isValid, currentUser, resetValidation, isEditing]);
+
+  // const handleEditBtnClick = () => {
+  //   setIsEditing(true);
+  //   setPreValue(prevValue => {
+  //     const updatedValue = { ...prevValue, ...value };
+  //     resetValidation({
+  //       name: updatedValue.name,
+  //       email: updatedValue.email
+  //     });
+  //     return updatedValue;
+  //   });
+  //   console.log('Editing - value:', value, 'preValue:', preValue);
+  // };
+
+  // const handleSaveBtnClick = () => {
+  //   props.onSave({
+  //     name: value.name,
+  //     email: value.email
+  //   });
+  //   setIsEditing(false);
+  //   console.log('Saved - value:', value);
+  // };
+
+  // const handleCancel = () => {
+  //   resetValidation({
+  //     name: preValue.name,
+  //     email: preValue.email
+  //   });
+  //   setIsEditing(false);
+  //   console.log('Cancelled - preValue:', preValue);
+  // };
+
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   if (isValid || isEditing) {
+  //     props.onSave(value);
+  //   }
+  //   resetValidation({
+  //     name: value.name,
+  //     email: value.email
+  //   });
+  //   props.setError('');
+  // }
+
+  // useEffect(() => {
+  //   if (!isValid && !isEditing) {
+  //     resetValidation({
+  //       name: currentUser?.name,
+  //       email: currentUser?.email
+  //     });
+  //   }
+
+  //   if (!isEditing) {
+  //     setPreValue({ ...value });
+  //   }
+  // }, [isValid, currentUser, resetValidation, isEditing]);
 
   return (
     <>
