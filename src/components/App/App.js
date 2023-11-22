@@ -4,7 +4,7 @@ import { NotFound } from '../../utils/pattern';
 import api from '../../utils/MainApi'; //
 
 import * as auth from '../../utils/Auth';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import MovieProvider from '../../contexts/MovieContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
@@ -21,12 +21,15 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const storedUser = JSON.parse(localStorage.getItem('user'));
-  const [currentUser, setCurrentUser] = useState(storedUser || {});
-
+  // const storedUser = JSON.parse(localStorage.getItem('user'));
+  // const [currentUser, setCurrentUser] = useState(storedUser || {});
+  const [currentUser, setCurrentUser] = useState(
+    localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
+  );
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isError, setIsError] = useState('');
   const [isSend, setIsSend] = useState(false);
+  console.log(isLoggedIn);
 
   const isRegisterPage =
     location.pathname === '/signup' ||
@@ -35,45 +38,43 @@ function App() {
 
   const isNotFoundPage = NotFound(location.pathname);
 
-  function handleToken(token) {
-    auth
-      .checkToken(token)
-      .then(res => {
-        setIsLoggedIn(true);
-        setCurrentUser(res.user);
-        localStorage.setItem('isLoggedIn', true);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) {
-      handleToken(token);
-    }
-  }, []);
 
-  useEffect(() => {
-    const storedLastRoute = window.sessionStorage.getItem('lastRoute');
-
-    if (storedLastRoute) {
-      try {
-        const parsedLastRoute = JSON.parse(storedLastRoute);
-        if (parsedLastRoute.name) {
-          navigate(parsedLastRoute.name);
+    const handleToken = async () => {
+      if (token) {
+        try {
+          const response = await api.getUserInfo(token);
+          setCurrentUser(response);
+          setIsLoggedIn(true);
+        } catch (error) {
+          console.log('Ошибка при получении информации о пользователе:', error);
         }
-      } catch (error) {
-        console.error('Ошибка разбора сохраненного маршрута:', error);
       }
-    }
-
-    window.onbeforeunload = () => {
-      const currentPath = window.location.pathname;
-      window.sessionStorage.setItem('lastRoute', JSON.stringify({ name: currentPath }));
     };
+
+    handleToken();
   }, []);
+
+  // function handleToken(token) {
+  //   auth
+  //     .checkToken(token)
+  //     .then(res => {
+  //       setIsLoggedIn(true);
+  //       setCurrentUser(res.user);
+  //       localStorage.setItem('isLoggedIn', true);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     handleToken(token);
+  //   }
+  // }, []);
 
   function handleOnLogin({ email, password }) {
     setIsSend(true);
@@ -84,6 +85,7 @@ function App() {
         if (res.token) {
           console.log(res.token);
           localStorage.setItem('token', res.token);
+          localStorage.setItem('isLoggedIn', true);
           setIsLoggedIn(true);
           navigate('/movies', { replace: true });
         }
@@ -119,24 +121,14 @@ function App() {
       .finally(() => setIsSend(false));
   }
 
-  function handleLogOut() {
-    setIsLoggedIn(false);
-    localStorage.removeItem('token');
-    localStorage.removeItem('isLoggedIn');
-    setCurrentUser({});
-    localStorage.clear();
-    window.scrollTo(0, 0);
-    navigate('/', { replace: true });
-  }
-
   function handleUpdateUser({ email, name }) {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      setIsLoggedIn(false);
-      return;
-    }
+    // const token = localStorage.getItem('token');
+    // if (!token) {
+    //   setIsLoggedIn(false);
+    //   return;
+    // }
     api
-      .editProfile({ name, email }, token)
+      .editProfile({ name, email })
       .then(res => {
         setCurrentUser(res);
         setIsError('');
@@ -154,12 +146,25 @@ function App() {
       });
   }
 
+  function handleLogOut() {
+    setIsLoggedIn(false);
+    localStorage.removeItem('token');
+    localStorage.removeItem('isLoggedIn');
+    setCurrentUser({});
+    localStorage.clear();
+    window.scrollTo(0, 0);
+    navigate('/', { replace: true });
+  }
+
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (isLoggedIn && token) {
-      Promise.all([api.getUserInfo(token)])
-        .then(([userInfo]) => {
+    if (token && isLoggedIn) {
+      api
+        .getUserInfo(token)
+        .then(userInfo => {
           setCurrentUser(userInfo);
+          setIsLoggedIn(true);
+          console.log(isLoggedIn);
         })
         .catch(err => {
           console.log('Ошибка при получении информации:', err);
@@ -169,10 +174,11 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      {!isRegisterPage && !isNotFoundPage && (
-        <div>{!isLoggedIn ? <Header isLoggedIn={isLoggedIn} /> : <Navigation />}</div>
-      )}
       <MovieProvider>
+        {!isRegisterPage && !isNotFoundPage && (
+          <div>{!isLoggedIn ? <Header isLoggedIn={isLoggedIn} /> : <Navigation />}</div>
+        )}
+
         <Routes>
           <Route path="/" element={<Main />} />
           <Route
@@ -203,8 +209,8 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute
-                isLoggedIn={isLoggedIn}
                 element={Profile}
+                isLoggedIn={isLoggedIn}
                 onLoggedOut={handleLogOut}
                 onSave={handleUpdateUser}
                 error={isError}
@@ -222,8 +228,10 @@ function App() {
             path="/saved-movies"
             element={<ProtectedRoute isLoggedIn={isLoggedIn} element={SavedMovies} />}
           />
+
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+
         {!isRegisterPage && !isNotFoundPage && (
           <div>
             <Footer />

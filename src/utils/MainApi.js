@@ -30,20 +30,23 @@ class MainApi {
   }
 
   //Загрузка информации о пользователе с сервера
-  getUserInfo(token) {
+  getUserInfo() {
     return this._request(`${this._baseUrl}users/me`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     });
   }
 
   //обновление данных пользователя
-  editProfile(user, token) {
+  editProfile(user) {
     return this._request(`${this._baseUrl}users/me`, {
       method: 'PATCH',
-      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         email: user.email,
         name: user.name
@@ -86,7 +89,7 @@ class MainApi {
   }
 
   //удаление сохраненного фильма
-  removeSavedMovie(movieId, token) {
+  removeSavedMovie(movieId) {
     return this._request(`${this._baseUrl}movies/${movieId}`, {
       method: 'DELETE',
       headers: {
