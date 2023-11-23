@@ -44,7 +44,11 @@ function MoviesCardList(props) {
       {searchServerError && !isLoading && !props.isSearchError && (
         <p className="movie-card-list__error">{MoviesCardListData.serverError}</p>
       )}
-      {isSearchActive && filterMovie.length === 0 && !isLoading && (
+      {isSearchActive && allMovies.length === 0 && !isLoading && (
+        <p className="movie-card-list__error">{MoviesCardListData.notFound}</p>
+      )}
+
+      {allSavedMovies.length === 0 && !isLoading && (
         <p className="movie-card-list__error">{MoviesCardListData.notFound}</p>
       )}
 
@@ -61,21 +65,6 @@ function MoviesCardList(props) {
             </li>
           ))}
       </ul>
-
-      {/* {isSavedPage && allSavedMovies && (
-        <ul className="movie-card-list__section">
-          {!props.isLoading &&
-            allSavedMovies.map(movie => (
-              <li className="movie-card-list__movies" key={movie._id}>
-                <MoviesCard
-                  movie={movie}
-                  savedMovies={props.savedMovies}
-                  onDelete={props.onMovieDelete}
-                />
-              </li>
-            ))}
-        </ul>
-      )} */}
 
       {!isSavedPage &&
         showMoreButton &&
