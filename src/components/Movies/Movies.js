@@ -1,26 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { useMovieContext } from '../../contexts/MovieContext';
 
 function Movies() {
-  const {
-    movies,
-    savedMovies,
-    addSavedMovie,
-    removeSavedMovie,
-    searchAllMovies,
-    isShortFilm,
-    keyWord,
-    searchMovies
-  } = useMovieContext();
-
-  useEffect(() => {
-    localStorage.setItem(
-      'movies',
-      JSON.stringify({ key: keyWord, movies, isShortFilm, savedMovies })
-    );
-  }, [keyWord, movies, isShortFilm, searchMovies, savedMovies]);
+  const { movies, savedMovies, addSavedMovie, removeSavedMovie, searchAllMovies } =
+    useMovieContext();
 
   return (
     <>
@@ -30,7 +15,6 @@ function Movies() {
         savedMovies={savedMovies}
         onMovieSave={addSavedMovie}
         onMovieDelete={removeSavedMovie}
-        isSearchError={searchMovies}
       />
     </>
   );

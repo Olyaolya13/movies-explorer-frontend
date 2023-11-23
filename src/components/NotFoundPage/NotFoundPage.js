@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { NotFoundPageData } from '../../utils/constants';
+
 import './NotFoundPage.css';
 
 function NotFoundPage() {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    console.log('gg');
+    console.log('ff');
     navigate(-1);
   };
 
@@ -16,6 +16,7 @@ function NotFoundPage() {
       <div className="not-found__content">
         <h1 className="not-found__title">{NotFoundPageData.number}</h1>
         <p className="not-found__subtitle">{NotFoundPageData.text}</p>
+
         <button className="not-found__button" onClick={handleGoBack}>
           {NotFoundPageData.buttonText}
         </button>

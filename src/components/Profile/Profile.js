@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './Profile.css';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import useFormValidation from '../../hooks/FormValidation';
 import Navigation from '../Navigation/Navigation';
 import EditButton from '../EditBtn/EditBtn';
@@ -24,19 +24,16 @@ function Profile(props) {
       resetValidation({ ...prevValue, ...value });
       return { ...prevValue, ...value };
     });
-    console.log('Editing - value:', value, 'preValue:', preValue);
   };
 
   const handleSaveBtnClick = () => {
     props.onSave(value);
     setIsEditing(false);
-    console.log('Saved - value:', value);
   };
 
   const handleCancel = () => {
     resetValidation(preValue);
     setIsEditing(false);
-    console.log('Cancelled - preValue:', preValue);
   };
 
   function handleSubmit(e) {
@@ -57,62 +54,6 @@ function Profile(props) {
       setPreValue({ ...value });
     }
   }, [isValid, currentUser, resetValidation, isEditing]);
-
-  // const handleEditBtnClick = () => {
-  //   setIsEditing(true);
-  //   setPreValue(prevValue => {
-  //     const updatedValue = { ...prevValue, ...value };
-  //     resetValidation({
-  //       name: updatedValue.name,
-  //       email: updatedValue.email
-  //     });
-  //     return updatedValue;
-  //   });
-  //   console.log('Editing - value:', value, 'preValue:', preValue);
-  // };
-
-  // const handleSaveBtnClick = () => {
-  //   props.onSave({
-  //     name: value.name,
-  //     email: value.email
-  //   });
-  //   setIsEditing(false);
-  //   console.log('Saved - value:', value);
-  // };
-
-  // const handleCancel = () => {
-  //   resetValidation({
-  //     name: preValue.name,
-  //     email: preValue.email
-  //   });
-  //   setIsEditing(false);
-  //   console.log('Cancelled - preValue:', preValue);
-  // };
-
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   if (isValid || isEditing) {
-  //     props.onSave(value);
-  //   }
-  //   resetValidation({
-  //     name: value.name,
-  //     email: value.email
-  //   });
-  //   props.setError('');
-  // }
-
-  // useEffect(() => {
-  //   if (!isValid && !isEditing) {
-  //     resetValidation({
-  //       name: currentUser?.name,
-  //       email: currentUser?.email
-  //     });
-  //   }
-
-  //   if (!isEditing) {
-  //     setPreValue({ ...value });
-  //   }
-  // }, [isValid, currentUser, resetValidation, isEditing]);
 
   return (
     <>

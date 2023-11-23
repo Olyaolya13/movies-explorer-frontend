@@ -93,7 +93,7 @@ export const EditButtonData = {
 //movie
 export const MoviesCardListData = {
   notFound: 'Ничего не найдено',
-  Error: 'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз.',
+  serverError: 'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз.',
   buttonText: ' Ещё'
 };
 

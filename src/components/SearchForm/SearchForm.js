@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 import { useMovieContext } from '../../contexts/MovieContext';
 import { useLocation } from 'react-router-dom';
@@ -9,7 +9,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 function SearchForm(props) {
   const location = useLocation();
   const isSavedPage = location.pathname === '/saved-movies';
-  const [searchError, setSearchError] = useState(false);
+  const [inputError, setInputError] = useState(false);
 
   const SearchFormData = {
     shortFilm: 'Короткометражки'
@@ -32,11 +32,11 @@ function SearchForm(props) {
     const inputValue = e.target.value;
     setKeyWord(inputValue);
     localStorage.setItem('keyWord', inputValue);
-    setSearchError(false);
+    setInputError(false);
   };
   const handleSavedMovieInputChange = e => {
     setSavedKeyWord(e.target.value);
-    setSearchError(false);
+    setInputError(false);
   };
 
   const handleFilterCheckBoxSubmit = () => {
@@ -53,9 +53,9 @@ function SearchForm(props) {
     const searchValue = isSavedPage ? savedKeyWord : keyWord;
 
     if (searchValue.trim() === '') {
-      setSearchError(true);
+      setInputError(true);
     } else {
-      setSearchError(false);
+      setInputError(false);
 
       if (isSavedPage) {
         props.onSearchSavedMovies(searchValue);
@@ -74,7 +74,7 @@ function SearchForm(props) {
     if (!isSavedPage) {
       const storedValue = localStorage.getItem(filterMovie);
       setIsShortFilm(storedValue === 'true');
-      setSearchError(false);
+      setInputError(false);
 
       const savedKeyWord = localStorage.getItem('keyWord');
       setKeyWord(savedKeyWord || '');
@@ -89,7 +89,7 @@ function SearchForm(props) {
             <img src={SearchLogo} alt="Икона поиска" className="search__logo" />
             <input
               type="text"
-              placeholder={searchError ? 'Нужно ввести ключевое слово' : 'Фильм'}
+              placeholder={inputError ? 'Нужно ввести ключевое слово' : 'Фильм'}
               className="search__input"
               value={isSavedPage ? savedKeyWord : keyWord}
               onChange={isSavedPage ? handleSavedMovieInputChange : handleMovieInputChange}

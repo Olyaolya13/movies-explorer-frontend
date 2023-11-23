@@ -21,16 +21,11 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  // const storedUser = JSON.parse(localStorage.getItem('user'));
-  // const [currentUser, setCurrentUser] = useState(storedUser || {});
-  const [currentUser, setCurrentUser] = useState(
-    localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
-  );
+  const storedUser = JSON.parse(localStorage.getItem('user'));
+  const [currentUser, setCurrentUser] = useState(storedUser || {});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isError, setIsError] = useState('');
   const [isSend, setIsSend] = useState(false);
-  console.log(isLoggedIn);
-
   const isRegisterPage =
     location.pathname === '/signup' ||
     location.pathname === '/signin' ||
@@ -38,43 +33,25 @@ function App() {
 
   const isNotFoundPage = NotFound(location.pathname);
 
+  function handleToken(token) {
+    auth
+      .checkToken(token)
+      .then(res => {
+        setIsLoggedIn(true);
+        setCurrentUser(res.user);
+        localStorage.setItem('isLoggedIn', true);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   useEffect(() => {
     const token = localStorage.getItem('token');
-
-    const handleToken = async () => {
-      if (token) {
-        try {
-          const response = await api.getUserInfo(token);
-          setCurrentUser(response);
-          setIsLoggedIn(true);
-        } catch (error) {
-          console.log('Ошибка при получении информации о пользователе:', error);
-        }
-      }
-    };
-
-    handleToken();
+    if (token) {
+      handleToken(token);
+    }
   }, []);
-
-  // function handleToken(token) {
-  //   auth
-  //     .checkToken(token)
-  //     .then(res => {
-  //       setIsLoggedIn(true);
-  //       setCurrentUser(res.user);
-  //       localStorage.setItem('isLoggedIn', true);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     handleToken(token);
-  //   }
-  // }, []);
 
   function handleOnLogin({ email, password }) {
     setIsSend(true);
@@ -122,11 +99,6 @@ function App() {
   }
 
   function handleUpdateUser({ email, name }) {
-    // const token = localStorage.getItem('token');
-    // if (!token) {
-    //   setIsLoggedIn(false);
-    //   return;
-    // }
     api
       .editProfile({ name, email })
       .then(res => {
@@ -150,8 +122,10 @@ function App() {
     setIsLoggedIn(false);
     localStorage.removeItem('token');
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('keyWord');
+    localStorage.removeItem('movies');
+    localStorage.removeItem('allMoviesSearch');
     setCurrentUser({});
-    localStorage.clear();
     window.scrollTo(0, 0);
     navigate('/', { replace: true });
   }
@@ -164,7 +138,6 @@ function App() {
         .then(userInfo => {
           setCurrentUser(userInfo);
           setIsLoggedIn(true);
-          console.log(isLoggedIn);
         })
         .catch(err => {
           console.log('Ошибка при получении информации:', err);

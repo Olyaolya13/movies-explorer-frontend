@@ -7,13 +7,13 @@ const MovieContext = createContext();
 
 const MovieProvider = ({ children }) => {
   const currentUser = useContext(CurrentUserContext);
-  const [movies, setMovies] = useState([]); //фильмы
-  const [savedMovies, setSavedMovies] = useState([]); //сохраненные фильмы
-  const [isShortFilm, setIsShortFilm] = useState(false); //короткометражки фильмы
-  const [isShortSavedFilm, setIsShortSavedFilm] = useState(false); //короткометражки сохраненные фильмы
-  const [isLoading, setIsLoading] = useState(false); //прелоадер
-  const [keyWord, setKeyWord] = useState(''); //ключ фильмво
-  const [savedKeyWord, setSavedKeyWord] = useState(''); //ключ сохраненных фильмов
+  const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [isShortFilm, setIsShortFilm] = useState(false);
+  const [isShortSavedFilm, setIsShortSavedFilm] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [keyWord, setKeyWord] = useState('');
+  const [savedKeyWord, setSavedKeyWord] = useState('');
   const [searchServerError, setSearchServerError] = useState(false); //ошибка сервера
   const [searchMovies, setSearchMovies] = useState(false); //поиск фильма
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -128,7 +128,8 @@ const MovieProvider = ({ children }) => {
       .then(response => {
         console.log('Серверный ответ после сохранения:', response);
         setSavedMovies(savedMovies => [...savedMovies, response.data]);
-        localStorage.setItem('savedMovies', JSON.stringify([...savedMovies, response.data]));
+        const savedMoviesData = JSON.parse(localStorage.getItem('savedMovies')) || [];
+        localStorage.setItem('savedMovies', JSON.stringify([...savedMoviesData, response.data]));
         console.log('Фильм успешно добавлен в сохраненные:', response.data);
         return;
       })

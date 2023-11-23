@@ -9,9 +9,21 @@ function MoviesCard(props) {
 
   const [isSaved, setIsSaved] = useState(false);
 
+  const isMovieSaved = props.savedMovies?.some(savedMovie => savedMovie.movieId === props.movie.id);
+
   useEffect(() => {
-    setIsSaved(props.savedMovies.some(savedMovie => savedMovie.movieId === props.movie.id));
-  }, [props.savedMovies, props.movie.id]);
+    setIsSaved(isMovieSaved);
+  }, [isMovieSaved, props.savedMovies, props.movies]);
+
+  useEffect(() => {
+    const savedMoviesData = JSON.parse(localStorage.getItem('savedMovies'));
+    if (savedMoviesData) {
+      const isMovieSaved = savedMoviesData.some(
+        savedMovie => savedMovie.movieId === props.movie.id
+      );
+      setIsSaved(isMovieSaved);
+    }
+  }, [props.movie.id]);
 
   const handleDeleteClick = () => {
     console.log('delete');
@@ -20,7 +32,7 @@ function MoviesCard(props) {
         savedMovie.movieId === props.movie.movieId || savedMovie.movieId === props.movie.id
     );
     if (savedMovie && savedMovie._id) {
-      console.log('Trying to delete movie with _id:', savedMovie._id);
+      console.log('Фильм удален', savedMovie._id);
       props.onDelete(savedMovie._id);
     } else {
       console.log('Не удалось удалить');
@@ -28,17 +40,17 @@ function MoviesCard(props) {
   };
 
   const handleSaveClick = () => {
-    const existingMovie = props.savedMovies.find(
+    const movies = props.savedMovies.find(
       savedMovie =>
         savedMovie.movieId === props.movie.movieId || savedMovie.movieId === props.movie.id
     );
 
-    if (existingMovie && existingMovie._id) {
-      console.log('Trying to delete movie with _id:', existingMovie._id);
-      props.onDelete(existingMovie._id);
+    if (movies && movies._id) {
+      console.log('Фильм удален', movies._id);
+      props.onDelete(movies._id);
     } else {
       props.onAdd(props.movie);
-      console.log('Фильм успешно добавлен в сохраненные');
+      console.log('Фильм добавлен');
     }
 
     setIsSaved(prevIsSaved => !prevIsSaved);
@@ -75,7 +87,7 @@ function MoviesCard(props) {
         <button
           type="button"
           className={`movie-card__button ${buttonClassName}`}
-          onClick={isSavedPage ? handleDeleteClick : handleSaveClick}
+          onClick={isMovieSaved ? handleDeleteClick : handleSaveClick}
         ></button>
       </div>
     </section>
