@@ -9,72 +9,76 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 function SearchForm(props) {
   const location = useLocation();
   const isSavedPage = location.pathname === '/saved-movies';
-  const {
-    setIsShortFilm,
-    isShortFilm,
-    isShortSavedFilm,
-    setIsShortSavedFilm,
-    keyWord,
-    setKeyWord
-  } = useMovieContext();
-
   const [searchError, setSearchError] = useState(false);
-  const keyWordMovie = isSavedPage ? 'savedMoviesSearch' : 'allMoviesSearch';
-  const filterMovie = isSavedPage ? 'savedMoviesFilter' : 'allMoviesFilter';
 
   const SearchFormData = {
     shortFilm: 'Короткометражки'
   };
 
-  const handleInputChange = e => {
-    setKeyWord(e.target.value);
+  const {
+    isShortFilm,
+    isShortSavedFilm,
+    setIsShortFilm,
+    setIsShortSavedFilm,
+    savedKeyWord,
+    setSavedKeyWord,
+    keyWord,
+    setKeyWord
+  } = useMovieContext();
+
+  const filterMovie = !isSavedPage ? 'allMoviesSearch' : 'savedMoviesSearch';
+
+  const handleMovieInputChange = e => {
+    const inputValue = e.target.value;
+    setKeyWord(inputValue);
+    localStorage.setItem('keyWord', inputValue);
+    setSearchError(false);
+  };
+  const handleSavedMovieInputChange = e => {
+    setSavedKeyWord(e.target.value);
     setSearchError(false);
   };
 
   const handleFilterCheckBoxSubmit = () => {
     if (isSavedPage) {
       setIsShortSavedFilm(!isShortSavedFilm);
-      localStorage.setItem(filterMovie, String(!isShortSavedFilm));
     } else {
       setIsShortFilm(!isShortFilm);
-      localStorage.setItem(filterMovie, String(!isShortFilm));
+      localStorage.setItem(filterMovie, !isShortFilm);
     }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (keyWord.trim() === '') {
+    const searchValue = isSavedPage ? savedKeyWord : keyWord;
+
+    if (searchValue.trim() === '') {
       setSearchError(true);
     } else {
       setSearchError(false);
+
       if (isSavedPage) {
-        props.onSearchSavedMovies(keyWord);
+        props.onSearchSavedMovies(searchValue);
       } else {
-        props.onSearch(keyWord);
+        props.onSearch(searchValue);
       }
-      localStorage.setItem(keyWordMovie, keyWord);
     }
   };
 
   useEffect(() => {
     if (isSavedPage) {
-      setKeyWord('');
+      setSavedKeyWord('');
       setIsShortSavedFilm(false);
+      setSearchError(false);
     } else {
-      const value = localStorage.getItem(keyWordMovie);
-      if (value) {
-        setKeyWord(value);
-      } else {
-        setKeyWord('');
-      }
+      const storedValue = localStorage.getItem(filterMovie);
+      setIsShortFilm(storedValue === 'true' ? true : false);
+      setSearchError(false);
+
+      const savedKeyWord = localStorage.getItem('keyWord');
+      setKeyWord(savedKeyWord || '');
     }
-    const storedValue = localStorage.getItem(filterMovie);
-    if (storedValue) {
-      setIsShortFilm(storedValue === 'true');
-    } else {
-      setIsShortFilm(false);
-    }
-  }, [keyWordMovie, filterMovie, isSavedPage]);
+  }, [filterMovie, isSavedPage, setIsShortFilm]);
 
   return (
     <section className="search">
@@ -86,8 +90,8 @@ function SearchForm(props) {
               type="text"
               placeholder={searchError ? 'Нужно ввести ключевое слово' : 'Фильм'}
               className="search__input"
-              value={keyWord}
-              onChange={handleInputChange}
+              value={isSavedPage ? savedKeyWord : keyWord}
+              onChange={isSavedPage ? handleSavedMovieInputChange : handleMovieInputChange}
               required
             />
             <button type="submit" className="search__submit">
