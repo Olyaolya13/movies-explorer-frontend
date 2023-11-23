@@ -1,25 +1,31 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import moviesApi from '../utils/MoviesApi';
 import mainApi from '../utils/MainApi';
-import CurrentUserContext from '../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { useLocation } from 'react-router-dom';
 const MovieContext = createContext();
 
 const MovieProvider = ({ children }) => {
   const currentUser = useContext(CurrentUserContext);
-  const [movies, setMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState([]);
-  const [isShortFilm, setIsShortFilm] = useState(false);
-  const [isShortSavedFilm, setIsShortSavedFilm] = useState(false);
-  const [searchErrorNotFinded, setSearchErrorNotFinded] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [keyWord, setKeyWord] = useState('');
-  const [searchMovies, setSearchMovies] = useState(false);
+  const [movies, setMovies] = useState([]); //фильмы
+  const [savedMovies, setSavedMovies] = useState([]); //сохраненные фильмы
+  const [isShortFilm, setIsShortFilm] = useState(false); //короткометражки фильмы
+  const [isShortSavedFilm, setIsShortSavedFilm] = useState(false); //короткометражки сохраненные фильмы
+  const [isLoading, setIsLoading] = useState(false); //прелоадер
+  const [keyWord, setKeyWord] = useState(''); //ключ фильмво
+  const [savedKeyWord, setSavedKeyWord] = useState(''); //ключ сохраненных фильмов
+  const [searchServerError, setSearchServerError] = useState(false); //ошибка сервера
+  const [searchMovies, setSearchMovies] = useState(false); //поиск фильма
+  const [isSearchActive, setIsSearchActive] = useState(false);
+  const location = useLocation();
+
+  const isSavedPage = location.pathname === '/saved-movies';
 
   function searchAllMovies(token) {
-    setSearchErrorNotFinded(false);
+    setIsSearchActive(true);
     setSearchMovies(false);
+    setSearchServerError(false);
     setIsLoading(true);
-
     moviesApi
       .getMovies(token)
       .then(res => {
@@ -32,14 +38,16 @@ const MovieProvider = ({ children }) => {
         if (findMovies.length) {
           console.log('Найден фильм:', findMovies);
           setMovies(findMovies);
+          localStorage.setItem('movies', JSON.stringify(findMovies));
         } else {
           console.log('Фильм не найден');
           setMovies([]);
-          setSearchErrorNotFinded(true);
+          setSearchMovies(true);
+          setSearchServerError(false);
         }
       })
       .catch(() => {
-        setSearchMovies(true);
+        setSearchServerError(true);
       })
       .finally(() => {
         setIsLoading(false);
@@ -47,40 +55,37 @@ const MovieProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    const storedData = localStorage.getItem('movies');
-    if (storedData) {
-      const searchData = JSON.parse(storedData);
-
-      if (searchData && searchData.movies) {
-        setMovies(searchData.movies);
-        setSearchErrorNotFinded(true);
-      }
+    const storedMovies = localStorage.getItem('movies');
+    if (storedMovies) {
+      setMovies(JSON.parse(storedMovies));
     }
-  }, [searchMovies]);
+  }, []);
 
-  function loadSavedMovies(savedMovie) {
-    setSearchErrorNotFinded(false);
+  function loadSavedMovies(token) {
+    setSearchMovies(true);
+    setSearchServerError(false);
 
     mainApi
-      .getSavedMovies(savedMovie)
-      .then(savedMovies => {
-        let findMovies = savedMovies.filter(
-          movie =>
-            movie.nameRU.toLowerCase().includes(keyWord.toLowerCase()) ||
-            movie.nameEN.toLowerCase().includes(keyWord.toLowerCase())
+      .getSavedMovies(token)
+      .then(res => {
+        let findSavedMovies = res.filter(
+          savedMovie =>
+            savedMovie.nameRU.toLowerCase().includes(savedKeyWord.toLowerCase()) ||
+            savedMovie.nameEN.toLowerCase().includes(savedKeyWord.toLowerCase())
         );
-        if (savedMovies.length) {
-          console.log('Найден фильм:', findMovies);
-          setSavedMovies(findMovies);
+
+        if (findSavedMovies.length) {
+          console.log('Найден фильм:', findSavedMovies);
+          setSavedMovies(findSavedMovies);
         } else {
           console.log('Фильм не найден');
           setSavedMovies([]);
-          setSearchErrorNotFinded(true);
+          setSearchMovies(true);
+          setSearchServerError(false);
         }
-        setSearchMovies(false);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        setSearchServerError(true);
       });
   }
 
@@ -141,16 +146,21 @@ const MovieProvider = ({ children }) => {
         isShortSavedFilm,
         setIsShortSavedFilm,
         setIsShortFilm,
+        searchAllMovies,
         addSavedMovie,
         removeSavedMovie,
-        searchAllMovies,
         loadSavedMovies,
+        savedKeyWord,
+        setSavedKeyWord,
         keyWord,
         setKeyWord,
         searchMovies,
-        searchErrorNotFinded,
+        setSearchServerError,
         isLoading,
-        setSavedMovies
+        setSavedMovies,
+        setSearchMovies,
+        searchServerError,
+        isSearchActive
       }}
     >
       {children}
