@@ -2,7 +2,6 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import moviesApi from '../utils/MoviesApi';
 import mainApi from '../utils/MainApi';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { useLocation } from 'react-router-dom';
 const MovieContext = createContext();
 
 const MovieProvider = ({ children }) => {
@@ -17,9 +16,6 @@ const MovieProvider = ({ children }) => {
   const [searchServerError, setSearchServerError] = useState(false); //ошибка сервера
   const [searchMovies, setSearchMovies] = useState(false); //поиск фильма
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const location = useLocation();
-
-  const isSavedPage = location.pathname === '/saved-movies';
 
   function searchAllMovies(token) {
     setIsSearchActive(true);
@@ -116,27 +112,56 @@ const MovieProvider = ({ children }) => {
       movieId: movie.id,
       nameRU: movie.nameRU,
       nameEN: movie.nameEN
+      // owner: currentUser._id
     };
 
-    const updatedMovieInfo = {
-      ...movieInfo,
-      owner: currentUser._id
-    };
-
-    mainApi
-      .addSavedMovie(updatedMovieInfo)
-      .then(response => {
-        console.log('Серверный ответ после сохранения:', response);
-        setSavedMovies(savedMovies => [...savedMovies, response.data]);
-        const savedMoviesData = JSON.parse(localStorage.getItem('savedMovies')) || [];
-        localStorage.setItem('savedMovies', JSON.stringify([...savedMoviesData, response.data]));
-        console.log('Фильм успешно добавлен в сохраненные:', response.data);
-        return;
+    return mainApi
+      .addSavedMovie(movieInfo)
+      .then(res => {
+        const updatedSavedMovies = [...savedMovies, res.data];
+        localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
+        setSavedMovies(updatedSavedMovies);
+        console.log('Фильм успешно добавлен в сохраненные:', res.data);
+        console.log('Информация о фильме:', movieInfo);
       })
       .catch(error => {
         console.error('Ошибка при добавлении фильма в сохраненные:', error);
       });
   }
+
+  // function addSavedMovie(movie) {
+  //   const movieInfo = {
+  //     country: movie.country,
+  //     director: movie.director,
+  //     duration: movie.duration,
+  //     year: movie.year,
+  //     description: movie.description,
+  //     image: `https://api.nomoreparties.co${movie.image.url}`,
+  //     trailerLink: movie.trailerLink,
+  //     thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+  //     movieId: movie.id,
+  //     nameRU: movie.nameRU,
+  //     nameEN: movie.nameEN
+  //   };
+
+  //   const updatedMovieInfo = {
+  //     ...movieInfo,
+  //     owner: currentUser._id
+  //   };
+
+  //   return mainApi
+  //     .addSavedMovie(updatedMovieInfo, currentUser)
+  //     .then(res => {
+  //       const savedMoviesData = JSON.parse(localStorage.getItem('savedMovies')) || [];
+  //       const updatedSavedMovies = [...savedMoviesData, res.data];
+
+  //       localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
+  //       setSavedMovies(updatedSavedMovies);
+  //     })
+  //     .catch(error => {
+  //       console.error('Ошибка при добавлении фильма в сохраненные:', error);
+  //     });
+  // }
 
   return (
     <MovieContext.Provider

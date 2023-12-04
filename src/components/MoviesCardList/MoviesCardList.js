@@ -55,7 +55,7 @@ function MoviesCardList(props) {
       <ul className="movie-card-list__section">
         {!isLoading &&
           filterMovie.map(movie => (
-            <li className="movie-card-list__movies" key={movie._id}>
+            <li className="movie-card-list__movies" key={movie && movie._id}>
               <MoviesCard
                 movie={movie}
                 onAdd={props.onMovieSave}
@@ -67,6 +67,7 @@ function MoviesCardList(props) {
       </ul>
 
       {!isSavedPage &&
+        !isLoading &&
         showMoreButton &&
         visibleCardsRows * visibleCardsMovies < props.movies.length && (
           <div className="movie-card-list__show-button">

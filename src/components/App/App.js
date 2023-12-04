@@ -59,9 +59,11 @@ function App() {
     return auth
       .login(email, password)
       .then(res => {
-        if (res.token) {
+        if (res.token && res.user) {
+          console.log('User data:', res);
           console.log(res.token);
           localStorage.setItem('token', res.token);
+          localStorage.setItem('currentUser', JSON.stringify(res.user));
           localStorage.setItem('isLoggedIn', true);
           setIsLoggedIn(true);
           navigate('/movies', { replace: true });
@@ -120,11 +122,12 @@ function App() {
 
   function handleLogOut() {
     setIsLoggedIn(false);
-    localStorage.removeItem('token');
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('keyWord');
-    localStorage.removeItem('movies');
-    localStorage.removeItem('allMoviesSearch');
+    localStorage.clear();
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('isLoggedIn');
+    // localStorage.removeItem('keyWord');
+    // localStorage.removeItem('movies');
+    // localStorage.removeItem('allMoviesSearch');
     setCurrentUser({});
     window.scrollTo(0, 0);
     navigate('/', { replace: true });
