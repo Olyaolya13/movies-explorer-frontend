@@ -112,7 +112,6 @@ const MovieProvider = ({ children }) => {
       movieId: movie.id,
       nameRU: movie.nameRU,
       nameEN: movie.nameEN
-      // owner: currentUser._id
     };
 
     return mainApi
@@ -128,40 +127,6 @@ const MovieProvider = ({ children }) => {
         console.error('Ошибка при добавлении фильма в сохраненные:', error);
       });
   }
-
-  // function addSavedMovie(movie) {
-  //   const movieInfo = {
-  //     country: movie.country,
-  //     director: movie.director,
-  //     duration: movie.duration,
-  //     year: movie.year,
-  //     description: movie.description,
-  //     image: `https://api.nomoreparties.co${movie.image.url}`,
-  //     trailerLink: movie.trailerLink,
-  //     thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
-  //     movieId: movie.id,
-  //     nameRU: movie.nameRU,
-  //     nameEN: movie.nameEN
-  //   };
-
-  //   const updatedMovieInfo = {
-  //     ...movieInfo,
-  //     owner: currentUser._id
-  //   };
-
-  //   return mainApi
-  //     .addSavedMovie(updatedMovieInfo, currentUser)
-  //     .then(res => {
-  //       const savedMoviesData = JSON.parse(localStorage.getItem('savedMovies')) || [];
-  //       const updatedSavedMovies = [...savedMoviesData, res.data];
-
-  //       localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
-  //       setSavedMovies(updatedSavedMovies);
-  //     })
-  //     .catch(error => {
-  //       console.error('Ошибка при добавлении фильма в сохраненные:', error);
-  //     });
-  // }
 
   return (
     <MovieContext.Provider
