@@ -23,7 +23,21 @@ function MoviesCard(props) {
       );
       setIsSaved(isMovieSaved);
     }
-  }, [props.movie.id]);
+  }, [props.movie.id, isMovieSaved, props.savedMovies, props.movies]);
+
+  // useEffect(() => {
+  //   setIsSaved(isMovieSaved);
+  // }, [isMovieSaved, props.savedMovies, props.movies]);
+
+  // useEffect(() => {
+  //   const savedMoviesData = JSON.parse(localStorage.getItem('savedMovies'));
+  //   if (savedMoviesData) {
+  //     const isMovieSaved = savedMoviesData.some(
+  //       savedMovie => savedMovie.movieId === props.movie.id
+  //     );
+  //     setIsSaved(isMovieSaved);
+  //   }
+  // }, [props.movie.id]);
 
   const handleDeleteClick = () => {
     console.log('delete');
@@ -39,7 +53,7 @@ function MoviesCard(props) {
     }
   };
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
     const movies = props.savedMovies.find(
       savedMovie =>
         savedMovie.movieId === props.movie.movieId || savedMovie.movieId === props.movie.id
@@ -47,14 +61,31 @@ function MoviesCard(props) {
 
     if (movies && movies._id) {
       console.log('Фильм удален', movies._id);
-      props.onDelete(movies._id);
+      await props.onDelete(movies._id);
     } else {
-      props.onAdd(props.movie);
+      await props.onAdd(props.movie);
       console.log('Фильм добавлен');
     }
 
     setIsSaved(prevIsSaved => !prevIsSaved);
   };
+
+  // const handleSaveClick = () => {
+  //   const movies = props.savedMovies.find(
+  //     savedMovie =>
+  //       savedMovie.movieId === props.movie.movieId || savedMovie.movieId === props.movie.id
+  //   );
+
+  //   if (movies && movies._id) {
+  //     console.log('Фильм удален', movies._id);
+  //     props.onDelete(movies._id);
+  //   } else {
+  //     props.onAdd(props.movie);
+  //     console.log('Фильм добавлен');
+  //   }
+
+  //   setIsSaved(prevIsSaved => !prevIsSaved);
+  // };
 
   const movieUrl = isSavedPage
     ? props.movie.image
