@@ -1,11 +1,9 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import moviesApi from '../utils/MoviesApi';
 import mainApi from '../utils/MainApi';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
 const MovieContext = createContext();
 
 const MovieProvider = ({ children }) => {
-  const currentUser = useContext(CurrentUserContext);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isShortFilm, setIsShortFilm] = useState(false);

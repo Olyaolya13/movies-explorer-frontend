@@ -25,15 +25,15 @@ function MoviesCardList(props) {
 
   const showMoreButton = !isSavedPage && isShortFilm ? visibleCards >= props.movies.length : true;
 
-  const allMovies =
-    !isSavedPage &&
-    props.movies
-      .slice(0, visibleCards)
-      .filter(movie => (isShortFilm ? movie.duration <= 40 : true));
-
   const allSavedMovies =
     isSavedPage &&
     props.savedMovies.filter(movie => (isShortSavedFilm ? movie.duration <= 40 : true));
+
+  const allMovies =
+    !isSavedPage &&
+    props.movies
+      .filter(movie => (isShortFilm ? movie.duration <= 40 : true))
+      .slice(0, visibleCardsRows * visibleCardsMovies);
 
   const filterMovie = !isSavedPage ? allMovies : allSavedMovies;
 
