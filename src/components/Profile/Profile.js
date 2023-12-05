@@ -4,6 +4,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import useFormValidation from '../../hooks/FormValidation';
 import Navigation from '../Navigation/Navigation';
 import EditButton from '../EditBtn/EditBtn';
+import { namePattern } from '../../utils/pattern';
 
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
@@ -34,6 +35,11 @@ function Profile(props) {
   const handleCancel = () => {
     resetValidation(preValue);
     setIsEditing(false);
+  };
+
+  const isSaveButtonDisabled = () => {
+    // Проверяем, что введенные данные не совпадают с текущими данными пользователя
+    return !isValid || JSON.stringify(value) === JSON.stringify(currentUser);
   };
 
   function handleSubmit(e) {
@@ -75,6 +81,7 @@ function Profile(props) {
                   onChange={handleChange}
                   className={`profile__input ${error.name ? 'profile__input-text-error' : ''}`}
                   required
+                  pattern={namePattern.source}
                   disabled={!isEditing}
                 />
                 <span
@@ -122,6 +129,7 @@ function Profile(props) {
                 onSubmit={handleSaveBtnClick}
                 onCancelClick={handleCancel}
                 error={props.error}
+                isSaveDisabled={isSaveButtonDisabled()}
               />
             </div>
           </form>
