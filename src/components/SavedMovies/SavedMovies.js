@@ -1,14 +1,21 @@
+import React, { useEffect } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { savedMoviesData } from '../../utils/constants';
+import { useMovieContext } from '../../contexts/MovieContext'; //
 
-function Movies() {
+function SavedMovies() {
+  const { savedMovies, loadSavedMovies, removeSavedMovie } = useMovieContext();
+
+  useEffect(() => {
+    loadSavedMovies();
+  }, []);
+
   return (
     <>
-      <SearchForm />
-      <MoviesCardList movies={savedMoviesData} />
+      <SearchForm onSearchSavedMovies={loadSavedMovies} />
+      <MoviesCardList savedMovies={savedMovies} onMovieDelete={removeSavedMovie} />
     </>
   );
 }
 
-export default Movies;
+export default SavedMovies;

@@ -1,20 +1,3 @@
-import HistoryAboutGraffity from '../images/MartaKuperHistoryAboutGraffity.svg';
-import MickJagger from '../images/MickJagger.svg';
-import Polaroid from '../images/Polaroid.svg';
-import Skateboard from '../images/Skateboard.svg';
-import SkateboardOnTheRoad from '../images/SkateboardOnTheRoad.svg';
-import TheBooksellers from '../images/TheBooksellers.svg';
-import MerceCunningham from '../images/MerceCunningham.svg';
-import Graffity from '../images/Graffity.svg';
-import RunMarathon from '../images/RunMarathon.svg';
-import KeithHaringStreetArt from '../images/KeithHaringStreetArt.svg';
-import SmokingMan from '../images/SmokingMan.svg';
-import IfIThinkOfGermanyAtNight from '../images/IfIThinkOfGermanyAtNight.svg';
-import WarOfArt from '../images/WarOfArt.svg';
-import GimmeDanger from '../images/GimmeDanger.svg';
-import RunMan from '../images/RunMan.svg';
-import Parkur from '../images/Parkur.svg';
-
 //header
 export const HeaderData = {
   signup: 'Регистрация',
@@ -98,6 +81,22 @@ export const PortfolioData = {
   ]
 };
 
+//edit Btn
+
+export const EditButtonData = {
+  edit: 'Редактировать',
+  save: 'Сохранить',
+  signout: 'Выйти из аккаунта',
+  cancel: 'Отмена'
+};
+
+//movie
+export const MoviesCardListData = {
+  notFound: 'Ничего не найдено',
+  serverError: 'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз.',
+  buttonText: ' Ещё'
+};
+
 //not found page
 export const NotFoundPageData = {
   number: '404',
@@ -113,186 +112,4 @@ export const FooterData = {
   subtitle: 'Github',
   linkGithub: 'https://github.com/yandex-praktikum?tab=repositories',
   linkYandex: 'https://practicum.yandex.ru/'
-};
-
-//login
-export const LoginData = {
-  title: 'Рады видеть!',
-  signup: 'Регистрация',
-  question: 'Ещё не зарегистрированы?',
-  name: 'Имя',
-  email: 'E-mail',
-  password: 'Пароль',
-  signin: 'Войти'
-};
-
-//register
-export const RegisterData = {
-  title: 'Добро пожаловать!',
-  signup: 'Зарегистрироваться',
-  question: 'Уже зарегистрированы?',
-  name: 'Имя',
-  email: 'E-mail',
-  password: 'Пароль',
-  signin: 'Войти'
-};
-
-//profile
-
-export const ProfileData = {
-  title: 'Имя',
-  email: 'E-mai',
-  edit: 'Редактировать',
-  save: 'Сохранить',
-  signout: 'Выйти из аккаунта'
-};
-
-//search form
-export const SearchFormData = {
-  shortFilm: 'Короткометражки'
-};
-
-//Movies
-export const MoviesCardListData = [
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: HistoryAboutGraffity,
-    alt: 'Черно-белая картина, улыбающиеся девушка - фотограф стоит на фоне домов с мальчиками около машины'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: Polaroid,
-    alt: 'Мужчина на фоне постановочного света, картинка в стиле поларойд'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: MickJagger,
-    alt: 'Мик Джаггер с гитарой за столом, черно белая картинка'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: Skateboard,
-    alt: 'Мужчина, катающийся на скейтборде, внутри здания с колоннами'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: SkateboardOnTheRoad,
-    alt: 'Молодые люди, катающиеся на скейтбордах по дороге на улице в солнечное время в городе '
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: TheBooksellers,
-    alt: 'Продавец книг, переберающий их в квартире в светлое время суток,'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: MerceCunningham,
-    alt: 'Мерс Каннингем с товарищами около забора здания'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: Graffity,
-    alt: 'Граффити на поезде на станции'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: RunMarathon,
-    alt: 'Множество людей,бегущих марафон'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: KeithHaringStreetArt,
-    alt: 'Молодые люди на вечеринке, черно белая картинка'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: SmokingMan,
-    alt: 'Молодой, курящий парень'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: IfIThinkOfGermanyAtNight,
-    alt: 'Молодой мужчина в очках, сидящий в студии звукозаписи'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: WarOfArt,
-    alt: 'Люди, сидящие в большом зале, над ними два портрета лидеров КНДР '
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: GimmeDanger,
-    alt: 'Молодые люди около кирпичной стены здания, вид сверху'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: RunMan,
-    alt: 'Молодой мужчина, подбегающий к финишной леньте'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: Parkur,
-    alt: 'Множетсво молодых людей, загимающихся на железных конструкцяиях'
-  }
-];
-
-export const savedMoviesData = [
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: HistoryAboutGraffity,
-    alt: 'Picture: History About Graffity'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: Polaroid,
-    alt: 'Picture: Polaroid Photo'
-  },
-  {
-    title: '33 слова о дизайне',
-    hours: '1ч',
-    minutes: '42м',
-    image: MickJagger,
-    alt: 'Picture: MickJagger'
-  }
-];
-
-//move card list
-export const MoviesCardLisShowMoreBtnData = {
-  title: 'Ещё'
 };

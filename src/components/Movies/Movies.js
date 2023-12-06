@@ -1,14 +1,21 @@
+import React from 'react';
 import SearchForm from '../SearchForm/SearchForm';
-import { MoviesCardListData } from '../../utils/constants';
-// import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import { useMovieContext } from '../../contexts/MovieContext';
 
 function Movies() {
+  const { movies, savedMovies, addSavedMovie, removeSavedMovie, searchAllMovies } =
+    useMovieContext();
+
   return (
     <>
-      <SearchForm />
-      <MoviesCardList movies={MoviesCardListData} />
-      {/* <Preloader /> */}
+      <SearchForm onSearch={searchAllMovies} />
+      <MoviesCardList
+        movies={movies}
+        savedMovies={savedMovies}
+        onMovieSave={addSavedMovie}
+        onMovieDelete={removeSavedMovie}
+      />
     </>
   );
 }

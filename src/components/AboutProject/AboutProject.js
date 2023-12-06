@@ -1,6 +1,6 @@
 import React from 'react';
 import './AboutProject.css';
-import { AboutProjectData } from '../../utils/constants';
+import { AboutProjectData } from '../../utils/constants'; //
 
 function AboutProject() {
   return (

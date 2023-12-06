@@ -2,6 +2,7 @@
 .movie-card-list-saved {
   padding: 70px 60px 80px;
   background-color: #fafafa;
+  min-height: 86px;
 }
 
 .movie-card-list-saved {
@@ -46,6 +47,14 @@
 
 .movie-card-list__text-button:hover {
   opacity: 0.8;
+}
+
+.movie-card-list__error {
+  color: #ee3465;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: normal;
 }
 
 @media (max-width: 800px) {
